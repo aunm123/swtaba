@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tim.mapper.TItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tim.entity.TItem">
+        <id column="num_iid" property="numIid" />
+        <result column="category" property="category" />
+        <result column="item_url" property="itemUrl" />
+        <result column="material_lib_type" property="materialLibType" />
+        <result column="nick" property="nick" />
+        <result column="pict_url" property="pictUrl" />
+        <result column="provcity" property="provcity" />
+        <result column="reserve_price" property="reservePrice" />
+        <result column="seller_id" property="sellerId" />
+        <result column="title" property="title" />
+        <result column="user_type" property="userType" />
+        <result column="volume" property="volume" />
+        <result column="zk_final_price" property="zkFinalPrice" />
+        <result column="item_description" property="itemDescription" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="isdelete" property="isdelete" />
+        <result column="short_title" property="shortTitle" />
+        <result column="white_image" property="whiteImage" />
+    </resultMap>
+
+</mapper>
