@@ -2,7 +2,7 @@
 const Service = require('egg').Service;
 
 class HomeService extends Service {
-	async getTopData({categoryid= 0, pageNo = 1, pageSize = 10 }) {
+	async getTopData({categoryid, pageNo, pageSize}) {
 		const { ctx, config, logger } = this;
 		logger.info(`获取首页数据：categoryid=${categoryid} pageNo=${pageNo}, pageSize=${pageSize}`);
 
@@ -12,7 +12,7 @@ class HomeService extends Service {
 			method: 'GET',
 			data: {
 				categoryid: categoryid,
-				pageNo: pageNo,
+				page: pageNo,
 				pageSize: pageSize
 			},
 			timeout: 30000,
