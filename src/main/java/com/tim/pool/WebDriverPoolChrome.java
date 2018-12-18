@@ -206,7 +206,7 @@ public class WebDriverPoolChrome {
                     // 获取 网页的 title
                     System.out.println(" Page title is: " + driver.getTitle());
 
-                    new WebDriverWait(driver, 9000).until(input -> {
+                    new WebDriverWait(driver, 180).until(input -> {
                         WebElement webElement = ((WebDriver) input).findElement(By.id("page"));
                         WebElement targetElement = webElement.findElement(By.className("ke-post"));
                         String innerHTML = targetElement.getAttribute("innerHTML");

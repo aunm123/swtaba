@@ -1,0 +1,18 @@
+<% items.forEach(function(item){ %>
+<div class="waterfall-item">
+	<a href="/detail">
+		<div>
+			<img class="img"
+				 data-src="<%=item.pictUrl%>"
+				 src="<%=item.pictUrl%>">
+		</div>
+		<div class="info">
+			<h3 class="title"><%=item.title%></h3>
+			<p class="priceInfo">
+				<span class="yen">¥</span><span class="price"><%=(item.zkFinalPrice)/100.0%></span>
+
+			</p>
+		</div>
+	</a>
+</div>
+<% }); %>

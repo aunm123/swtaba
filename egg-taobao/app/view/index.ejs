@@ -2,383 +2,229 @@
 <body>
 
 <link rel="stylesheet" href="public/js/swiper/css/swiper.min.css">
-<link rel="stylesheet" href="public/js/mescroll/mescroll.css">
+<link rel="stylesheet" href="public/js/dropload/dropload.css">
 <script src="public/js/jQuery/jQuery.min.js"></script>
 
 <div class="main">
 
-    <div class="page-header">
-        <div class="logo-div">
-            <div style="display: none" class="logo"></div>
-        </div>
-        <div class="search-input" mx-click="mockInput()">
-            <span class="search_icon"></span>
-            <span class="input_value">中长款风衣 女</span>
-        </div>
-    </div>
+	<div class="page-header">
+		<div class="logo-div">
+			<div style="display: none" class="logo"></div>
+		</div>
+		<div class="search-input" mx-click="mockInput()">
+			<span class="search_icon"></span>
+			<span class="input_value">中长款风衣 女</span>
+		</div>
+	</div>
 
-    <div class="swiper-container" id="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <a href="">
-                    <img src="public/image/banner/1.jpg">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="">
-                    <img src="public/image/banner/2.jpg">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="">
-                    <img src="public/image/banner/3.jpg">
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="swiper-pagination"></div>
-    <script src="public/js/swiper/js/swiper.js"></script>
-    <script>
-		var bef = (document.body.clientWidth * 2.5)/100.0;
+	<div class="swiper-container" id="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<a href="">
+					<img src="public/image/banner/1.jpg">
+				</a>
+			</div>
+			<div class="swiper-slide">
+				<a href="">
+					<img src="public/image/banner/2.jpg">
+				</a>
+			</div>
+			<div class="swiper-slide">
+				<a href="">
+					<img src="public/image/banner/3.jpg">
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="swiper-pagination"></div>
+	<script src="public/js/swiper/js/swiper.js"></script>
+	<script>
+		var bef = (document.body.clientWidth * 2.5) / 100.0;
 		var swiper = new Swiper('#swiper-container', {
 			slidesPerView: 1,
-			spaceBetween: bef * 2 ,
+			spaceBetween: bef * 2,
 			slidesOffsetBefore: bef,
 			loop: true,
 			pagination: {
 				el: '.swiper-pagination',
 			},
 		})
-    </script>
+	</script>
 
-    <div class="category-div">
-        <div>
-            <a class="item" href="">
-                <img src="public/image/cat_item/item1.png" alt="">
-                <span>我的淘宝</span>
-            </a>
-        </div>
-        <div>
-            <a class="item" href="">
-                <img src="public/image/cat_item/item1.png" alt="">
-                <span>我的淘宝</span>
-            </a>
-        </div>
-        <div>
-            <a class="item" href="">
-                <img src="public/image/cat_item/item1.png" alt="">
-                <span>我的淘宝</span>
-            </a>
-        </div>
-        <div>
-            <a class="item" href="">
-                <img src="public/image/cat_item/item1.png" alt="">
-                <span>我的淘宝</span>
-            </a>
-        </div>
-        <div>
-            <a class="item" href="">
-                <img src="public/image/cat_item/item1.png" alt="">
-                <span>我的淘宝</span>
-            </a>
-        </div>
-        <div>
-            <a class="item" href="">
-                <img src="public/image/cat_item/item1.png" alt="">
-                <span>我的淘宝</span>
-            </a>
-        </div>
-        <div>
-            <a class="item" href="">
-                <img src="public/image/cat_item/item1.png" alt="">
-                <span>我的淘宝</span>
-            </a>
-        </div>
-        <div>
-            <a class="item" href="">
-                <img src="public/image/cat_item/item1.png" alt="">
-                <span>我的淘宝</span>
-            </a>
-        </div>
-        <div>
-            <a class="item" href="">
-                <img src="public/image/cat_item/item1.png" alt="">
-                <span>我的淘宝</span>
-            </a>
-        </div>
-        <div>
-            <a class="item" href="">
-                <img src="public/image/cat_item/item1.png" alt="">
-                <span>我的淘宝</span>
-            </a>
-        </div>
-    </div>
-
-
-    <div data-mxview="atb_like">
-        <div class="">
-            <h3 class="atb_like_title">猜你喜欢</h3>
-            <div class="waterfall" id="like-list-con">
-                <div class="waterfall-list">
-                    <div class="waterfall-item">
-                        <a href="/detail">
-                            <div>
-                                <img class="img"
-                                     data-src="//gw.alicdn.com/bao/uploaded/i1/2951220827/O1CN011Hyo06d2d63pl0t_!!2951220827.jpg_300x300q75.jpg_.webp"
-                                     src="//gw.alicdn.com/bao/uploaded/i1/2951220827/O1CN011Hyo06d2d63pl0t_!!2951220827.jpg_300x300q75.jpg_.webp">
-                            </div>
-                            <div class="info">
-                                <h3 class="title">酷伽新品韩版卉碎花圆领短袖连衣裙</h3>
-                                <p class="priceInfo">
-                                    <span class="yen">¥</span><span class="price">22.8</span>
-
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="waterfall-item">
-                        <a href="/detail"
-                           data-spm-act-id="a311n.9159044/new2.16986416.2.">
-                            <div>
-                                <img class="img"
-                                     data-src="//gw.alicdn.com/bao/uploaded/i4/415336962/O1CN01SyzM6f21IdtRSHKNO_!!415336962.jpg_300x300q75.jpg_.webp"
-
-                                     src="//gw.alicdn.com/bao/uploaded/i4/415336962/O1CN01SyzM6f21IdtRSHKNO_!!415336962.jpg_300x300q75.jpg_.webp">
-                            </div>
-                            <div class="info">
-                                <h3 class="title">迷你暖风机浴室小太阳家用省电速热</h3>
-                                <p class="priceInfo">
-                                    <span class="yen">¥</span><span class="price">88</span>
-
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="waterfall-item">
-                        <a href="/detail"
-                           data-spm-anchor-id="a311n.9159044/new2.16986416.3"
-                           data-spm-act-id="a311n.9159044/new2.16986416.3.">
-                            <div>
-                                <img class="img"
-                                     data-src="//gw.alicdn.com/bao/uploaded/i2/2452048316/TB2aC.LpsuYBuNkSmRyXXcA3pXa_!!2452048316.jpg_300x300q75.jpg_.webp"
-
-                                     src="//gw.alicdn.com/bao/uploaded/i2/2452048316/TB2aC.LpsuYBuNkSmRyXXcA3pXa_!!2452048316.jpg_300x300q75.jpg_.webp">
-                            </div>
-                            <div class="info">
-                                <h3 class="title">秋冬季工装运动弹力潮牌胖子收脚裤</h3>
-                                <p class="priceInfo">
-                                    <span class="yen">¥</span><span class="price">135</span>
-
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="waterfall-item">
-                        <a href="/detail"
-                           data-spm-anchor-id="a311n.9159044/new2.16986416.4">
-                            <div>
-                                <img class="img"
-                                     data-src="//gw.alicdn.com/bao/uploaded/i3/2185466847/TB18Lr9aQfb_uJkSnfoXXb_epXa_!!0-item_pic.jpg_300x300q75.jpg_.webp"
-
-                                     src="//gw.alicdn.com/bao/uploaded/i3/2185466847/TB18Lr9aQfb_uJkSnfoXXb_epXa_!!0-item_pic.jpg_300x300q75.jpg_.webp">
-                            </div>
-                            <div class="info">
-                                <h3 class="title">韩版秋冬季新款长款仿羊绒冬天披肩</h3>
-                                <p class="priceInfo">
-                                    <span class="yen">¥</span><span class="price">49</span>
-
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="waterfall-item">
-                        <a href="/detail"
-                           data-spm-anchor-id="a311n.9159044/new2.16986416.5">
-                            <div>
-                                <img class="img"
-                                     data-src="//gw.alicdn.com/bao/uploaded/i2/3995599781/O1CN014YbrUn2M7kOyZJbBK_!!3995599781.jpg_300x300q75.jpg_.webp"
-
-                                     src="//gw.alicdn.com/bao/uploaded/i2/3995599781/O1CN014YbrUn2M7kOyZJbBK_!!3995599781.jpg_300x300q75.jpg_.webp">
-                            </div>
-                            <div class="info">
-                                <h3 class="title">联维lanwea抖音同款小太阳取暖器</h3>
-                                <p class="priceInfo">
-                                    <span class="yen">¥</span><span class="price">99</span>
-
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="waterfall-item">
-                        <a href="/detail">
-                            <div>
-                                <img class="img"
-                                     data-src="//gw.alicdn.com/bao/uploaded/i1/2904804747/O1CN01Vc1yu31kwAbVORxpA_!!2904804747.jpg_300x300q75.jpg_.webp"
-
-                                     src="//gw.alicdn.com/bao/uploaded/i1/2904804747/O1CN01Vc1yu31kwAbVORxpA_!!2904804747.jpg_300x300q75.jpg_.webp">
-                            </div>
-                            <div class="info">
-                                <h3 class="title">胡月明拉丁字母女韩版ulzzang卫衣</h3>
-                                <p class="priceInfo">
-                                    <span class="yen">¥</span><span class="price">129</span>
-
-                                    <span class="ticket-icon"><i class="priceNum">5元</i></span>
-
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="waterfall-item">
-                        <a href="/detail">
-                            <div>
-                                <img class="img"
-                                     data-src="//gw.alicdn.com/bao/uploaded/i3/1666970895/O1CN01eFe58U1ITwxhBZlLU_!!0-item_pic.jpg_300x300q75.jpg_.webp"
-                                     >
-                            </div>
-                            <div class="info">
-                                <h3 class="title">ro加绒哈伦裤嘻哈飞鼠裤潮牌卫裤</h3>
-                                <p class="priceInfo">
-                                    <span class="yen">¥</span><span class="price">136</span>
-
-                                    <span class="ticket-icon"><i class="priceNum">5元</i></span>
-
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="waterfall-item">
-                        <a href="/detail">
-                            <div>
-                                <img class="img"
-                                     data-src="//gw.alicdn.com/bao/uploaded/i2/847768437/O1CN01qPOkEW2CCC5176l5Y_!!847768437.jpg_300x300q75.jpg_.webp"
-                                     >
-                            </div>
-                            <div class="info">
-                                <h3 class="title">大爱雾霾蓝仿羊绒冬季韩版拼接披肩</h3>
-                                <p class="priceInfo">
-                                    <span class="yen">¥</span><span class="price">58</span>
-
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="waterfall-item">
-                        <a href="/detail">
-                            <div>
-                                <img class="img"
-                                     data-src="//gw.alicdn.com/bao/uploaded/i3/3894487310/O1CN01rOgEfI23s1ilSYtCv_!!0-item_pic.jpg_300x300q75.jpg_.webp"
-                                     >
-                            </div>
-                            <div class="info">
-                                <h3 class="title">吉毅220v/2kw家用办公室暖风机</h3>
-                                <p class="priceInfo">
-                                    <span class="yen">¥</span><span class="price">99</span>
-
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="waterfall-item">
-                        <a href="/detail">
-                            <div>
-                                <img class="img"
-                                     data-src="//gw.alicdn.com/bao/uploaded/i3/44377823/TB2S_.onR8lpuFjy0FnXXcZyXXa_!!44377823.jpg_300x300q75.jpg_.webp"
-                                     >
-                            </div>
-                            <div class="info">
-                                <h3 class="title">【mfr★周边】ro仙境传说天使钥匙扣</h3>
-                                <p class="priceInfo">
-                                    <span class="yen">¥</span><span class="price">19</span>
-
-                                </p>
-                            </div>
-                        </a>
-                    </div>
+	<div class="category-div">
+		<div>
+			<a class="item" href="">
+				<img src="public/image/cat_item/item1.png" alt="">
+				<span>我的淘宝</span>
+			</a>
+		</div>
+		<div>
+			<a class="item" href="">
+				<img src="public/image/cat_item/item1.png" alt="">
+				<span>我的淘宝</span>
+			</a>
+		</div>
+		<div>
+			<a class="item" href="">
+				<img src="public/image/cat_item/item1.png" alt="">
+				<span>我的淘宝</span>
+			</a>
+		</div>
+		<div>
+			<a class="item" href="">
+				<img src="public/image/cat_item/item1.png" alt="">
+				<span>我的淘宝</span>
+			</a>
+		</div>
+		<div>
+			<a class="item" href="">
+				<img src="public/image/cat_item/item1.png" alt="">
+				<span>我的淘宝</span>
+			</a>
+		</div>
+		<div>
+			<a class="item" href="">
+				<img src="public/image/cat_item/item1.png" alt="">
+				<span>我的淘宝</span>
+			</a>
+		</div>
+		<div>
+			<a class="item" href="">
+				<img src="public/image/cat_item/item1.png" alt="">
+				<span>我的淘宝</span>
+			</a>
+		</div>
+		<div>
+			<a class="item" href="">
+				<img src="public/image/cat_item/item1.png" alt="">
+				<span>我的淘宝</span>
+			</a>
+		</div>
+		<div>
+			<a class="item" href="">
+				<img src="public/image/cat_item/item1.png" alt="">
+				<span>我的淘宝</span>
+			</a>
+		</div>
+		<div>
+			<a class="item" href="">
+				<img src="public/image/cat_item/item1.png" alt="">
+				<span>我的淘宝</span>
+			</a>
+		</div>
+	</div>
 
 
-                    <!--<div class="waterfall-footer" style="clear:both;">-->
-                        <!--<div class="waterfall-status-done js-hide">亲，没有更多了</div>-->
-                        <!--<div class="waterfall-status-loading js-hide"><p><span class="loading-icon"></span><span-->
-                                        <!--class="loading-text">加载中</span></p></div>-->
-                        <!--<div class="waterfall-status-error js-hide">服务器开小差啦，请稍后再试</div>-->
-                    <!--</div>-->
-                </div>
-            </div>
-        </div>
-    </div>
+	<div data-mxview="atb_like">
+		<div class="">
+			<h3 class="atb_like_title">猜你喜欢</h3>
+			<div class="waterfall" id="like-list-con">
+				<div class="waterfall-list">
+
+					<!--<div class="waterfall-footer" style="clear:both;">-->
+					<!--<div class="waterfall-status-done js-hide">亲，没有更多了</div>-->
+					<!--<div class="waterfall-status-loading js-hide"><p><span class="loading-icon"></span><span-->
+					<!--class="loading-text">加载中</span></p></div>-->
+					<!--<div class="waterfall-status-error js-hide">服务器开小差啦，请稍后再试</div>-->
+					<!--</div>-->
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
 
-<script src="public/js/mescroll/mescroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="public/js/dropload/dropload.min.js?time=20181212"></script>
 <script>
-	$(function(){
-		//创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,重置列表数据;
-		var mescroll = new MeScroll("like-list-con", {
-			up: {
-				clearEmptyId: "waterfall-list",
-				// callback: getListData,
-			}
+	$(function () {
+
+		var page = 1;
+		// dropload
+		var dropload = $('body').dropload({
+			scrollArea: window,
+			domUp: {
+				domClass: 'dropload-up',
+				domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+				domUpdate: '<div class="dropload-update">↑释放更新</div>',
+				domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+			},
+			domDown: {
+				domClass: 'dropload-down',
+				domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+				domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+				domNoData: '<div class="dropload-noData">数据已经加载完毕</div>'
+			},
+			loadUpFn : function(me){
+				page = 1;
+				$.ajax({
+					type: 'POST',
+					url: '/i_page',
+					data: {categoryid: 0, pageNo: page},
+					dataType: 'html',
+					success: function (data) {
+						model(data,me,"up");
+					},
+					error: function (xhr, type) {
+						// 即使加载出错，也得重置
+						me.lock()
+						me.noData();
+						me.resetload();
+					}
+				});
+			},
+			loadDownFn: function (me) {
+				$.ajax({
+					type: 'POST',
+					url: '/i_page',
+					data: {categoryid: 0, pageNo: page},
+					dataType: 'html',
+					success: function (data) {
+						model(data,me,"down");
+					},
+					error: function (xhr, type) {
+						// 即使加载出错，也得重置
+						me.lock()
+						me.noData();
+						me.resetload();
+					}
+				});
+			},
 		});
 
-		function getListData(page){
-			//联网加载数据
-			getListDataFromNet(page.num, page.size, function(data){
-				//联网成功的回调,隐藏下拉刷新和上拉加载的状态;
-				mescroll.endSuccess(data.length);//传参:数据的总数; mescroll会自动判断列表如果无任何数据,则提示空;列表无下一页数据,则提示无更多数据;
-				//设置列表数据,因为配置了emptyClearId,第一页会清空dataList的数据,所以setListData应该写在最后;
-				setListData(data);
-			}, function(){
-				//联网失败的回调,隐藏下拉刷新和上拉加载的状态;
-				mescroll.endErr();
-			});
-		}
+		function model(data,me,m) {
 
-		/*设置列表数据*/
-		function setListData(data){
-			var listDom=document.getElementById("dataList");
-			for (var i = 0; i < data.length; i++) {
-				var pd=data[i];
+			var total = $('.hasmore').attr("more");
+			var len = $('.waterfall-list .waterfall-item').length;
 
-				var str='<img class="pd-img" src="'+pd.pdImg+'"/>';
-				str+='<p class="pd-name">'+pd.pdName+'</p>';
-				str+='<p class="pd-price">'+pd.pdPrice+' 元</p>';
-				str+='<p class="pd-sold">已售'+pd.pdSold+'件</p>';
-
-				var liDom=document.createElement("li");
-				liDom.innerHTML=str;
-				listDom.appendChild(liDom);
-			}
-		}
-
-		var dataTag=1;
-
-		/*联网加载列表数据*/
-		function getListDataFromNet(pageNum,pageSize,successCallback,errorCallback) {
-			//延时一秒,模拟联网
-			setTimeout(function () {
-//              	$.ajax({
-//		                type: 'GET',
-//		                url: 'xxx',
-//		                url: 'xxx?num='+pageNum+"&size="+pageSize,
-//		                dataType: 'json',
-//		                success: function(data){
-				var data=pdlist1; // 模拟数据: ../res/pdlist1.js
-				if(dataTag==2) data=pdlist2; // 模拟数据: ../res/pdlist2.js
-				//模拟分页数据
-				var listData=[];
-				for (var i = (pageNum-1)*pageSize; i < pageNum*pageSize; i++) {
-					if(i==data.length) break;
-					listData.push(data[i]);
+			if (m === 'down'){
+				if (len >= total){
+					me.lock();
+					me.noData();
+					me.resetload();
+					return ;
 				}
-				successCallback(listData);
-//		                },
-//		                error: errorCallback
-//		            });
-			},1000)
+			}
+
+			try {
+				if (page === 1){
+					$('.waterfall-list').html(data);
+				}else {
+					$('.waterfall-list').append(data);
+				}
+			}catch (e){}
+			page++;
+			// 每次数据加载完，必须重置
+			if (m === 'down'){
+				if (len >= total){
+					me.lock();
+					me.noData();
+				}
+			}
+
+			me.resetload();
 		}
 
-		//禁止PC浏览器拖拽图片,避免与下拉刷新冲突;如果仅在移动端使用,可删除此代码
-		document.ondragstart=function() {return false;}
+
 	});
 </script>
 </body>
