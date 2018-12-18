@@ -1,0 +1,176 @@
+body {
+  background-color: #f6f6f6;
+}
+[mx-click] {
+  cursor: pointer;
+}
+.logo {
+  position: relative;
+  padding: 0.2rem 0 0.25rem;
+}
+.search-input {
+  height: 0.68rem;
+  min-height: 31px;
+  width: 95%;
+  margin: auto;
+  opacity: 0.92;
+  background: rgba(255, 255, 255, 0.21);
+  border: 1px solid rgba(255, 255, 255, 0.47);
+  border-radius: 1rem;
+  text-align: center;
+  font-size: 10px;
+}
+.search-input .search_icon {
+  width: 0.26rem;
+  height: 0.26rem;
+  display: inline-block;
+  background: url(//gw.alicdn.com/tfs/TB15F0JbcbpK1RjSZFyXXX_qFXa-25-24.png);
+  background-size: cover;
+  margin-right: 0.06rem;
+  color: #fff;
+  vertical-align: middle;
+}
+.search-input .input_value {
+  font-size: 0.24rem;
+  color: #fff;
+  line-height: 29px;
+  vertical-align: middle;
+}
+.logo-div {
+  padding: 10px;
+}
+.logo-div .logo {
+  width: 79px;
+  height: 21px;
+  background: url(../image/logo.png) no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+}
+.swiper-container {
+  margin-top: -43px !important;
+  margin-bottom: 20px!important;
+}
+.swiper-container .swiper-slide a {
+  display: block;
+}
+.swiper-container .swiper-slide a img {
+  width: 95%;
+}
+.swiper-pagination {
+  width: 100%;
+  margin-top: -28px;
+  position: inherit;
+}
+.swiper-pagination .swiper-pagination-bullet {
+  width: 4px;
+  height: 4px;
+  margin: 0 2px;
+}
+.category-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.category-div div {
+  min-width: 20%;
+}
+.category-div .item {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+.category-div .item img {
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  border-radius: 50%;
+}
+.category-div .item span {
+  font-size: 12px;
+  text-align: center;
+  line-height: 14px;
+  margin-top: 5px;
+  font-family: PingFangSC-Regular;
+}
+.atb_like_title {
+  text-align: center;
+  margin: 15px 0 7px 0;
+}
+.waterfall .waterfall-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.waterfall .waterfall-list .waterfall-item {
+  width: 50%;
+  box-sizing: border-box;
+  padding-bottom: 6px;
+}
+.waterfall .waterfall-list .waterfall-item img {
+  width: 100%;
+  height: 47vw;
+  display: block;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.waterfall .waterfall-list .waterfall-item a {
+  background-color: white;
+  display: block;
+}
+.waterfall .waterfall-list .waterfall-item a .info {
+  margin-top: 5px;
+}
+.waterfall .waterfall-list .waterfall-item a .info .title {
+  font-size: 12px;
+  padding: 0 8px;
+  color: #666;
+  display: -webkit-box;
+  line-height: 16px;
+  height: 32px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.waterfall .waterfall-list .waterfall-item a .info .priceInfo {
+  padding: 0 8px 8px 8px;
+}
+.waterfall .waterfall-list .waterfall-item a .info .priceInfo .yen {
+  font-size: 13px;
+  color: #ff5000;
+}
+.waterfall .waterfall-list .waterfall-item a .info .priceInfo .price {
+  font-size: 13px;
+  color: #ff5000;
+}
+.waterfall .waterfall-list .waterfall-item a .info .priceInfo .ticket-icon {
+  display: inline-block;
+  width: 58px;
+  height: 15.4px;
+  background: url(../image/cat_item/piao_bg.png);
+  background-size: cover;
+  color: #f44;
+  position: relative;
+  float: right;
+  top: 5.5px;
+}
+.waterfall .waterfall-list .waterfall-item a .info .priceInfo .ticket-icon .priceNum {
+  position: absolute;
+  width: 32px;
+  left: 0;
+  height: 15.4px;
+  top: 1px;
+  line-height: 15.4px;
+  text-align: center;
+  font-style: normal;
+  font-size: 12px;
+}
+.waterfall .waterfall-list .waterfall-item:nth-child(n) {
+  padding-left: 6px;
+  padding-right: 3px;
+}
+.waterfall .waterfall-list .waterfall-item:nth-child(2n) {
+  padding-left: 3px;
+  padding-right: 6px;
+}
+/*# sourceMappingURL=main.css.map */

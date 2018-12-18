@@ -1,0 +1,111 @@
+<%- include('temple/head.ejs'); %>
+<link rel="stylesheet" href="public/js/swiper/css/swiper.min.css">
+<link rel="stylesheet" href="public/css/detail.css">
+<body>
+
+<div class="app">
+    <header class="toolbar sticky">
+        <div class="toolbar__btn-wrapper clearfix">
+            <div class="toolbar__btn toolbar__back">
+                <a href="/">
+                    <i class="iconfont icon-back_light"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="carousel" id="carousel">
+        <div class="swiper-wrapper">
+            <div data-index="0" class="swiper-slide">
+                <img alt=""
+                     src="public/image/detail/1.webp"
+                     class="mui-lazy slick-image"></div>
+            <div data-index="1" class="swiper-slide">
+                <img alt=""
+                     src="public/image/detail/2.webp"
+                     class="slick-image"></div>
+            <div data-index="2" class="swiper-slide">
+                <img alt=""
+                     src="public/image/detail/3.webp"
+                     class="slick-image"></div>
+            <div data-index="3" class="swiper-slide">
+                <img alt=""
+                     src="public/image/detail/4.webp"
+                     class="slick-image"></div>
+            <div data-index="4" class="swiper-slide">
+                <img alt=""
+                     src="public/image/detail/5.webp"
+                     class="slick-image"></div>
+        </div>
+        <div class="dots"></div>
+    </div>
+
+    <div class="info">
+        <div class="base">
+            <div class="prices-wrapper">
+                <div class="prices">
+                    <div class="price-title"></div>
+                    <div class="price">22.8</div>
+                    <span class="price-tag text">满两件包邮</span><span class="price-tag text">淘金币抵2%</span></div>
+                <div class="extra-price"><p>价格<span class="price-span line-through">￥69</span></p></div>
+                <div class="price-intl"></div>
+                <div class="price-tip"></div>
+            </div>
+            <div class="title-wrapper"><h2 class="title">酷伽新品韩版时尚卉碎花圆领短袖中长款修身连衣裙1746</h2>
+                <div class="share-btn"><i class="icon iconfont share-btn icon-share_light" aria-hidden="true"></i></div>
+            </div>
+            <div class="delivery-box"><span class="delivery-price">货源地：浙江杭州</span><span class="month-sold">月销量：53</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="description" class="J_DetailSection tshop-psm ke-post">
+        <div id="J_DivItemDesc" class="content">
+            <p><img style="max-width: 750.0px;"
+                    src="https://img.alicdn.com/imgextra/i2/1064942825/TB20pZWgS0jpuFjy0FlXXc0bpXa_!!1064942825.jpg"
+                    align="absmiddle"><img style="max-width: 750.0px;"
+                                           src="https://img.alicdn.com/imgextra/i1/1064942825/TB2gAEMgR0kpuFjy1zdXXXuUVXa_!!1064942825.jpg"
+                                           align="absmiddle"><img style="max-width: 750.0px;"
+                                                                  src="https://img.alicdn.com/imgextra/i1/1064942825/TB2WUiMiipnpuFjSZFkXXc4ZpXa_!!1064942825.jpg"
+                                                                  align="absmiddle"><img style="max-width: 750.0px;"
+                                                                                         src="https://img.alicdn.com/imgextra/i1/1064942825/TB2RbkJgR0lpuFjSszdXXcdxFXa_!!1064942825.jpg"
+                                                                                         align="absmiddle"><img
+                        style="max-width: 750.0px;" src="//img.alicdn.com/tps/i4/T10B2IXb4cXXcHmcPq-85-85.gif"
+                        class="tb-loading-background"
+                        data-ks-lazyload="https://img.alicdn.com/imgextra/i1/1064942825/TB29VsPgSxjpuFjSszeXXaeMVXa_!!1064942825.jpg"
+                        align="absmiddle" width="750" height="2246"><img style="max-width: 750.0px;"
+                                                                         src="//img.alicdn.com/tps/i4/T10B2IXb4cXXcHmcPq-85-85.gif"
+                                                                         class="tb-loading-background"
+                                                                         data-ks-lazyload="https://img.alicdn.com/imgextra/i2/1064942825/TB2u7OQibxmpuFjSZJiXXXauVXa_!!1064942825.jpg"
+                                                                         align="absmiddle" width="750" height="1130">
+            </p>
+        </div>
+    </div>
+
+    <div class="bar">
+        <a class="bar-item"
+           href="//shop.m.taobao.com/shop/shop_index.htm?user_id=154420891&amp;item_id=16313634425"><i
+                    class="icon iconfont icon-shop" aria-hidden="true"></i><span>店铺</span></a>
+        <div class="bar-item"><i class="icon iconfont icon-wang" aria-hidden="true"></i><span>客服</span></div>
+        <div class="bar-item"><i class="icon iconfont icon icon-favor" aria-hidden="true"></i><span>收藏</span></div>
+        <div class="bar-btn-wrapper">
+            <div class="bar-btn bar-addcart">加入购物车</div>
+            <div class="bar-btn bar-buynow">立即购买</div>
+        </div>
+    </div>
+</div>
+
+
+<script src="public/js/swiper/js/swiper.js"></script>
+<script>
+	var swiper = new Swiper('#carousel', {
+		loop: true,
+		pagination: {
+			el: '.dots',
+			type: 'fraction',
+		},
+	})
+</script>
+
+</body>
+<%- include('temple/foot.ejs'); %>
