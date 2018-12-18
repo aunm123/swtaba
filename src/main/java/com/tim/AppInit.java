@@ -41,11 +41,11 @@ public class AppInit implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 
-//		for (int i = 1; i<=2; i++){
-//			packageCouponData.packWithWorld("裙子",i);
-//		}
+		for (int i = 1; i<=2; i++){
+			packageCouponData.packWithWord2("婴儿",i, 50);
+		}
 
-		packageCouponData.packWithWord2("裙子",1, 50);
+//		packageCouponData.packWithWord2("裙子",1, 50);
 
 //		webDriverPool2.start();
 

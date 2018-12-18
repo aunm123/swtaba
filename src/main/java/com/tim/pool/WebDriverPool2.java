@@ -1,6 +1,7 @@
 package com.tim.pool;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.tim.entity.TItem;
 import com.tim.entity.TItemContent;
@@ -116,7 +117,8 @@ public class WebDriverPool2 {
 
 	public void start() {
 
-		Integer count = itemMapper.countItem();
+		Wrapper wrapper = new EntityWrapper<>();
+		Integer count = itemMapper.selectCount(wrapper);
 		Integer totalPage = count / 50 + (count % 50 == 0 ? 0 : 1);
 		initDriverArray();
 

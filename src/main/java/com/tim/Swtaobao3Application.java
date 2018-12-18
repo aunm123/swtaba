@@ -17,6 +17,7 @@ public class Swtaobao3Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Swtaobao3Application.class, args);
+
 	}
 
 }
