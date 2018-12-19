@@ -60,6 +60,9 @@ public class MybatisConf {
 	 */
 	@Bean
 	public MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean() {
+
+		org.apache.ibatis.logging.LogFactory.useSlf4jLogging();
+
 		MybatisSqlSessionFactoryBean mybatisPlus = new MybatisSqlSessionFactoryBean();
 		mybatisPlus.setDataSource(dataSource);
 		mybatisPlus.setVfs(SpringBootVFS.class);
@@ -85,6 +88,7 @@ public class MybatisConf {
 		if (!ObjectUtils.isEmpty(this.properties.resolveMapperLocations())) {
 			mybatisPlus.setMapperLocations(this.properties.resolveMapperLocations());
 		}
+
 		return mybatisPlus;
 	}
 
