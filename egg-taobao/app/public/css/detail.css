@@ -324,8 +324,34 @@
   background-image: -moz-linear-gradient(left, #ff7a00, #fe560a);
   background-image: linear-gradient(90deg, #ff7a00, #fe560a);
 }
+.app .tshop-psm {
+  margin-bottom: 60px;
+}
 .app .tshop-psm img {
-  width: 100%;
+  width: 100%!important;
+  max-width: 100%!important;
   object-fit: contain;
+}
+.app .tshop-psm div {
+  overflow: hidden;
+}
+.app .tshop-psm .desc-item p {
+  text-align: center;
+  word-break: break-all;
+}
+.app .tshop-psm .desc-item img {
+  display: block;
+  width: 100%;
+  min-height: 13.33333vw;
+}
+.app .tshop-psm .desc-item {
+  width: 100%;
+}
+.app .tshop-psm .desc-title {
+  margin: 5px 0;
+  font-size: 3.2vw;
+  line-height: 1.25;
+  text-align: center;
+  color: #939393;
 }
 /*# sourceMappingURL=detail.css.map */

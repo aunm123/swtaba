@@ -133,7 +133,7 @@ public class WebDriverPoolChrome {
                 String url = item.getItemUrl();
                 String item_id = item.getNumIid();
 
-                Runnable thread = createThread(url, item_id);
+                Runnable thread = createThread(url, item_id, 1);
                 if (thread != null) {
                     driverPool.execute(thread);
                 }
@@ -160,19 +160,22 @@ public class WebDriverPoolChrome {
     }
 
 
-    public Runnable createThread(String item_url, String item_id) {
+    public Runnable createThread(String item_url, String item_id , Integer retryCount) {
 
         TItemContent tItemContent = tItemContentService.selectById(item_id);
         if (tItemContent != null) {
             long beginDate = tItemContent.getUpdateDate().getTime();
             long nowDate = new Date().getTime();
 
-            if (nowDate - beginDate <= 3000000) return null;
-
-            return null;
+            // 过期时间是7天
+            if (nowDate - beginDate <= (3600*24*14*1000L)) {
+                return null;
+            }
+            System.out.println("过期："+tItemContent.getItemId());
         }
 
         Runnable runnable = new Runnable() {
+
             @Override
             public void run() {
 
@@ -229,6 +232,7 @@ public class WebDriverPoolChrome {
                     TItemContent tItemContent = new TItemContent();
                     tItemContent.setItemId(item_id);
                     tItemContent.setContent(content.toString());
+                    tItemContent.setUpdateDate(new Date());
 
                     tItemContentService.insertOrUpdate(tItemContent);
 
@@ -238,14 +242,28 @@ public class WebDriverPoolChrome {
 
                     System.out.println("补捉详细页失败");
 
+                    // 失败，即重试3次
+                    Integer rc = retryCount;
+                    if (3 >= rc){
+                        // 重新重试
+                        Runnable thread = createThread(item_url, item_id, rc++);
+                        if (thread != null) {
+                            driverPool.execute(thread);
+                        }
+                    }
+
                 } finally {
                     driver.close();
                     tWebDriver.setFinish(true);
+
+
+
                 }
 
             }
         };
         return runnable;
     }
+
 
 }

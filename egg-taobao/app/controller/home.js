@@ -29,7 +29,12 @@ class HomeController extends Controller {
 
 	async detail() {
 		const ctx = this.ctx;
-		await ctx.render('item_detail.ejs');
+		let {itemid} = ctx.query;
+		const listData = await ctx.service.home.getTopDetail({itemid});
+		if (listData && listData.data.done === 'success'){
+			await ctx.render('item_detail.ejs',listData.data.data);
+		}
+
 	}
 }
 

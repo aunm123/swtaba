@@ -19,6 +19,21 @@ class HomeService extends Service {
 		});
 		return response;
 	}
+
+	async getTopDetail({itemid}) {
+		const { ctx, config, logger } = this;
+
+		// 获取搜索结果
+		const response = await ctx.curl(`${config.searchServer}/api/detail`, {
+			dataType: 'json',
+			method: 'GET',
+			data: {
+				itemid: itemid,
+			},
+			timeout: 30000,
+		});
+		return response;
+	}
 }
 
 module.exports = HomeService;

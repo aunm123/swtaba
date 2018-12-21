@@ -21,10 +21,10 @@ public class MybatisGenerator {
 	private static Map conf = new HashMap() {
 		{
 			//jdbc
-			put("jdbc.driver", "com.mysql.jdbc.Driver");
+			put("jdbc.driver", "com.mysql.cj.jdbc.Driver");
 			put("jdbc.url", "jdbc:mysql://localhost:3306/tbshop?useUnicode=true&useSSL=false&characterEncoding=utf8");
 			put("jdbc.user", "root");
-			put("jdbc.pass", "root");
+			put("jdbc.pass", "123123");
 
 			//config
 			put("packageName", "com.tim");
@@ -32,11 +32,12 @@ public class MybatisGenerator {
 
 			//tables
 			put("tables", new String[]{
-                    "t_category",
+//                    "t_category",
 //                    "t_item",
 //                    "t_item_content",
 //                    "t_item_img",
 //                    "t_tbk_item",
+					"t_key",
 			});
 
 			put("tablePrefix", new String[]{"t_"});

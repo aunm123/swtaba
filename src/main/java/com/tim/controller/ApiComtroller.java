@@ -66,9 +66,6 @@ public class ApiComtroller {
 	public ResultUtil detail(@RequestParam String itemid){
 
 		Map map = itemService.selectDetail(itemid);
-		if (map == null){
-			map = webDriverPick.pickingUpItemWithid(itemid);
-		}
 
 		return new ResultUtil(map);
 	}

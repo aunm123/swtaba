@@ -69,7 +69,7 @@ public class TItemServiceImpl extends ServiceImpl<TItemMapper, TItem> implements
 		if (categoryid !=0){
 			wrapper.eq("category",categoryid);
 		}
-		wrapper.orderBy("create_date");
+		wrapper.orderBy(true,"create_date",false);
 		Page<TTbkItem> tbkItemPage = new Page<TTbkItem>(page,pageSize);
 		Page tbkItems = tbkItemService.selectPage(tbkItemPage, wrapper);
 
@@ -99,17 +99,16 @@ public class TItemServiceImpl extends ServiceImpl<TItemMapper, TItem> implements
 
 			TItem tItem = this.selectById(tbkItem.getItemId());
 
-			Wrapper wrapper2 = new EntityWrapper<>();
-			wrapper2.eq("item_id",tbkItem.getItemId());
-			List imglist = itemImgService.selectList(wrapper2);
+			List imglist = itemImgService.selectList(wrapper);
 			HashMap<Object, Object> imgmap = new HashMap<>();
 			imgmap.put("smallimg",imglist);
 
 
-			Object itemContent = itemContentService.selectOne(wrapper2);
+			Object itemContent = itemContentService.selectOne(wrapper);
 
 			if (itemContent == null) {
-				return  null;
+				JSONObject short_Object = JSONUtil.connect(tbkItem, tItem, imgmap);
+				return  short_Object;
 			}
 
 			JSONObject jsonObject = JSONUtil.connect(tbkItem, tItem, imgmap,itemContent);

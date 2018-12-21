@@ -222,6 +222,11 @@ public class PackageCouponData {
             for (Object coupon : tbk_coupon) {
                 JSONObject data = (JSONObject) coupon;
 
+                // 主页图片都没有，肯定是无效数据，不获取
+                if (data.getString("pict_url").length()<=1){
+                    continue;
+                }
+
                 TItem item = new TItem();
                 item.setCategory(data.getString("category_id"));
                 item.setItemUrl(data.getString("item_url"));
@@ -291,7 +296,7 @@ public class PackageCouponData {
             Integer re = ((JSONObject) JSON.parse(rsp.getBody())).getJSONObject("tbk_dg_material_optional_response")
                     .getInteger("total_results");
 
-            System.out.println("获取得到: " + re + " 条数据" + " page: " + page + " pageSize: " + pageSize);
+            System.out.println("关键字 '" + keyword + "' 一共有: " + re + " 条数据" + " page: " + page + " pageSize: " + pageSize);
             return new ResultUtil(datas, re, page);
 
 
