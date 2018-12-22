@@ -34,6 +34,23 @@ class HomeService extends Service {
 		});
 		return response;
 	}
+
+	async getShortUrl({url,text,logo}) {
+		const { ctx, config, logger } = this;
+
+		// 获取搜索结果
+		const response = await ctx.curl(`${config.searchServer}/api/shorturl`, {
+			dataType: 'json',
+			method: 'GET',
+			data: {
+				url,
+				text,
+				logo,
+			},
+			timeout: 30000,
+		});
+		return response;
+	}
 }
 
 module.exports = HomeService;

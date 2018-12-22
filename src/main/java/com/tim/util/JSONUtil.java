@@ -16,8 +16,12 @@ public class JSONUtil {
 			String oStr = JSON.toJSONString(o);
 			JSONObject jo = JSON.parseObject(oStr);
 
-			for (String key : jo.keySet()){
-				mainObj.put(key,jo.get(key));
+			try {
+				for (String key : jo.keySet()){
+					mainObj.put(key,jo.get(key));
+				}
+			}catch (Exception e){
+				System.out.println("json connect error");
 			}
 		}
 
