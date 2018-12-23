@@ -5,6 +5,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.taobao.api.ApiException;
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.TbkItemRecommendGetRequest;
+import com.taobao.api.request.TbkTpwdCreateRequest;
+import com.taobao.api.response.TbkItemRecommendGetResponse;
+import com.taobao.api.response.TbkTpwdCreateResponse;
 import com.tim.entity.TItem;
 import com.tim.entity.TItemContent;
 import com.tim.entity.TItemImg;
@@ -47,6 +54,8 @@ public class ApiComtroller {
 	PackageCouponData packageCouponData;
 	@Autowired
 	WebDriverPick webDriverPick;
+	@Autowired
+	TaobaoClient client;
 
 	@ResponseBody
 	@RequestMapping(value = "/top")
@@ -81,4 +90,59 @@ public class ApiComtroller {
 		return  resultUtil;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/shorturl")
+	public ResultUtil short_url(@RequestParam String url,
+							@RequestParam String text,
+							@RequestParam String logo){
+
+		if (url.equals("")){
+			HashMap<Object, Object> map = new HashMap<>();
+			ResultUtil resultUtil = new ResultUtil(map);
+			return  resultUtil;
+		}
+
+		String tempUrl = url;
+		if (!tempUrl.startsWith("https://")){
+			tempUrl = "https:" + url;
+		}
+		TbkTpwdCreateRequest req = new TbkTpwdCreateRequest();
+		req.setUrl(tempUrl);
+		req.setText(text);
+		req.setLogo(logo);
+		try {
+			TbkTpwdCreateResponse rsp = client.execute(req);
+			JSONObject data = JSONObject.parseObject(rsp.getBody()).getJSONObject("tbk_tpwd_create_response").getJSONObject("data");
+			HashMap<Object, Object> map = new HashMap<>();
+			map.put("shorturl",data.getString("model"));
+			ResultUtil resultUtil = new ResultUtil(map);
+			return  resultUtil;
+
+		} catch (ApiException e) {
+			e.printStackTrace();
+			return  new ResultUtil(e);
+		}
+
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/oppo")
+	public ResultUtil oppo_url(@RequestParam String num_iid){
+
+		TbkItemRecommendGetRequest req = new TbkItemRecommendGetRequest();
+		req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url");
+		req.setNumIid(Long.valueOf(num_iid));
+		req.setCount(20L);
+		req.setPlatform(1L);
+		try {
+			TbkItemRecommendGetResponse rsp = client.execute(req);
+			HashMap<Object, Object> map = new HashMap<>();
+			ResultUtil resultUtil = new ResultUtil(map);
+			return  resultUtil;
+
+		} catch (ApiException e) {
+			e.printStackTrace();
+			return  new ResultUtil(e);
+		}
+	}
 }

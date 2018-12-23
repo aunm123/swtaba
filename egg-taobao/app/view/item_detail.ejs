@@ -43,10 +43,11 @@
                     <div class="price"><%=(zkFinalPrice)/100.0%></div>
                     <span class="price-tag text"><%=couponInfo%></span>
                 </div>
-                <div class="extra-price"><p>价格<span class="price-span line-through">￥69</span></p></div>
+                <div class="extra-price"><p>价格<span class="price-span line-through">￥<%=(zkFinalPrice)/100.0%></span></p></div>
                 <div class="price-intl"></div>
                 <div class="price-tip"></div>
             </div>
+			<div><%=short_url%></div>
             <div class="title-wrapper"><h2 class="title"><%=title%></h2>
                 <div class="share-btn"><i class="icon iconfont share-btn icon-share_light" aria-hidden="true"></i></div>
             </div>
@@ -82,7 +83,6 @@
 <script src="public/js/swiper/js/swiper.js"></script>
 <script>
 	var swiper = new Swiper('#carousel', {
-		loop: true,
 		pagination: {
 			el: '.dots',
 			type: 'fraction',

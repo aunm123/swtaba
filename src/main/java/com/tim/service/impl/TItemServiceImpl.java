@@ -78,12 +78,14 @@ public class TItemServiceImpl extends ServiceImpl<TItemMapper, TItem> implements
 		ArrayList<Object> objects = new ArrayList<>();
 
 		for (TTbkItem tbkItem : (List<TTbkItem>)tbkItems.getRecords()){
-			HashMap<Object, Object> map = new HashMap<>();
 
 			TItem tItem = this.selectById(tbkItem.getItemId());
 
-			JSONObject jsonObject = JSONUtil.connect(tbkItem, tItem);
-			objects.add(jsonObject);
+			if (tItem!=null){
+				JSONObject jsonObject = JSONUtil.connect(tbkItem, tItem);
+				objects.add(jsonObject);
+			}
+
 		}
 
 		return new ResultUtil(objects,tbkItems.getTotal(),page);

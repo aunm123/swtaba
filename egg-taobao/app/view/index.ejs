@@ -114,7 +114,7 @@
 		</div>
 	</div>
 
-
+	<div class="hasmore" style="display: none" more="<%=total%>"></div>
 	<div data-mxview="atb_like">
 		<div class="">
 			<h3 class="atb_like_title">猜你喜欢</h3>
@@ -196,6 +196,7 @@
 			var total = $('.hasmore').attr("more");
 			var len = $('.waterfall-list .waterfall-item').length;
 
+			console.log("asdasd")
 			if (m === 'down'){
 				if (len >= total){
 					me.lock();

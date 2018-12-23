@@ -10,4 +10,6 @@ module.exports = app => {
   router.post('/i_page', controller.home.index_page);
 
   router.get('/detail', controller.home.detail);
+
+  router.get('/shorturl', controller.home.shortUrl);
 };
