@@ -129,8 +129,10 @@ public class ApiComtroller {
 	@RequestMapping(value = "/oppo")
 	public ResultUtil oppo_url(@RequestParam String num_iid){
 
+
+
 		TbkItemRecommendGetRequest req = new TbkItemRecommendGetRequest();
-		req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url");
+		req.setFields("num_iid,click_url");
 		req.setNumIid(Long.valueOf(num_iid));
 		req.setCount(20L);
 		req.setPlatform(1L);
@@ -145,4 +147,8 @@ public class ApiComtroller {
 			return  new ResultUtil(e);
 		}
 	}
+
+
+
+
 }
