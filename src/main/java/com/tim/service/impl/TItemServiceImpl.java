@@ -40,6 +40,8 @@ public class TItemServiceImpl extends ServiceImpl<TItemMapper, TItem> implements
 	TItemImgServiceImpl itemImgService;
 	@Autowired
 	TItemContentServiceImpl itemContentService;
+	@Autowired
+	TItemMapper itemMapper;
 
 	public Page<TItem> selectPage(Integer page) {
 		Page<TItem> itemPage = new Page<>(page,50);
@@ -89,8 +91,6 @@ public class TItemServiceImpl extends ServiceImpl<TItemMapper, TItem> implements
 	}
 
 	public Map selectDetail(String itemid){
-
-
 		try {
 
 			Wrapper wrapper = new EntityWrapper<>();
@@ -120,7 +120,13 @@ public class TItemServiceImpl extends ServiceImpl<TItemMapper, TItem> implements
 			return null;
 		}
 
+	}
 
 
+	@Transactional
+	public void cleanUpItems(){
+		itemMapper.cleanItemsContent();
+		itemMapper.cleanItemsImg();
+		itemMapper.cleanItemstbk();
 	}
 }
