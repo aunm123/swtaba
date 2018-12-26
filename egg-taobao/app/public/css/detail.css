@@ -115,11 +115,11 @@
 .app .info .prices-wrapper .prices .price-tag.text {
   height: auto;
   width: auto;
-  font-size: 3.2vw;
-  line-height: 4.26667vw;
+  font-size: 14px;
+  line-height: 16px;
   padding: 0 1.33333vw;
   -moz-border-radius: 2.13333vw;
-  border-radius: 2.13333vw;
+  border-radius: 12px;
   background-color: #f81131;
   color: #fff;
 }
