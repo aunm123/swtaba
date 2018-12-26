@@ -1,0 +1,61 @@
+<iframe class="main-frame" style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    background-color: white;">
+
+</iframe>
+
+<div class="spinner-div" style="top: 0;left: 0">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<script>
+
+	window.addEventListener('message', function (e) {
+		var data = e.data;
+		if (data == 'loadfinish') {
+			iframe_finish();
+			return;
+		}
+		if (data.action == 'closeframe') {
+			var self_item = window.document.getElementsByClassName('main-frame');
+			$(self_item).fadeOut(100);
+
+			$(".main").show();
+			document.scrollingElement.scrollTop = window.scrollTop;
+			return;
+		}
+	}, false);
+
+	function iframe_finish() {
+		var target = $('.main-frame');
+		if (!target.attr('src')) {
+			$(".spinner-div").hide();
+			return;
+		}
+		target.show();
+		$(".spinner-div").hide();
+	}
+
+	function open_url(url) {
+		$(".spinner-div").show();
+
+		var target = $('.main-frame');
+		target.attr('src', url);
+		// $("body").css("position","fixed");
+
+		window.scrollTop = document.scrollingElement.scrollTop;
+		$(".main").hide();
+
+	}
+</script>

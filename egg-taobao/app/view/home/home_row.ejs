@@ -1,18 +1,29 @@
 <% items.forEach(function(item){ %>
 <div class="waterfall-item">
-	<a href="/detail?itemid=<%=item.numIid%>">
+	<a href="javascript:;" onclick="open_url('/detail?itemid=<%=item.numIid%>')">
 		<div>
-			<img class="img"
-				 data-src="<%=item.pictUrl%>"
-				 src="<%=item.pictUrl%>">
+			<img class="img lazy"
+                 data-original="<%=item.pictUrl%>"
+                 src="public/image/loading.gif">
 		</div>
 		<div class="info">
 			<h3 class="title"><%=item.title%></h3>
-			<p class="priceInfo">
-				<span class="yen">¥</span><span class="price"><%=(item.zkFinalPrice)/100.0%></span>
-
+			<p class="priceInfo" style="padding-bottom: 0;">
+				<span class="yen">¥</span><span class="price"><%=((item.zkFinalPrice)/100.0 - item.couponAmount).toFixed(2) %></span>
+                <span class="yen line-through" style="margin-left: 5px;">¥</span><span class="price line-through extra-price"><%=((item.reservePrice)/100.0).toFixed(2)%></span>
 			</p>
+            <p class="priceInfo" style="display: flex;align-items: center;">
+                <!--<i class="iconfont icon-wodeyouhuijuan" style="margin-right: 7px"></i>-->
+                <span style="    font-size: 13px;padding: 0 5px;border: 1px solid #ff5000;color: #ff5000;"><%=item.couponInfo%></span>
+            </p>
 		</div>
 	</a>
 </div>
+<script>
+	$(function () {
+		$('img.lazy').lazyload({
+			container: $("#like-list-con")
+		});
+	})
+</script>
 <% }); %>

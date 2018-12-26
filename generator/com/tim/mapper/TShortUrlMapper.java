@@ -1,6 +1,6 @@
 package com.tim.mapper;
 
-import com.tim.entity.TKey;
+import com.tim.entity.TShortUrl;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author tim
- * @since 2018-12-21
+ * @since 2018-12-26
  */
-public interface TKeyMapper extends BaseMapper<TKey> {
+public interface TShortUrlMapper extends BaseMapper<TShortUrl> {
 
 }

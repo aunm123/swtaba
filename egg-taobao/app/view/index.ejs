@@ -3,7 +3,8 @@
 
 <link rel="stylesheet" href="public/js/swiper/css/swiper.min.css">
 <link rel="stylesheet" href="public/js/dropload/dropload.css">
-<script src="public/js/jQuery/jQuery.min.js"></script>
+
+<%- include('iframe_open.ejs'); %>
 
 <div class="main">
 
@@ -53,66 +54,70 @@
 
 	<div class="category-div">
 		<div>
-			<a class="item" href="">
+			<a class="item" href="javascript:;" onclick="open_url('//www.baidu.com')">
 				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的淘宝</span>
+				<span>我的彩票</span>
 			</a>
 		</div>
 		<div>
 			<a class="item" href="">
 				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的淘宝</span>
+				<span>我的彩票</span>
 			</a>
 		</div>
 		<div>
 			<a class="item" href="">
 				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的淘宝</span>
+				<span>我的彩票</span>
 			</a>
 		</div>
 		<div>
 			<a class="item" href="">
 				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的淘宝</span>
+				<span>我的彩票</span>
 			</a>
 		</div>
 		<div>
 			<a class="item" href="">
 				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的淘宝</span>
+				<span>我的彩票</span>
 			</a>
 		</div>
 		<div>
 			<a class="item" href="">
 				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的淘宝</span>
+				<span>我的彩票</span>
 			</a>
 		</div>
 		<div>
 			<a class="item" href="">
 				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的淘宝</span>
+				<span>我的彩票</span>
 			</a>
 		</div>
 		<div>
 			<a class="item" href="">
 				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的淘宝</span>
+				<span>我的彩票</span>
 			</a>
 		</div>
 		<div>
 			<a class="item" href="">
 				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的淘宝</span>
+				<span>我的彩票</span>
 			</a>
 		</div>
 		<div>
 			<a class="item" href="">
 				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的淘宝</span>
+				<span>我的彩票</span>
 			</a>
 		</div>
 	</div>
+
+    <script type="text/javascript">
+		window.postMessage("loadfinish",'*');
+    </script>
 
 	<div class="hasmore" style="display: none" more="<%=total%>"></div>
 	<div data-mxview="atb_like">
@@ -120,17 +125,11 @@
 			<h3 class="atb_like_title">猜你喜欢</h3>
 			<div class="waterfall" id="like-list-con">
 				<div class="waterfall-list">
-
-					<!--<div class="waterfall-footer" style="clear:both;">-->
-					<!--<div class="waterfall-status-done js-hide">亲，没有更多了</div>-->
-					<!--<div class="waterfall-status-loading js-hide"><p><span class="loading-icon"></span><span-->
-					<!--class="loading-text">加载中</span></p></div>-->
-					<!--<div class="waterfall-status-error js-hide">服务器开小差啦，请稍后再试</div>-->
-					<!--</div>-->
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 </div>
 
@@ -196,7 +195,6 @@
 			var total = $('.hasmore').attr("more");
 			var len = $('.waterfall-list .waterfall-item').length;
 
-			console.log("asdasd")
 			if (m === 'down'){
 				if (len >= total){
 					me.lock();

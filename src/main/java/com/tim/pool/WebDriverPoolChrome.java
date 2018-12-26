@@ -92,6 +92,9 @@ public class WebDriverPoolChrome {
         tWebDriver.setFinish(true);
         tWebDriver.setDriver(driver);
 
+        // 设置浏览器大小
+        driver.manage().window().setSize(new Dimension(400,2046));
+
         return tWebDriver;
 
     }

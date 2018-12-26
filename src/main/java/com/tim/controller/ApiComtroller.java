@@ -18,10 +18,7 @@ import com.tim.entity.TItemImg;
 import com.tim.entity.TTbkItem;
 import com.tim.magic.PackageCouponData;
 import com.tim.pool.WebDriverPick;
-import com.tim.service.impl.TItemContentServiceImpl;
-import com.tim.service.impl.TItemImgServiceImpl;
-import com.tim.service.impl.TItemServiceImpl;
-import com.tim.service.impl.TTbkItemServiceImpl;
+import com.tim.service.impl.*;
 import com.tim.util.JSONUtil;
 import com.tim.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +46,8 @@ public class ApiComtroller {
 	TItemServiceImpl itemService;
 	@Autowired
 	TItemImgServiceImpl itemImgService;
+	@Autowired
+	TShortUrlServiceImpl shortUrlService;
 	@Autowired
 	TItemContentServiceImpl itemContentService;
 	@Autowired
@@ -92,7 +92,8 @@ public class ApiComtroller {
 
 	@ResponseBody
 	@RequestMapping(value = "/shorturl")
-	public ResultUtil short_url(@RequestParam String url,
+	public ResultUtil short_url(@RequestParam String itemid,
+							@RequestParam String url,
 							@RequestParam String text,
 							@RequestParam String logo){
 
@@ -101,24 +102,20 @@ public class ApiComtroller {
 			ResultUtil resultUtil = new ResultUtil(map);
 			return  resultUtil;
 		}
-
 		String tempUrl = url;
 		if (!tempUrl.startsWith("https://")){
 			tempUrl = "https:" + url;
 		}
-		TbkTpwdCreateRequest req = new TbkTpwdCreateRequest();
-		req.setUrl(tempUrl);
-		req.setText(text);
-		req.setLogo(logo);
 		try {
-			TbkTpwdCreateResponse rsp = client.execute(req);
-			JSONObject data = JSONObject.parseObject(rsp.getBody()).getJSONObject("tbk_tpwd_create_response").getJSONObject("data");
+			tempUrl = URLDecoder.decode(tempUrl, "UTF-8");
+			String shortUrl = shortUrlService.getShortUrl(itemid, tempUrl, text, logo);
+
 			HashMap<Object, Object> map = new HashMap<>();
-			map.put("shorturl",data.getString("model"));
+			map.put("shorturl",shortUrl);
 			ResultUtil resultUtil = new ResultUtil(map);
 			return  resultUtil;
 
-		} catch (ApiException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return  new ResultUtil(e);
 		}

@@ -1,0 +1,82 @@
+<div class="module">
+    <div class="details-mode5" style="margin-top:0px;margin-bottom:5px;">
+        <div class="details-code">
+            <div class="code">
+                <span class="code" id="details-mode5-code"><%=short_url%></span>
+                <button class="keycopy">一键复制</button>
+            </div>
+        </div>
+        <p class="details-desp">复制上方淘口令，打开手机淘宝购买</p>
+    </div>
+
+</div>
+<style>
+    .module{
+        background-color: #faf5f6;
+        padding: 15px 0 5px 0;
+    }
+    .keycopy{
+        width: 100px;
+        height: 40px;
+        background: #ff4400;
+        display: block;
+        line-height: 40px;
+        text-align: center;
+        top: -1px;
+        color: #fff;
+        border: none;
+        font-size: 12px;
+    }
+    .keycopy:active{
+        background: #ff624a;
+    }
+    .code{
+        position: relative;
+        display: flex;
+        margin: 0 auto;
+        width: 290px;
+        overflow: hidden;
+        line-height: 40px;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+    }
+    .code span{
+        height: 40px;
+        color: #7f4900;
+        line-height: 40px;
+        width: 100%;
+        background: white;
+        font-size: 20px;
+        padding: 0;
+        border: dashed 1px #ff4400;
+        box-sizing: border-box;
+        font-family: "Microsoft Yahei";
+        position: relative;
+    }
+    .details-desp{
+        font-size: 12px;
+        margin: 8px 0;
+        color: #999;
+        text-align: center;
+    }
+    .code.select span{
+        border-color: #55ae95;
+    }
+    .code.select .keycopy{
+        background: #55ae95;
+    }
+</style>
+<script>
+    $(function () {
+	    var clipboard = new ClipboardJS('.keycopy',{
+		    text: function() {
+			    return '<%=short_url%>';
+		    }
+	    })
+	    clipboard.on('success', e => {
+            $('.code').addClass('select');
+		    $('.keycopy')[0].innerText = "已复制"
+	    })
+    });
+</script>

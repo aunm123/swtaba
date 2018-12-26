@@ -1,4 +1,6 @@
 .app {
+
+
   .carousel {
     position: relative;
     overflow: hidden;
@@ -28,10 +30,27 @@
   }
 
   .toolbar {
-    position: absolute;
-    top: 20px;
-    left: 10px;
     z-index: 99;
+    position: fixed;
+    width: 100vw;
+    background-color: transparent;
+    height: 50px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .nv.toolbar {
+    background-color: #f9f9f9!important;
+
+    .toolbar__btn {
+      color: black!important;
+      background-color: transparent!important;
+
+      .iconfont{
+        color: black!important;
+      }
+
+    }
   }
 
   .toolbar .toolbar__btn-wrapper {
@@ -63,6 +82,10 @@
       -moz-transition: background .3s ease;
       transition: background .3s ease;
       background-color: rgba(0, 0, 0, .4);
+
+      .iconfont{
+        color: white;
+      }
     }
   }
 
@@ -130,17 +153,6 @@
           -webkit-transform-origin: left center;
           -moz-transform-origin: left center;
           transform-origin: left center;
-        }
-      }
-      .extra-price {
-        font-size: 3.2vw;
-        width: 100vw;
-        color: #999;
-        overflow: hidden;
-        white-space: nowrap;
-        .line-through {
-          text-decoration: line-through;
-          color: #999;
         }
       }
       .price-intl {
@@ -306,9 +318,9 @@
     }
 
     .bar-btn-wrapper {
-      width: 58.66667vw;
+      width: 80vw;
       height: 9.6vw;
-      margin: 0 2.13333vw;
+      margin: auto;
       display: -webkit-box;
       display: -webkit-flex;
       display: -moz-box;
@@ -342,27 +354,46 @@
   }
 
   .bar-addcart {
-    background-image: -webkit-linear-gradient(left,#ffc500,#ff9402);
-    background-image: -moz-linear-gradient(left,#ffc500,#ff9402);
-    background-image: linear-gradient(90deg,#ffc500,#ff9402);
+    background-image: -webkit-linear-gradient(left, #ffc500, #ff9402);
+    background-image: -moz-linear-gradient(left, #ffc500, #ff9402);
+    background-image: linear-gradient(90deg, #ffc500, #ff9402);
   }
 
   .bar-buynow {
-    background-image: -webkit-linear-gradient(left,#ff7a00,#fe560a);
-    background-image: -moz-linear-gradient(left,#ff7a00,#fe560a);
-    background-image: linear-gradient(90deg,#ff7a00,#fe560a);
+    background-image: -webkit-linear-gradient(left, #ff7a00, #fe560a);
+    background-image: -moz-linear-gradient(left, #ff7a00, #fe560a);
+    background-image: linear-gradient(90deg, #ff7a00, #fe560a);
   }
 
   .tshop-psm {
     margin-bottom: 60px;
 
     img {
-      max-width: 100vw!important;
+      max-width: 100vw !important;
       object-fit: contain;
     }
 
     div {
+      max-width: 100vw!important;
       overflow: hidden;
+      box-sizing: border-box!important;
+    }
+    span,font {
+      display: inline-block!important;;
+      max-width: 100vw!important;
+      word-break:break-all;
+      word-warp:break-word;
+    }
+
+    table {
+      max-width: 100vw!important;
+      width: 100vw!important;
+      margin-left: auto!important;
+      margin-right: auto!important;
+
+      td,th,tbody,tr {
+        max-width: 100vw!important;
+      }
     }
 
     .desc-item p {
@@ -372,12 +403,12 @@
 
     .desc-item img {
       display: block;
-      width: 100%;
+      width: 100vw!important;
       min-height: 13.33333vw;
     }
 
     .desc-item {
-      width: 100%;
+      width: 100vw!important;
     }
 
     .desc-title {

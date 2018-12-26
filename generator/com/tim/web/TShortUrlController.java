@@ -11,10 +11,10 @@ import org.springframework.stereotype.Controller;
  * </p>
  *
  * @author tim
- * @since 2018-12-21
+ * @since 2018-12-26
  */
 @Controller
-@RequestMapping("/t-key")
-public class TKeyController {
+@RequestMapping("/t-short-url")
+public class TShortUrlController {
 
 }

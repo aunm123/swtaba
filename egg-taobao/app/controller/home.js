@@ -44,6 +44,7 @@ class HomeController extends Controller {
 			let short_url = listData.data.data["couponClickUrl"];
 
 			let params = {
+				itemid: itemid,
 				url: short_url,
 				text: listData.data.data["title"],
 				logo: listData.data.data["pictUrl"]

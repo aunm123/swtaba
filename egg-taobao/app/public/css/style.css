@@ -255,3 +255,17 @@ td,th{padding:0}
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
+
+
+
+.extra-price {
+    font-size: 3.2vw;
+    width: 100vw;
+    color: #999;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.line-through {
+    text-decoration: line-through;
+    color: #999!important;
+}

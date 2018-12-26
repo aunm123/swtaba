@@ -8,6 +8,9 @@
     <link href="public/css/main.css" rel="stylesheet" type="text/css">
     <link href="public/font/iconfont.css" rel="stylesheet" type="text/css">
 
+    <script src="public/js/jQuery/jQuery.min.js"></script>
+    <script src="public/js/jquery.lazyload.min.js"></script>
+
     <!-- 声明文档使用的字符编码 -->
     <meta charset='utf-8'>
     <!-- 优先使用 IE 最新版本和 Chrome -->
@@ -64,4 +67,61 @@
     <!-- Windows 8 磁贴颜色 -->
     <meta name="msapplication-TileImage" content="icon.png"/>
 
+    <style>
+        body{
+            background-color: #f8f8f8;
+        }
+        .spinner-div{
+            z-index: 200;
+            position: fixed;
+            background: #fff;
+            box-sizing: border-box;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+
+            position: relative;
+            margin: 200px auto;
+        }
+
+        .double-bounce1, .double-bounce2 {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #ff5000;
+            opacity: 0.6;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            -webkit-animation: bounce 2.0s infinite ease-in-out;
+            animation: bounce 2.0s infinite ease-in-out;
+        }
+
+        .double-bounce2 {
+            -webkit-animation-delay: -1.0s;
+            animation-delay: -1.0s;
+        }
+
+        @-webkit-keyframes bounce {
+            0%, 100% { -webkit-transform: scale(0.0) }
+            50% { -webkit-transform: scale(1.0) }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(0.0);
+                -webkit-transform: scale(0.0);
+            } 50% {
+                  transform: scale(1.0);
+                  -webkit-transform: scale(1.0);
+              }
+        }
+    </style>
 </head>

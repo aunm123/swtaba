@@ -34,6 +34,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Tim on 2018/12/5.
@@ -263,6 +265,13 @@ public class PackageCouponData {
 				tbkItem.setCouponClickUrl(data.getString("coupon_share_url"));
 				tbkItem.setCouponEndTime(data.getDate("coupon_end_time"));
 				tbkItem.setCouponStartTime(data.getDate("coupon_start_time"));
+
+				Pattern pattern = Pattern.compile("减(\\d+)元");
+				Matcher matcher = pattern.matcher(tbkItem.getCouponInfo());
+
+				while (matcher.find()) {
+					tbkItem.setCouponAmount(matcher.group(1));
+				}
 
 
 				tbkItem.setIncludeDxjh(data.getString("include_dxjh"));

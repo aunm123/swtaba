@@ -22,10 +22,24 @@
   color: #616161;
 }
 .app .toolbar {
-  position: absolute;
-  top: 20px;
-  left: 10px;
   z-index: 99;
+  position: fixed;
+  width: 100vw;
+  background-color: transparent;
+  height: 50px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+.app .nv.toolbar {
+  background-color: #f9f9f9 !important;
+}
+.app .nv.toolbar .toolbar__btn {
+  color: black!important;
+  background-color: transparent!important;
+}
+.app .nv.toolbar .toolbar__btn .iconfont {
+  color: black!important;
 }
 .app .toolbar .toolbar__btn-wrapper {
   width: 100%;
@@ -56,6 +70,9 @@
   -moz-transition: background 0.3s ease;
   transition: background 0.3s ease;
   background-color: rgba(0, 0, 0, 0.4);
+}
+.app .toolbar .toolbar__btn-wrapper .toolbar__btn .iconfont {
+  color: white;
 }
 .app .delivery-box {
   padding: 0 3.2vw;
@@ -118,17 +135,6 @@
   -webkit-transform-origin: left center;
   -moz-transform-origin: left center;
   transform-origin: left center;
-}
-.app .info .prices-wrapper .extra-price {
-  font-size: 3.2vw;
-  width: 100vw;
-  color: #999;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.app .info .prices-wrapper .extra-price .line-through {
-  text-decoration: line-through;
-  color: #999;
 }
 .app .info .prices-wrapper .price-intl {
   font-size: 3.2vw;
@@ -281,9 +287,9 @@
   white-space: nowrap;
 }
 .app .bar .bar-btn-wrapper {
-  width: 58.66667vw;
+  width: 80vw;
   height: 9.6vw;
-  margin: 0 2.13333vw;
+  margin: auto;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -328,11 +334,32 @@
   margin-bottom: 60px;
 }
 .app .tshop-psm img {
-  max-width: 100vw!important;
+  max-width: 100vw !important;
   object-fit: contain;
 }
 .app .tshop-psm div {
+  max-width: 100vw!important;
   overflow: hidden;
+  box-sizing: border-box !important;
+}
+.app .tshop-psm span,
+.app .tshop-psm font {
+  display: inline-block !important;
+  max-width: 100vw!important;
+  word-break: break-all;
+  word-warp: break-word;
+}
+.app .tshop-psm table {
+  max-width: 100vw!important;
+  width: 100vw!important;
+  margin-left: auto!important;
+  margin-right: auto!important;
+}
+.app .tshop-psm table td,
+.app .tshop-psm table th,
+.app .tshop-psm table tbody,
+.app .tshop-psm table tr {
+  max-width: 100vw!important;
 }
 .app .tshop-psm .desc-item p {
   text-align: center;
@@ -340,11 +367,11 @@
 }
 .app .tshop-psm .desc-item img {
   display: block;
-  width: 100%;
+  width: 100vw!important;
   min-height: 13.33333vw;
 }
 .app .tshop-psm .desc-item {
-  width: 100%;
+  width: 100vw!important;
 }
 .app .tshop-psm .desc-title {
   margin: 5px 0;

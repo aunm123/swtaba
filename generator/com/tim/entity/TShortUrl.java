@@ -1,6 +1,5 @@
 package com.tim.entity;
 
-import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
@@ -13,17 +12,15 @@ import com.tim.common.BaseEntity;
  * </p>
  *
  * @author tim
- * @since 2018-12-21
+ * @since 2018-12-26
  */
-@TableName("t_key")
-public class TKey extends BaseEntity {
+@TableName("t_short_url")
+public class TShortUrl extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-
-    private String key;
+    @TableId("item_id")
+    private String itemId;
 
     @TableField("create_date")
     private Date createDate;
@@ -31,19 +28,17 @@ public class TKey extends BaseEntity {
     @TableField("update_date")
     private Date updateDate;
 
-    public Integer getId() {
-        return id;
+    @TableField("s_url")
+    private String sUrl;
+
+    private String url;
+
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
     public Date getCreateDate() {
         return createDate;
@@ -59,14 +54,29 @@ public class TKey extends BaseEntity {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+    public String getsUrl() {
+        return sUrl;
+    }
+
+    public void setsUrl(String sUrl) {
+        this.sUrl = sUrl;
+    }
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     @Override
     public String toString() {
-        return "TKey{" +
-        "id=" + id +
-        ", key=" + key +
+        return "TShortUrl{" +
+        "itemId=" + itemId +
         ", createDate=" + createDate +
         ", updateDate=" + updateDate +
+        ", sUrl=" + sUrl +
+        ", url=" + url +
         "}";
     }
 }

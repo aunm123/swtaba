@@ -1,0 +1,26 @@
+<script>
+	var swiper = new Swiper('#carousel', {
+		pagination: {
+			el: '.dots',
+			type: 'fraction',
+		},
+	})
+	$(function () {
+		var viewW = $(window).width();
+		$(document).scroll(function() {
+			var scroH = $(document).scrollTop();  //滚动高度
+
+			if(scroH >= (viewW*0.8)){  //距离顶部大于可见宽度
+				$('.toolbar').addClass('nv')
+			}else {
+				$('.toolbar').removeClass('nv')
+			}
+
+		});
+	})
+
+	function closePage() {
+		window.parent.postMessage({action:'closeframe'},'*');
+		window.document.body.remove();
+	}
+</script>

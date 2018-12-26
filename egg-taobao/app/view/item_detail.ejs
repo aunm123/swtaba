@@ -1,13 +1,20 @@
 <%- include('temple/head.ejs'); %>
 <link rel="stylesheet" href="public/js/swiper/css/swiper.min.css">
 <link rel="stylesheet" href="public/css/detail.css">
+<script src="public/js/clipboard/clipboard.min.js"></script>
+
+
 <body>
 
-<div class="app">
+<script type="text/javascript">
+	window.parent.postMessage("loadfinish",'*');
+</script>
+
+<div class="app" style="min-height: 100vh;margin-bottom: 50px;">
     <header class="toolbar sticky">
         <div class="toolbar__btn-wrapper clearfix">
             <div class="toolbar__btn toolbar__back">
-                <a href="/">
+                <a href="javascript:;" onClick="closePage()">
                     <i class="iconfont icon-back_light"></i>
                 </a>
             </div>
@@ -19,17 +26,16 @@
             <% if (pictUrl) { %>
                 <div data-index="0" class="swiper-slide">
                     <img alt=""
-                         src="<%=pictUrl%>"
-                         class="mui-lazy slick-image"></div>
+                         data-ks-lazyload='<%=pictUrl%>'
+                         src="public/image/loading.gif"
+                         class="mui-lazy slick-image lazy"></div>
             <% } %>
-
-
 
             <% smallimg.forEach(function(itemimg){ %>
             <div data-index="0" class="swiper-slide">
                 <img alt=""
                      src="<%=itemimg.url%>"
-                     class="mui-lazy slick-image"></div>
+                     class="mui-lazy slick-image lazy"></div>
             <% }); %>
         </div>
         <div class="dots"></div>
@@ -40,17 +46,15 @@
             <div class="prices-wrapper">
                 <div class="prices">
                     <div class="price-title"></div>
-                    <div class="price"><%=(zkFinalPrice)/100.0%></div>
+                    <div class="price"><%=((zkFinalPrice)/100.0 - couponAmount).toFixed(2) %></div>
                     <span class="price-tag text"><%=couponInfo%></span>
                 </div>
-                <div class="extra-price"><p>价格<span class="price-span line-through">￥<%=(zkFinalPrice)/100.0%></span></p></div>
+                <div class="extra-price"><p>价格<span class="price-span line-through">￥<%=((reservePrice)/100.0).toFixed(2)%></span></p></div>
                 <div class="price-intl"></div>
                 <div class="price-tip"></div>
             </div>
-			<div><%=short_url%></div>
-            <div class="title-wrapper"><h2 class="title"><%=title%></h2>
-                <div class="share-btn"><i class="icon iconfont share-btn icon-share_light" aria-hidden="true"></i></div>
-            </div>
+            <%- include('temple/detail_short_copy.ejs', {short_url: short_url}); %>
+            <div class="title-wrapper"><h2 class="title"><%=title%></h2></div>
             <div class="delivery-box"><span class="delivery-price">货源地：<%=provcity%></span><span class="month-sold">月销量：<%=volume%></span>
             </div>
         </div>
@@ -67,28 +71,14 @@
     <% }%>
 
     <div class="bar">
-        <a class="bar-item"
-           href="//shop.m.taobao.com/shop/shop_index.htm?user_id=154420891&amp;item_id=16313634425"><i
-                    class="icon iconfont icon-shop" aria-hidden="true"></i><span>店铺</span></a>
-        <div class="bar-item"><i class="icon iconfont icon-wang" aria-hidden="true"></i><span>客服</span></div>
-        <div class="bar-item"><i class="icon iconfont icon icon-favor" aria-hidden="true"></i><span>收藏</span></div>
         <div class="bar-btn-wrapper">
-            <div class="bar-btn bar-addcart">加入购物车</div>
-            <div class="bar-btn bar-buynow">立即购买</div>
+            <a id="totb" class="bar-btn bar-buynow" href="javascript:;" onclick="open_taobao('#totb','<%=couponClickUrl%>')">淘宝领劵</a>
         </div>
     </div>
 </div>
 
-
 <script src="public/js/swiper/js/swiper.js"></script>
-<script>
-	var swiper = new Swiper('#carousel', {
-		pagination: {
-			el: '.dots',
-			type: 'fraction',
-		},
-	})
-</script>
+<%- include('iframe_close.ejs'); %>
 <style>
     .J_DetailSection{
         background-color: white;

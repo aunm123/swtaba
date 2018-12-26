@@ -1,1 +1,25 @@
+
+<script>
+	$(function () {
+		$('img').lazyload({
+			'data_attribute': 'ks-lazyload'
+		});
+	})
+
+    function open_taobao(targetClass,s_url) {
+	    var url = "taobao://s.click.taobao.com/6ERCbL32kLy";                   //淘宝
+	    window.location = "taobao:"+s_url;
+
+
+	    // const cb = new ClipboardJS(targetClass, {
+		 //    text: () => s_url
+	    // })
+	    // cb.on('success', e => {
+		 //    window.location = url;
+	    // })
+	    // cb.on('error', function(e) {
+		 //    alert('复制失败,请手动复制');
+	    // });
+    }
+</script>
 </html>
