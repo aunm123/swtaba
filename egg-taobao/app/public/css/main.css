@@ -5,7 +5,7 @@
   position: relative;
   padding: 0.2rem 0 0.25rem;
 }
-.search-input {
+.main .search-input {
   height: 0.68rem;
   min-height: 31px;
   width: 95%;
@@ -17,7 +17,7 @@
   text-align: center;
   font-size: 10px;
 }
-.search-input .search_icon {
+.main .search-input .search_icon {
   width: 0.26rem;
   height: 0.26rem;
   display: inline-block;
@@ -27,64 +27,64 @@
   color: #fff;
   vertical-align: middle;
 }
-.search-input .input_value {
+.main .search-input .input_value {
   font-size: 0.24rem;
   color: #fff;
   line-height: 29px;
   vertical-align: middle;
 }
-.logo-div {
+.main .logo-div {
   padding: 10px;
 }
-.logo-div .logo {
+.main .logo-div .logo {
   width: 79px;
   height: 21px;
   background: url(../image/logo.png) no-repeat;
   background-size: cover;
   margin: 0 auto;
 }
-.swiper-container {
+.main .swiper-container {
   margin-top: -43px !important;
   margin-bottom: 20px!important;
 }
-.swiper-container .swiper-slide a {
+.main .swiper-container .swiper-slide a {
   display: block;
 }
-.swiper-container .swiper-slide a img {
+.main .swiper-container .swiper-slide a img {
   width: 95%;
 }
-.swiper-pagination {
+.main .swiper-pagination {
   width: 100%;
   margin-top: -28px;
   position: inherit;
 }
-.swiper-pagination .swiper-pagination-bullet {
+.main .swiper-pagination .swiper-pagination-bullet {
   width: 4px;
   height: 4px;
   margin: 0 2px;
 }
-.category-div {
+.main .category-div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
-.category-div div {
+.main .category-div div {
   min-width: 20%;
 }
-.category-div .item {
+.main .category-div .item {
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
   margin-bottom: 5px;
 }
-.category-div .item img {
+.main .category-div .item img {
   width: 40px;
   height: 40px;
   margin: auto;
   border-radius: 50%;
 }
-.category-div .item span {
+.main .category-div .item span {
   font-size: 12px;
   text-align: center;
   line-height: 14px;

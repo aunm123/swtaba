@@ -1,8 +1,13 @@
-
+<script type="text/javascript">
+	window.postMessage("loadfinish",'*');
+</script>
 <script>
 	$(function () {
 		$('img').lazyload({
 			'data_attribute': 'ks-lazyload'
+		});
+		$('img').lazyload({
+			'data_attribute': 'src'
 		});
 	})
 

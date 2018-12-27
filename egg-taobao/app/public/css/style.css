@@ -242,6 +242,17 @@ table{border-collapse:collapse;border-spacing:0}
 
 td,th{padding:0}
 
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block;
+}
+a {
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+}
+
 .page-header{
     background-image: linear-gradient(122deg,#FF8B58 0,#FF3E3E 41%,#FF203C 100%);
     padding: 0 .24rem 1.3rem;

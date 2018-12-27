@@ -1,0 +1,56 @@
+<%- include('../temple/head.ejs'); %>
+<link rel="stylesheet" href="public/css/search.css">
+<body>
+<%- include('../iframe_open.ejs'); %>
+
+<div>
+
+    <header class="search-head">
+        <div class="search-content">
+            <a href="javascript:;" class="btn" onClick="closePage()">
+                <i class="iconfont icon-back_light"></i>
+            </a>
+            <i class="iconfont icon-search search-icon"></i>
+            <input class="search-input" type="text" value="asdasd">
+            <a href="javascript:;" class="btn" onClick="">
+                搜索
+            </a>
+        </div>
+    </header>
+
+    <div id="hot">
+        <div id="J_SEARCH_HISTORY">
+            <h1 class="search-title">
+                历史搜索
+                <span class="clear-cache" mx-click="clearHistory()" data-spm-click="gostr=/aitaobao.3;locaid=clearhistory;">
+		<i class="icon-delete"></i>清除记录
+	</span>
+            </h1>
+            <section id="history-words" data-spm="8001" class="search-list-keys">
+
+                <a href="//ai.m.taobao.com/search.html?q=电暖器" class="item">电暖器</a>
+
+                <a href="//ai.m.taobao.com/search.html?q=airpods" class="item">airpods</a>
+
+                <a href="//ai.m.taobao.com/search.html?q=airpods 原装" class="item">airpods 原装</a>
+
+                <a href="//ai.m.taobao.com/search.html?q=地板砖" class="item">地板砖</a>
+
+            </section>
+        </div>
+        <div id="J_SEARCH_KGB">
+            <h1 class="search-title">热门搜索</h1>
+            <section data-spm="8002" class="search-list-keys">
+
+
+                <% hotkeywords.forEach(function(item){ %>
+                    <a href="//ai.m.taobao.com/search.html?q=<%=item%>" class="item"><%=item%></a>
+                <% }); %>
+
+            </section>
+        </div>
+    </div>
+
+</div>
+</body>
+<%- include('../temple/foot.ejs'); %>

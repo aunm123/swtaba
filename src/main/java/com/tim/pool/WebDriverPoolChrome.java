@@ -16,6 +16,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -63,9 +64,9 @@ public class WebDriverPoolChrome {
         // # 设置默认编码为 utf-8
         chromeOptions.addArguments("lang=zh_CN.UTF-8");
         // 模拟手机
-//        chromeOptions.addArguments("user-agent=\"Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1\"");
+        chromeOptions.addArguments("user-agent=\"Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1\"");
         // pc 端
-        chromeOptions.addArguments("user-agent=\"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50\"");
+//        chromeOptions.addArguments("user-agent=\"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50\"");
 
         //单线程运行
 //        chromeOptions.addArguments("–single-process");
@@ -93,7 +94,7 @@ public class WebDriverPoolChrome {
         tWebDriver.setDriver(driver);
 
         // 设置浏览器大小
-        driver.manage().window().setSize(new Dimension(400,2046));
+        driver.manage().window().setSize(new Dimension(375,2046));
 
         return tWebDriver;
 
@@ -212,25 +213,32 @@ public class WebDriverPoolChrome {
                     // 获取 网页的 title
                     System.out.println(" Page title is: " + driver.getTitle());
 
-                    new WebDriverWait(driver, 180).until(input -> {
-                        WebElement webElement = ((WebDriver) input).findElement(By.id("page"));
-                        WebElement targetElement = webElement.findElement(By.className("ke-post"));
-                        String innerHTML = targetElement.getAttribute("innerHTML");
-                        Pattern p = Pattern.compile(".*(描述加载中).*");
-                        Matcher m = p.matcher(innerHTML);
-                        Boolean b1 = true;
-                        if (m.find()) {
-                            b1 = false;
-                        }
-                        return b1;
-                    });
+                    // PC版
+//                    new WebDriverWait(driver, 180).until(input -> {
+//                        WebElement webElement = ((WebDriver) input).findElement(By.id("page"));
+//                        WebElement targetElement = webElement.findElement(By.className("ke-post"));
+//                        String innerHTML = targetElement.getAttribute("innerHTML");
+//                        Pattern p = Pattern.compile(".*(描述加载中).*");
+//                        Matcher m = p.matcher(innerHTML);
+//                        Boolean b1 = true;
+//                        if (m.find()) {
+//                            b1 = false;
+//                        }
+//                        return b1;
+//                    });
+//                    WebElement webElement = driver.findElement(By.id("page"));
+//                    String str = webElement.getAttribute("outerHTML");
 
-                    WebElement webElement = driver.findElement(By.id("page"));
-
+                    // 手机版
+                    new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOfElementLocated(By.className("desc-wrapper")));
+                    WebElement webElement = driver.findElement(By.id("root"));
                     String str = webElement.getAttribute("outerHTML");
+
+
+
                     Html html = new Html(str);
 
-                    Selectable content = html.$("#description");
+                    Selectable content = html.$(".desc-wrapper");
 
                     TItemContent tItemContent = new TItemContent();
                     tItemContent.setItemId(item_id);

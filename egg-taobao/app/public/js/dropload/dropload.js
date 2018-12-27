@@ -93,23 +93,25 @@
         });
 
         // 绑定触摸
-        me.$element.on('touchstart',function(e){
-            if(!me.loading){
-                fnTouches(e);
-                fnTouchstart(e, me);
-            }
-        },true);
-        me.$element.on('touchmove',function(e){
-            if(!me.loading){
-                fnTouches(e, me);
-                fnTouchmove(e, me);
-            }
-        },true);
-        me.$element.on('touchend',function(){
-            if(!me.loading){
-                fnTouchend(me);
-            }
-        });
+        try{
+	        me.$element.on('touchstart',function(e){
+		        if(!me.loading){
+			        fnTouches(e);
+			        fnTouchstart(e, me);
+		        }
+	        },true);
+	        me.$element.on('touchmove',function(e){
+		        if(!me.loading){
+			        fnTouches(e, me);
+			        fnTouchmove(e, me);
+		        }
+	        },true);
+	        me.$element.on('touchend',function(){
+		        if(!me.loading){
+			        fnTouchend(me);
+		        }
+	        });
+        }catch (e){}
 
         // 加载下方
         me.$scrollArea.on('scroll',function(){

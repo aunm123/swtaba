@@ -1,0 +1,73 @@
+<div class="module list-content">
+    <div class="hasmore" style="display: none" more="<%=total%>"></div>
+    <div class="search-list" style="overflow: hidden"></div>
+
+    <script src="public/js/dropload/dropload.min.js?time=20181212"></script>
+    <script>
+		$(function () {
+
+			var page = 1;
+			// dropload
+			var dropload = $('.list-content').dropload({
+				domDown: {
+					domClass: 'dropload-down',
+					domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+					domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+					domNoData: '<div class="dropload-noData">数据已经加载完毕</div>'
+				},
+				loadDownFn: function (me) {
+					$.ajax({
+						type: 'POST',
+						url: '/s_page',
+						data: {categoryid: 0, pageNo: page},
+						dataType: 'html',
+						success: function (data) {
+							model(data,me,"down");
+						},
+						error: function (xhr, type) {
+							// 即使加载出错，也得重置
+							me.lock()
+							me.noData();
+							me.resetload();
+						}
+					});
+				},
+			});
+
+			function model(data,me,m) {
+
+				var total = $('.hasmore').attr("more");
+				var len = $('.search-list .search-item').length;
+
+				if (m === 'down'){
+					if (len >= total){
+						me.lock();
+						me.noData();
+						me.resetload();
+						return ;
+					}
+				}
+
+				try {
+					if (page === 1){
+						$('.search-list').html(data);
+					}else {
+						$('.search-list').append(data);
+					}
+				}catch (e){}
+				page++;
+				// 每次数据加载完，必须重置
+				if (m === 'down'){
+					if (len >= total){
+						me.lock();
+						me.noData();
+					}
+				}
+
+				me.resetload();
+			}
+
+
+		});
+    </script>
+</div>

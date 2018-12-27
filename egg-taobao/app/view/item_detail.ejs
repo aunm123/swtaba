@@ -10,7 +10,7 @@
 	window.parent.postMessage("loadfinish",'*');
 </script>
 
-<div class="app" style="min-height: 100vh;margin-bottom: 50px;">
+<div class="app" style="margin-bottom: 56px;">
     <header class="toolbar sticky">
         <div class="toolbar__btn-wrapper clearfix">
             <div class="toolbar__btn toolbar__back">
@@ -46,7 +46,7 @@
             <div class="prices-wrapper">
                 <div class="prices">
                     <div class="price-title"></div>
-                    <div class="price"><%=((zkFinalPrice)/100.0 - couponAmount).toFixed(2) %></div>
+                    <div class="price"><%=((reservePrice)/100.0 - couponAmount).toFixed(2) %></div>
                     <span class="price-tag text"><%=couponInfo%></span>
                 </div>
                 <div class="extra-price"><p>价格<span class="price-span line-through">￥<%=((reservePrice)/100.0).toFixed(2)%></span></p></div>
@@ -61,7 +61,7 @@
     </div>
 
     <% if (typeof content !== 'undefined'){ %>
-    <div class="tshop-psm">
+    <div class="tshop-psm" style="background-color: white">
         <div class="desc-title">
             <i class="icon iconfont desc-title-icon icon-piclight" aria-hidden="true"></i>
             商品详情
@@ -70,7 +70,7 @@
     </div>
     <% }%>
 
-    <div class="bar">
+    <div class="bar" style="box-shadow: 0px 1px 10px #dadada;">
         <div class="bar-btn-wrapper">
             <a id="totb" class="bar-btn bar-buynow" href="javascript:;" onclick="open_taobao('#totb','<%=couponClickUrl%>')">淘宝领劵</a>
         </div>
