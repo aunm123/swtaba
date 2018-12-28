@@ -193,25 +193,25 @@ public class PackageCouponData {
 //			req.setEndTkRate(1234L); // 淘客佣金比率上限 如：1234表示12.34%
 //			req.setStartTkRate(1234L); //淘客佣金比率下限，如：1234表示12.34%
 //			req.setEndPrice(10L);   // 折扣价范围上限，单位：元
-            req.setStartPrice(10L); // 折扣价范围下限，单位：元
-            req.setIsOverseas(false);  // 是否海外商品
-            req.setIsTmall(false);   //  是否商城商品
+//            req.setStartPrice(10L); // 折扣价范围下限，单位：元
+//            req.setIsOverseas(false);  // 是否海外商品
+//            req.setIsTmall(false);   //  是否商城商品
 
-            req.setSort("tk_rate_des");  //排序_des（降序），排序_asc（升序），销量（total_sales），淘客佣金比率（tk_rate）， 累计推广量（tk_total_sales），总支出佣金（tk_total_commi），价格（price）
+            req.setSort("total_sales_des");  //排序_des（降序），排序_asc（升序），销量（total_sales），淘客佣金比率（tk_rate）， 累计推广量（tk_total_sales），总支出佣金（tk_total_commi），价格（price）
 //			req.setItemloc("杭州");   //  所在地
 
             req.setQ(keyword);
-//			req.setMaterialId(2836L);  //  官方的物料Id  不传时默认为2836
-            req.setHasCoupon(false);  //  是否有优惠券
+//			req.setMaterialId(3767L);  //  官方的物料Id  不传时默认为2836
+            req.setHasCoupon(true);  //  是否有优惠券
 
             req.setAdzoneId(Long.valueOf(TBConf.AdzoneId));
 
-            req.setNeedFreeShipment(true);  //   是否包邮
-            req.setNeedPrepay(true);        // 是否加入消费者保障
-            req.setIncludePayRate30(true);  // 成交转化是否高于行业均值
-            req.setIncludeGoodRate(true);    // 好评率是否高于行业均值
-            req.setIncludeRfdRate(true);    // 退款率是否低于行业均值
-            req.setNpxLevel(2L);            // 牛皮癣程度，取值：1:不限，2:无，3:轻微
+//            req.setNeedFreeShipment(true);  //   是否包邮
+//            req.setNeedPrepay(true);        // 是否加入消费者保障
+//            req.setIncludePayRate30(true);  // 成交转化是否高于行业均值
+//            req.setIncludeGoodRate(true);    // 好评率是否高于行业均值
+//            req.setIncludeRfdRate(true);    // 退款率是否低于行业均值
+            req.setNpxLevel(1L);            // 牛皮癣程度，取值：1:不限，2:无，3:轻微
 //			req.setEndKaTkRate(1234L);		// KA媒体淘客佣金比率上限
 //			req.setStartKaTkRate(1234L);	// KA媒体淘客佣金比率下限
             TbkDgMaterialOptionalResponse rsp = client.execute(req);

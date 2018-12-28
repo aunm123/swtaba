@@ -1,5 +1,8 @@
 package com.tim.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.tim.entity.TKey;
+import com.tim.magic.PackageCouponData;
 import com.tim.service.ITItemService;
 import com.tim.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -20,6 +24,8 @@ public class SearchController {
     @Autowired
     private ITItemService itemService;
 
+    @Autowired
+    PackageCouponData packageCouponData;
 
     // 设计 api 搜索
 
@@ -36,7 +42,6 @@ public class SearchController {
             @RequestParam(defaultValue = "") String m,
             HttpServletRequest request
     ){
-
         ResultUtil resultUtil = itemService.selectKeyWord(page, pageSize, categoryid, v, p, q);
         return  resultUtil;
 
