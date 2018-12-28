@@ -16,11 +16,20 @@
 					domNoData: '<div class="dropload-noData">数据已经加载完毕</div>'
 				},
 				loadDownFn: function (me) {
+                    let params = {
+	                    categoryid: 0,
+                        pageNo: page,
+                        q: getParam("q"),
+                        v: getParam("v"),
+                        p: getParam("p"),
+                        m: getParam("m"),
+                    }
 					$.ajax({
 						type: 'POST',
 						url: '/s_page',
-						data: {categoryid: 0, pageNo: page},
+						data: params,
 						dataType: 'html',
+						contentType: "application/x-www-form-urlencoded; charset=utf-8",
 						success: function (data) {
 							model(data,me,"down");
 						},
@@ -38,6 +47,7 @@
 
 				var total = $('.hasmore').attr("more");
 				var len = $('.search-list .search-item').length;
+                if (total!=data.total)
 
 				if (m === 'down'){
 					if (len >= total){

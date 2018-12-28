@@ -2,21 +2,9 @@
 <link rel="stylesheet" href="public/css/search.css">
 <body>
 <%- include('../iframe_open.ejs'); %>
-
 <div>
 
-    <header class="search-head">
-        <div class="search-content">
-            <a href="javascript:;" class="btn" onClick="closePage()">
-                <i class="iconfont icon-back_light"></i>
-            </a>
-            <i class="iconfont icon-search search-icon"></i>
-            <input class="search-input" type="text" value="asdasd">
-            <a href="javascript:;" class="btn" onClick="">
-                搜索
-            </a>
-        </div>
-    </header>
+    <%- include('../temple/search-head.ejs');%>
 
     <div id="hot">
         <div id="J_SEARCH_HISTORY">

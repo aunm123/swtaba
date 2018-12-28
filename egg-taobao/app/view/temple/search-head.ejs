@@ -1,0 +1,15 @@
+<header class="search-head">
+    <div class="search-content">
+        <a href="javascript:;" class="btn" onClick="closePage()">
+            <i class="iconfont icon-back_light"></i>
+        </a>
+        <i class="iconfont icon-search search-icon"></i>
+        <input id="search-input" class="search-input" type="text">
+        <a href="javascript:;" class="btn" onClick="searchAction()">
+            搜索
+        </a>
+    </div>
+</header>
+<script>
+	document.getElementById("search-input").value = decodeURI(getParam('q'));
+</script>

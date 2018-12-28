@@ -80,17 +80,6 @@ public class ApiComtroller {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/search")
-	public Object search(@RequestParam(defaultValue = "1") Integer page,
-					   @RequestParam(defaultValue = "50") Integer pageSize,
-					   @RequestParam String keyword){
-
-		ResultUtil resultUtil = packageCouponData.packWithWord(keyword, page, pageSize);
-
-		return  resultUtil;
-	}
-
-	@ResponseBody
 	@RequestMapping(value = "/shorturl")
 	public ResultUtil short_url(@RequestParam String itemid,
 							@RequestParam String url,

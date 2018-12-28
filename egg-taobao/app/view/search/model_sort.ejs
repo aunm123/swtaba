@@ -2,27 +2,64 @@
     <div class="category clear"
          style="background-color: rgb(255, 255, 255); position: relative; top: 0px;">
         <ul class="category-wrap clear">
-            <li class="select">
-                <a href="javascript:void(0)" data-tab="综合排序" class="">
+            <li class="select" id="normal">
+                <a href="javascript:void(0)" data-tab="综合排序" onclick="normalsort()">
                     默认排序
                 </a>
             </li>
-            <li>
-                <a href="javascript:void(0)" data-tab="销量" class="">
+            <li id="sell">
+                <a href="javascript:void(0)" data-tab="销量" onclick="sellsort()">
                     月销量
                 </a>
             </li>
-            <li>
-                <a href="javascript:void(0)" data-tab="价格" class="">
+            <li id="price1">
+                <a href="javascript:void(0)" data-tab="价格从低到高" onclick="pricesort('a')">
                     价格 <span class="iconfont"></span>
                 </a>
             </li>
-            <li>
-                <a href="javascript:void(0)" data-tab="价格从高到低" class="hover">
+            <li id="price2">
+                <a href="javascript:void(0)" data-tab="价格从高到低" onclick="pricesort('d')">
                     价格 <span class="iconfont"></span>
                 </a>
             </li>
         </ul>
 
     </div>
+    <script>
+	    function normalsort() {
+		    var key = $('#search-input').val();
+		    key = key ? key : ""
+		    window.location.href = "/search?q=" + key;
+	    }
+		function sellsort() {
+			var key = $('#search-input').val();
+			key = key ? key : ""
+			window.location.href = "/search?q=" + key + "&v=a";
+		}
+		function pricesort(p_sort) {
+			var key = $('#search-input').val();
+			key = key ? key : ""
+			window.location.href = "/search?q=" + key + "&p=" + p_sort;
+		}
+		$(function () {
+			var q = getParam('q');
+			var v = getParam('v');
+			var p = getParam('p');
+			var m = getParam('m');
+			$('.select').removeClass('select');
+			if (p){
+				if (p=='a'){
+					$('#price1').addClass('select')
+				}else {
+					$('#price2').addClass('select')
+				}
+				return ;
+			}
+			if (v){
+				$('#sell').addClass('select')
+			}else {
+				$('#normal').addClass('select')
+			}
+		})
+    </script>
 </div>

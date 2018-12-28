@@ -8,7 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
+@RequestMapping(value = "/search")
 public class SearchController {
 
     @Autowired
@@ -19,20 +25,21 @@ public class SearchController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/search")
-    public ResultUtil top(
+    @RequestMapping(value = "/se")
+    public ResultUtil search(
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "50") Integer pageSize,
             @RequestParam(defaultValue = "0") Integer categoryid,
             @RequestParam String q,
-            @RequestParam String params
+            @RequestParam(defaultValue = "") String v,                // 月销售额
+            @RequestParam(defaultValue = "") String p,                // 价格
+            @RequestParam(defaultValue = "") String m,
+            HttpServletRequest request
     ){
 
+        ResultUtil resultUtil = itemService.selectKeyWord(page, pageSize, categoryid, v, p, q);
+        return  resultUtil;
 
-
-        ResultUtil resultUtil = itemService.selectNewList(page, pageSize, categoryid);
-
-        return resultUtil;
     }
 
 }

@@ -26,5 +26,13 @@
 		 //    alert('复制失败,请手动复制');
 	    // });
     }
+
+	function searchAction() {
+		var key = $('#search-input').val();
+		key = key?key:""
+		window.location.href="/search?q="+key;
+	}
+
 </script>
+
 </html>

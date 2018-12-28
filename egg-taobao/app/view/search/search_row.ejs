@@ -7,7 +7,10 @@
 		<div class="info">
 			<h3 class="title"><%=item.title%></h3>
 			<p class="priceInfo" style="padding-bottom: 0;">
-				<span class="yen">¥</span><span class="price"><%=((item.reservePrice)/100.0 - item.couponAmount).toFixed(2) %></span>
+				<span class="yen" style="color: red;">¥</span>
+                    <span class="price" style="color: red;font-weight: 700;font-size: 20px;margin-left: -2px;">
+                        <%=((item.reservePrice)/100.0 - item.couponAmount).toFixed(2) %>
+                    </span>
                 <span class="yen line-through" style="margin-left: 5px;">¥</span><span class="price line-through extra-price"><%=((item.reservePrice)/100.0).toFixed(2)%></span>
 			</p>
             <p class="priceInfo" style="display: flex;align-items: center;">

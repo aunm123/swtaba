@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author tim
  * @since 2018-12-05
  */
+@Repository
 public interface TItemMapper extends BaseMapper<TItem> {
 
     @Delete("delete from `t_item_content` where \n" +

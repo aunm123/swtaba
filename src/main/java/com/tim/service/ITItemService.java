@@ -28,6 +28,11 @@ public interface ITItemService extends IService<TItem> {
 
     public Map selectDetail(String itemid);
 
+    public ResultUtil selectKeyWord(Integer page, Integer pageSize, Integer categoryid,
+                             String volumne,                // 月销售额
+                             String price,                // 价格
+                             String keyword);
+
     public void cleanUpItems();
 
 }
