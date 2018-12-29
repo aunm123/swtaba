@@ -27,10 +27,10 @@ public interface TItemMapper extends BaseMapper<TItem> {
     public void cleanItemsContent();
 
 
-    @Delete("delete from `t_item_content` where \n" +
+    @Delete("delete from `t_item_img` where \n" +
             "item_id in (\n" +
             "\tSELECT item_id from (\n" +
-            "\t\tSELECT a.item_id,b.num_iid FROM `t_item_content` as a left join `t_item` as b on a.item_id = b.num_iid where b.num_iid is null\n" +
+            "\t\tSELECT a.item_id,b.num_iid FROM `t_item_img` as a left join `t_item` as b on a.item_id = b.num_iid where b.num_iid is null\n" +
             "    ) temp\n" +
             ")")
     public void cleanItemsImg();

@@ -47,7 +47,7 @@ public class AppInit implements CommandLineRunner {
 			// 每个关键字都查找n页面
 			for(TKey key : keys){
 				for (int i = 1; i <= 2; i++) {
-					packageCouponData.packWithWord2(key.getKey(), i, 50);
+					packageCouponData.packWithWord2(key.getKey(), i, 200);
 				}
 			}
 

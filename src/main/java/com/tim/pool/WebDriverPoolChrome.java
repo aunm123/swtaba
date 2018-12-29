@@ -3,11 +3,13 @@ package com.tim.pool;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.tim.config.TBConf;
 import com.tim.entity.TItem;
 import com.tim.entity.TItemContent;
 import com.tim.mapper.TItemMapper;
 import com.tim.service.impl.TItemContentServiceImpl;
 import com.tim.service.impl.TItemServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -31,6 +33,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Component
 public class WebDriverPoolChrome {
 
@@ -46,7 +49,7 @@ public class WebDriverPoolChrome {
     @Autowired
     TItemMapper itemMapper;
 
-    private ArrayList<TWebDriver> webDrivers;
+    private ArrayList<TWebDriver> webDrivers =  new ArrayList<>();
 
     //phantomjs路径
     private static final String WIN_JS_BIN = "D:\\chromedriver_win32\\chromedriver.exe";
@@ -117,12 +120,18 @@ public class WebDriverPoolChrome {
 
     public void start() {
 
+        if (TBConf.ChromeLoading){
+            log.info("正在爬取，请不要重复启动！！！！");
+            return;
+        }
+
+        TBConf.ChromeLoading = true;
+
         Wrapper wrapper = new EntityWrapper<>();
         Integer count = itemMapper.selectCount(wrapper);
         Integer totalPage = count / 50 + (count % 50 == 0 ? 0 : 1);
 
-
-        webDrivers = new ArrayList<>();
+        webDrivers.clear();
         for (int i = 0; i < 6; i++) {
             TWebDriver tWebDriver = defaultDriver();
             webDrivers.add(tWebDriver);
@@ -152,7 +161,9 @@ public class WebDriverPoolChrome {
                         TWebDriver tWebDriver = webDrivers.get(i);
                         tWebDriver.getDriver().quit();
                     }
+                    webDrivers.clear();
                     System.out.println("所有的子线程都结束了！");
+                    TBConf.ChromeLoading = false;
                     break;
                 }
                 Thread.sleep(1000);
@@ -171,8 +182,8 @@ public class WebDriverPoolChrome {
             long beginDate = tItemContent.getUpdateDate().getTime();
             long nowDate = new Date().getTime();
 
-            // 过期时间是7天
-            if (nowDate - beginDate <= (3600*24*14*1000L)) {
+            // 过期时间是60天
+            if (nowDate - beginDate <= (3600*24*60*1000L)) {
                 return null;
             }
             System.out.println("过期："+tItemContent.getItemId());

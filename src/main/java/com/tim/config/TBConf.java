@@ -21,6 +21,8 @@ public class TBConf {
 	public static final String AdzoneId = "62920816";
 	public static final String BASE_URL = "http://gw.api.taobao.com/router/rest";
 
+	public static Boolean ChromeLoading = false;
+
 
 	@Bean
 	public TaobaoClient taobaoClient(){
