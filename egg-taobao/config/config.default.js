@@ -34,5 +34,10 @@ module.exports = appInfo => {
 		},
 	};
 
+	config.clusterClient = {
+		maxWaitTime: 600000,
+		responseTimeout: 600000,
+	};
+
 	return config;
 };

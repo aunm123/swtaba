@@ -2,9 +2,9 @@
 const Service = require('egg').Service;
 
 class HomeService extends Service {
-	async getTopData({categoryid, pageNo, pageSize}) {
+	async getTopData({categoryid, page, pageSize}) {
 		const { ctx, config, logger } = this;
-		logger.info(`获取首页数据：categoryid=${categoryid} pageNo=${pageNo}, pageSize=${pageSize}`);
+		logger.info(`获取首页数据：categoryid=${categoryid} page=${page}, pageSize=${pageSize}`);
 
 		// 获取搜索结果
 		const response = await ctx.curl(`${config.searchServer}/api/top`, {
@@ -12,7 +12,7 @@ class HomeService extends Service {
 			method: 'GET',
 			data: {
 				categoryid: categoryid,
-				page: pageNo,
+				page: page,
 				pageSize: pageSize
 			},
 			timeout: 30000,

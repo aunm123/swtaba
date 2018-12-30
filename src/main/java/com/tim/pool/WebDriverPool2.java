@@ -39,9 +39,6 @@ import java.util.regex.Pattern;
 public class WebDriverPool2 {
 
 	@Autowired
-	ExecutorService driverPool;
-
-	@Autowired
 	TItemServiceImpl tItemService;
 
 	@Autowired

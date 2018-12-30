@@ -39,6 +39,7 @@
 }
 #hot {
   padding: 0 12px;
+  z-index: 200;
 }
 #hot .search-title {
   font-size: 16px;

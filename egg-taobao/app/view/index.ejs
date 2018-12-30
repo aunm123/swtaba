@@ -12,7 +12,7 @@
 		<div class="logo-div">
 			<div style="display: none" class="logo"></div>
 		</div>
-		<div class="search-input" mx-click="mockInput()">
+		<div class="search-input">
 			<span class="search_icon"></span>
 			<span class="input_value">中长款风衣 女</span>
 		</div>
@@ -50,47 +50,16 @@
 				el: '.swiper-pagination',
 			},
 		})
+        $(function () {
+	        $('.search-input').click(function(){
+		        open_url('/keyword');
+	        })
+        })
 	</script>
 
 	<div class="category-div">
 		<div>
-			<a class="item" href="javascript:;" onclick="open_url('//www.baidu.com')">
-				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的彩票</span>
-			</a>
-		</div>
-		<div>
-			<a class="item" href="">
-				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的彩票</span>
-			</a>
-		</div>
-		<div>
-			<a class="item" href="">
-				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的彩票</span>
-			</a>
-		</div>
-		<div>
-			<a class="item" href="">
-				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的彩票</span>
-			</a>
-		</div>
-		<div>
-			<a class="item" href="">
-				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的彩票</span>
-			</a>
-		</div>
-		<div>
-			<a class="item" href="">
-				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的彩票</span>
-			</a>
-		</div>
-		<div>
-			<a class="item" href="">
+			<a class="item" href="javascript:;" onclick="open_url('/search?q=airpods')">
 				<img src="public/image/cat_item/item1.png" alt="">
 				<span>我的彩票</span>
 			</a>
@@ -158,7 +127,7 @@
 				$.ajax({
 					type: 'POST',
 					url: '/i_page',
-					data: {categoryid: 0, pageNo: page},
+					data: {categoryid: 0, page: page},
 					dataType: 'html',
 					success: function (data) {
 						model(data,me,"up");
@@ -174,14 +143,13 @@
 				$.ajax({
 					type: 'POST',
 					url: '/i_page',
-					data: {categoryid: 0, pageNo: page},
+					data: {categoryid: 0, page: page},
 					dataType: 'html',
 					success: function (data) {
 						model(data,me,"down");
 					},
 					error: function (xhr, type) {
 						// 即使加载出错，也得重置
-						me.lock()
 						me.resetload();
 					}
 				});
@@ -190,18 +158,6 @@
 
 		function model(data,me,m) {
 
-			var total = $('.hasmore').attr("more");
-			var len = $('.waterfall-list .waterfall-item').length;
-
-			if (m === 'down'){
-				if (len >= total){
-					me.lock();
-					me.noData();
-					me.resetload();
-					return ;
-				}
-			}
-
 			try {
 				if (page === 1){
 					$('.waterfall-list').html(data);
@@ -209,13 +165,17 @@
 					$('.waterfall-list').append(data);
 				}
 			}catch (e){}
+
+
+			var total = $('.hasmore').attr("more");
+			var len = $('.waterfall-list .waterfall-item').length;
+
+
 			page++;
 			// 每次数据加载完，必须重置
-			if (m === 'down'){
-				if (len >= total){
-					me.lock();
-					me.noData();
-				}
+			if (len >= total){
+				me.lock();
+				me.noData();
 			}
 
 			me.resetload();

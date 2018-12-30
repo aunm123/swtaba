@@ -38,9 +38,6 @@ import java.util.regex.Pattern;
 public class WebDriverPoolChrome {
 
     @Autowired
-    ExecutorService driverPool;
-
-    @Autowired
     TItemServiceImpl tItemService;
 
     @Autowired
@@ -148,21 +145,22 @@ public class WebDriverPoolChrome {
 
                 Runnable thread = createThread(url, item_id, 1);
                 if (thread != null) {
-                    driverPool.execute(thread);
+                    TBConf.GetDriverPool().execute(thread);
                 }
             }
         }
-        driverPool.shutdown();
+        TBConf.GetDriverPool().shutdown();
 
         while (true) {//等待所有任务都结束了继续执行
             try {
-                if (driverPool.isTerminated()) {
+                if (TBConf.GetDriverPool().isTerminated()) {
                     for (int i = 0; i < webDrivers.size(); i++) {
                         TWebDriver tWebDriver = webDrivers.get(i);
                         tWebDriver.getDriver().quit();
                     }
                     webDrivers.clear();
                     log.info("所有的子线程都结束了！");
+                    TBConf.CleanPool();
                     TBConf.ChromeLoading = false;
                     break;
                 }
@@ -270,7 +268,7 @@ public class WebDriverPoolChrome {
                         // 重新重试
                         Runnable thread = createThread(item_url, item_id, rc++);
                         if (thread != null) {
-                            driverPool.execute(thread);
+                            TBConf.GetDriverPool().execute(thread);
                         }
                     }
 

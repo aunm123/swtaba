@@ -4,13 +4,30 @@
 
 <body>
 <%- include('../iframe_open.ejs'); %>
+
+<script type="text/javascript">
+	window.parent.postMessage("loadfinish",'*');
+</script>
+
 <div id="list">
 
     <%- include('../temple/search-head.ejs');%>
 
     <%- include('model_sort.ejs'); %>
-    <%- include('model_list.ejs',{ total: total }); %>
+    <%- include('model_list.ejs'); %>
+
+    <%- include('model_plan.ejs'); %>
 
 </div>
+<script>
+    $(function () {
+	    $("#search-input").focus(function(){
+	    	$('.list-sort').hide();
+		    $('.list-content').hide();
+		    $('#hot').show();
+	    });
+    })
+</script>
+<%- include('../iframe_close.ejs'); %>
 </body>
 <%- include('../temple/foot.ejs'); %>

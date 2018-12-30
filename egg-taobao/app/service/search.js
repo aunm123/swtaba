@@ -10,7 +10,7 @@ class SearchService extends Service {
 			dataType: 'json',
 			method: 'GET',
 			data: params,
-			timeout: 3000,
+			timeout: 60000,
 		});
 		return response;
 	}

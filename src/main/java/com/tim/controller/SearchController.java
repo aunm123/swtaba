@@ -42,6 +42,9 @@ public class SearchController {
             @RequestParam(defaultValue = "") String m,
             HttpServletRequest request
     ){
+
+        packageCouponData.packWithWord2(q, page, pageSize+200);
+
         ResultUtil resultUtil = itemService.selectKeyWord(page, pageSize, categoryid, v, p, q);
         return  resultUtil;
 

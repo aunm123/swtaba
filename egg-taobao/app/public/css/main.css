@@ -18,17 +18,18 @@
   font-size: 10px;
 }
 .main .search-input .search_icon {
-  width: 0.26rem;
-  height: 0.26rem;
+  width: 12px;
+  height: 12px;
   display: inline-block;
   background: url(//gw.alicdn.com/tfs/TB15F0JbcbpK1RjSZFyXXX_qFXa-25-24.png);
   background-size: cover;
-  margin-right: 0.06rem;
+  margin-right: 2px;
+  margin-top: -2px;
   color: #fff;
   vertical-align: middle;
 }
 .main .search-input .input_value {
-  font-size: 0.24rem;
+  font-size: 12px;
   color: #fff;
   line-height: 29px;
   vertical-align: middle;

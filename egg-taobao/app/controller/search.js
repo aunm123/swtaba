@@ -24,17 +24,7 @@ class SearchController extends Controller {
 			'chaonima'
 		];
 
-		let {categoryid, pageNo, q, v, p, m} = ctx.query;
-		const params = {
-			categoryid,
-			page: pageNo, // 当前页
-			pageSize: 10, // 每页显示个数
-			q, v, p, m
-		};
-		console.log("获取搜索第" + pageNo + "页数据");
-		const listData = await ctx.service.search.getSearchUrl(params);
-		const {currentPage, data, total, done, message} = listData.data;
-		await ctx.render('search/index.ejs', {hotkeywords,total:total});
+		await ctx.render('search/index.ejs', {hotkeywords});
 	}
 
 	/**
@@ -44,19 +34,19 @@ class SearchController extends Controller {
 	async search_page() {
 		const ctx = this.ctx;
 
-		let {categoryid, pageNo, q, v, p, m} = ctx.request.body;
+		let {categoryid, page, q, v, p, m} = ctx.request.body;
 		const params = {
 			categoryid,
-			page: pageNo, // 当前页
+			page: page, // 当前页
 			pageSize: 10, // 每页显示个数
 			q: decodeURI(q),
 			v, p, m
 
 		};
-		console.log("获取搜索第" + pageNo + "页数据");
+		console.log("获取搜索第" + page + "页数据");
 		const listData = await ctx.service.search.getSearchUrl(params);
 		const {currentPage, data, total, done, message} = listData.data;
-		await ctx.render('search/search_row.ejs', {items: data});
+		await ctx.render('search/search_row.ejs', {items: data,total: total});
 
 	}
 

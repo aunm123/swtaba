@@ -1,5 +1,4 @@
 <div class="module list-content">
-    <div class="hasmore" style="display: none" more="<%=total%>"></div>
     <div class="search-list" style="overflow: hidden"></div>
 
     <script src="public/js/dropload/dropload.min.js?time=20181212"></script>
@@ -7,6 +6,34 @@
 		$(function () {
 
 			var page = 1;
+			var pageSize = 20;
+            function loadDownFn(me) {
+	            let params = {
+		            categoryid: 0,
+		            page: page,
+		            q: getParam("q"),
+		            v: getParam("v"),
+		            p: getParam("p"),
+		            m: getParam("m"),
+	            }
+	            $.ajax({
+		            type: 'POST',
+		            url: '/s_page',
+		            data: params,
+		            dataType: 'html',
+		            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		            success: function (data) {
+			            model(data,me,"down");
+		            },
+		            error: function (xhr, type) {
+			            // 即使加载出错，也得重置
+			            console.log(xhr)
+			            me.lock();
+			            me.resetload();
+			            loadDownFn(me);
+		            }
+	            });
+            }
 			// dropload
 			var dropload = $('.list-content').dropload({
 				domDown: {
@@ -15,48 +42,12 @@
 					domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
 					domNoData: '<div class="dropload-noData">数据已经加载完毕</div>'
 				},
-				loadDownFn: function (me) {
-                    let params = {
-	                    categoryid: 0,
-                        pageNo: page,
-                        q: getParam("q"),
-                        v: getParam("v"),
-                        p: getParam("p"),
-                        m: getParam("m"),
-                    }
-					$.ajax({
-						type: 'POST',
-						url: '/s_page',
-						data: params,
-						dataType: 'html',
-						contentType: "application/x-www-form-urlencoded; charset=utf-8",
-						success: function (data) {
-							model(data,me,"down");
-						},
-						error: function (xhr, type) {
-							// 即使加载出错，也得重置
-							me.lock()
-							me.resetload();
-						}
-					});
-				},
+				loadDownFn: loadDownFn,
 			});
 
 			function model(data,me,m) {
 
-				var total = $('.hasmore').attr("more");
-				var len = $('.search-list .search-item').length;
-                if (total!=data.total)
-
-				if (m === 'down'){
-					if (len >= total){
-						me.lock();
-						me.noData();
-						me.resetload();
-						return ;
-					}
-				}
-
+				console.log("asdasd")
 				try {
 					if (page === 1){
 						$('.search-list').html(data);
@@ -64,13 +55,15 @@
 						$('.search-list').append(data);
 					}
 				}catch (e){}
+                try {total}catch (e){total = 20}
+				var len = $('.search-list .search-item').length;
+
+
 				page++;
 				// 每次数据加载完，必须重置
-				if (m === 'down'){
-					if (len >= total){
-						me.lock();
-						me.noData();
-					}
+				if (len >= total){
+					me.lock();
+					me.noData();
 				}
 
 				me.resetload();

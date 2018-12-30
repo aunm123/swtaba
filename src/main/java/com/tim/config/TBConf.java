@@ -23,6 +23,8 @@ public class TBConf {
 
 	public static Boolean ChromeLoading = false;
 
+	private static ExecutorService driverPool = null;
+
 
 	@Bean
 	public TaobaoClient taobaoClient(){
@@ -34,11 +36,22 @@ public class TBConf {
 		return new WebDriverPool();
 	}
 
-	@Bean
-	public ExecutorService driverPool(){
-		ExecutorService threadPool = Executors.newFixedThreadPool(5);
-//		ExecutorService threadPool = Executors.newSingleThreadExecutor();
-		return threadPool;
+//	@Bean
+//	public ExecutorService driverPool(){
+//		ExecutorService threadPool = Executors.newFixedThreadPool(5);
+////		ExecutorService threadPool = Executors.newSingleThreadExecutor();
+//		return threadPool;
+//	}
+
+	public static ExecutorService GetDriverPool(){
+		if (driverPool == null) {
+			driverPool = Executors.newFixedThreadPool(5);
+		}
+		return driverPool;
+	}
+
+	public static void CleanPool(){
+		driverPool = null;
 	}
 
 }

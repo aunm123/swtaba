@@ -32,9 +32,6 @@ import java.util.regex.Pattern;
 public class WebDriverPick {
 
 	@Autowired
-	ExecutorService driverPool;
-
-	@Autowired
 	TItemServiceImpl itemService;
 
 	@Autowired

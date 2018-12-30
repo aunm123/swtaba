@@ -151,7 +151,8 @@ public class TItemServiceImpl extends ServiceImpl<TItemMapper, TItem> implements
                 }
             }
 
-            wrapper = wrapper.like("title",keyword).or().like("short_title",keyword);
+            String filter_key = JSONUtil.StringFilter(keyword);
+            wrapper = wrapper.like("title",filter_key).or().like("short_title",filter_key);
 
             Page<TItem> itemPage = new Page<TItem>(page, pageSize);
             Page itemsPage = this.selectPage(itemPage, wrapper);
