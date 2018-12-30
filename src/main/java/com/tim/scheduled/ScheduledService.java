@@ -18,7 +18,7 @@ public class ScheduledService {
     /**
      * 定时任务 （定时采集chrome数据）（每小时启动一次）
      */
-    @Scheduled(cron = "0 0 /1 * * *")
+    @Scheduled(cron = "0 0 */1 * * *")
     public void scheduled(){
         log.info("定时器判断启动");
         webDriverPoolChrome.start();

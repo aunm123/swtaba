@@ -26,6 +26,7 @@ import com.tim.service.impl.TCategoryServiceImpl;
 import com.tim.service.impl.TItemServiceImpl;
 import com.tim.util.JSONUtil;
 import com.tim.util.ResultUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +41,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Tim on 2018/12/5.
  */
+@Slf4j
 @Component
 public class PackageCouponData {
 
@@ -312,8 +314,8 @@ public class PackageCouponData {
 
             Integer re = ((JSONObject) JSON.parse(rsp.getBody())).getJSONObject("tbk_dg_material_optional_response")
                     .getInteger("total_results");
-
-            System.out.println("关键字 '" + keyword + "' 一共有: " + re + " 条数据" + " page: " + page + " pageSize: " + pageSize);
+            
+            log.info("关键字 '" + keyword + "' 一共有: " + re + " 条数据" + " page: " + page + " pageSize: " + pageSize);
             return new ResultUtil(datas, re, page);
 
 

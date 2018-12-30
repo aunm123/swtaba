@@ -162,7 +162,7 @@ public class WebDriverPoolChrome {
                         tWebDriver.getDriver().quit();
                     }
                     webDrivers.clear();
-                    System.out.println("所有的子线程都结束了！");
+                    log.info("所有的子线程都结束了！");
                     TBConf.ChromeLoading = false;
                     break;
                 }
@@ -186,7 +186,7 @@ public class WebDriverPoolChrome {
             if (nowDate - beginDate <= (3600*24*60*1000L)) {
                 return null;
             }
-            System.out.println("过期："+tItemContent.getItemId());
+            log.info("过期："+tItemContent.getItemId());
         }
 
         Runnable runnable = new Runnable() {
@@ -222,7 +222,7 @@ public class WebDriverPoolChrome {
                     driver.get(item_url);
 
                     // 获取 网页的 title
-                    System.out.println(" Page title is: " + driver.getTitle());
+                    log.info(" Page title is: " + driver.getTitle());
 
                     // PC版
 //                    new WebDriverWait(driver, 180).until(input -> {
@@ -262,7 +262,7 @@ public class WebDriverPoolChrome {
                 } catch (Exception e) {
                     e.printStackTrace();
 
-                    System.out.println("补捉详细页失败");
+                    log.error("补捉详细页失败 ，"+ e.getLocalizedMessage());
 
                     // 失败，即重试3次
                     Integer rc = retryCount;

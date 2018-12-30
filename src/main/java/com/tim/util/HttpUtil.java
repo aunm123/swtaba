@@ -1,5 +1,7 @@
 package com.tim.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,6 +14,7 @@ import java.util.Map;
 /**
  * Created by Tim on 2018/12/3.
  */
+@Slf4j
 public class HttpUtil {
 
 	/**
@@ -57,7 +60,7 @@ public class HttpUtil {
 				result += line;
 			}
 		} catch (Exception e) {
-			System.out.println("发送GET请求出现异常！" + e);
+			log.error("发送GET请求出现异常！" + e);
 			e.printStackTrace();
 		}
 		// 使用finally块来关闭输入流
@@ -115,7 +118,7 @@ public class HttpUtil {
 				result += line;
 			}
 		} catch (Exception e) {
-			System.out.println("发送 POST 请求出现异常！" + e);
+			log.error("发送 POST 请求出现异常！" + e);
 			e.printStackTrace();
 		}
 		//使用finally块来关闭输出流、输入流

@@ -7,6 +7,7 @@ import com.tim.entity.TItemContent;
 import com.tim.mapper.TItemMapper;
 import com.tim.service.impl.TItemContentServiceImpl;
 import com.tim.service.impl.TItemServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
@@ -26,7 +27,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Tim on 2018/12/7.
  */
-
+@Slf4j
 @Component
 public class WebDriverPick {
 
@@ -80,7 +81,7 @@ public class WebDriverPick {
 
 			driver.get(item_url);
 			// 获取 网页的 title
-			System.out.println(" Page title is: " + driver.getTitle());
+			log.info(" Page title is: " + driver.getTitle());
 
 			new WebDriverWait(driver, 9000).until(input -> {
 				WebElement webElement = ((WebDriver) input).findElement(By.id("page"));
@@ -113,8 +114,7 @@ public class WebDriverPick {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			System.out.println("补捉详细页失败");
+			log.error("补捉详细页失败");
 
 		} finally {
 			driver.close();

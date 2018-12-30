@@ -2,10 +2,12 @@ package com.tim.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by Tim on 2018/12/7.
  */
+@Slf4j
 public class JSONUtil {
 
 	public static JSONObject connect(Object main, Object... args){
@@ -21,7 +23,7 @@ public class JSONUtil {
 					mainObj.put(key,jo.get(key));
 				}
 			}catch (Exception e){
-				System.out.println("json connect error");
+				log.error("json connect error");
 			}
 		}
 

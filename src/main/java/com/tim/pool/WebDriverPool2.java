@@ -8,6 +8,7 @@ import com.tim.entity.TItemContent;
 import com.tim.mapper.TItemMapper;
 import com.tim.service.impl.TItemContentServiceImpl;
 import com.tim.service.impl.TItemServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -33,6 +34,7 @@ import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Component
 public class WebDriverPool2 {
 
@@ -191,7 +193,8 @@ public class WebDriverPool2 {
 					driver.get(item_url);
 
 					// 获取 网页的 title
-					System.out.println(" Page title is: " + driver.getTitle());
+					log.info(" Page title is: " + driver.getTitle());
+
 
 					new WebDriverWait(driver, 9000).until(input -> {
 						WebElement webElement = ((WebDriver) input).findElement(By.id("page"));
@@ -223,7 +226,7 @@ public class WebDriverPool2 {
 				} catch (Exception e) {
 					e.printStackTrace();
 
-					System.out.println("补捉详细页失败");
+					log.error("补捉详细页失败");
 
 				} finally {
 					driver.close();
