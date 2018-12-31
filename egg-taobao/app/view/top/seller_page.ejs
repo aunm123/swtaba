@@ -7,7 +7,7 @@
 <script type="text/javascript">
 	window.parent.postMessage("loadfinish", '*');
 </script>
-
+<a href="javascript:;" onclick="changeSelect(55)">asdasdasdasd</a>
 <%- include('seller_header.ejs',{topsell: topsell}) %>
 
 <div id="list">
@@ -24,13 +24,23 @@
 
 </div>
 
+
+
 <script src="public/js/dropload/dropload.min.js?time=20181212"></script>
 <script>
+	var page = 1;
+	var dropload = null;
+    function changeSelect(topid) {
+	    page = 1;
+	    $('.waterfall-list').html('');
+	    dropload.resetload();
+    }
+    
 	$(function () {
 
-		var page = 1;
+
 		// dropload
-		var dropload = $('body').dropload({
+		dropload = $('body').dropload({
 			scrollArea: window,
 			domUp: {
 				domClass: 'dropload-up',
@@ -43,23 +53,6 @@
 				domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
 				domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
 				domNoData: '<div class="dropload-noData">数据已经加载完毕</div>'
-			},
-			loadUpFn: function (me) {
-				page = 1;
-				$.ajax({
-					type: 'POST',
-					url: '/t_page',
-					data: {topid: 0, page: page},
-					dataType: 'html',
-					success: function (data) {
-						model(data, me, "up");
-					},
-					error: function (xhr, type) {
-						// 即使加载出错，也得重置
-						me.lock()
-						me.resetload();
-					}
-				});
 			},
 			loadDownFn: function (me) {
 				$.ajax({
