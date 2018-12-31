@@ -11,7 +11,11 @@ class HomeController extends Controller {
 		};
 		const listData = await ctx.service.home.getTopData(params);
 		const {currentPage, data, total, done, message} = listData.data;
-		await ctx.render('index.ejs', {total: total});
+
+		const topSellData = await ctx.service.home.getTopSell();
+		const {top} = topSellData.data.data;
+
+		await ctx.render('index.ejs', {total: total, topsell: top});
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package com.tim.service;
 
-import com.tim.entity.TShortUrl;
+import com.tim.entity.TTopSell;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.service.IService;
  * </p>
  *
  * @author tim
- * @since 2018-12-26
+ * @since 2018-12-31
  */
-public interface ITShortUrlService extends IService<TShortUrl> {
+public interface ITTopSellService extends IService<TTopSell> {
 
 }

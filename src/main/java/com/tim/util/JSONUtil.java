@@ -3,6 +3,7 @@ package com.tim.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,6 +43,23 @@ public class JSONUtil {
 		Matcher m = p.matcher(str);
 		String result = m.replaceAll(" ").trim();
 		return result.replace(" ","%");
+	}
+
+	/**
+	 * MD5方法
+	 *
+	 * @param text 明文
+	 * @return 密文
+	 * @throws Exception
+	 */
+	public static String md5(String text) {
+		try {
+			//加密后的字符串
+			String encodeStr= DigestUtils.md5Hex(text);
+			return encodeStr;
+		}catch (Exception e){
+			return "";
+		}
 	}
 
 

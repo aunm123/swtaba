@@ -12,4 +12,10 @@
 </header>
 <script>
 	document.getElementById("search-input").value = decodeURI(getParam('q'));
+
+	$('#search-input').on('keypress',function(event){
+		if (event.keyCode == 13) {
+			searchAction()
+		}
+	});
 </script>

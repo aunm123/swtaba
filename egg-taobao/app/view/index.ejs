@@ -57,32 +57,7 @@
         })
 	</script>
 
-	<div class="category-div">
-		<div>
-			<a class="item" href="javascript:;" onclick="open_url('/search?q=airpods')">
-				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的彩票</span>
-			</a>
-		</div>
-		<div>
-			<a class="item" href="">
-				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的彩票</span>
-			</a>
-		</div>
-		<div>
-			<a class="item" href="">
-				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的彩票</span>
-			</a>
-		</div>
-		<div>
-			<a class="item" href="">
-				<img src="public/image/cat_item/item1.png" alt="">
-				<span>我的彩票</span>
-			</a>
-		</div>
-	</div>
+    <%- include('home/top_seller.ejs', {topsell: topsell}); %>
 
     <script type="text/javascript">
 		window.postMessage("loadfinish",'*');

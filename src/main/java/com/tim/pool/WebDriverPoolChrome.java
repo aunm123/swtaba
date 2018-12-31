@@ -46,7 +46,7 @@ public class WebDriverPoolChrome {
     @Autowired
     TItemMapper itemMapper;
 
-    private ArrayList<TWebDriver> webDrivers =  new ArrayList<>();
+    private ArrayList<TWebDriver> webDrivers = new ArrayList<>();
 
     //phantomjs路径
     private static final String WIN_JS_BIN = "D:\\chromedriver_win32\\chromedriver.exe";
@@ -60,7 +60,7 @@ public class WebDriverPoolChrome {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         //无头设置
-		chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--headless");
         // # 设置默认编码为 utf-8
         chromeOptions.addArguments("lang=zh_CN.UTF-8");
         // 模拟手机
@@ -94,7 +94,7 @@ public class WebDriverPoolChrome {
         tWebDriver.setDriver(driver);
 
         // 设置浏览器大小
-        driver.manage().window().setSize(new Dimension(375,2046));
+        driver.manage().window().setSize(new Dimension(375, 2046));
 
         return tWebDriver;
 
@@ -117,7 +117,7 @@ public class WebDriverPoolChrome {
 
     public void start() {
 
-        if (TBConf.ChromeLoading){
+        if (TBConf.ChromeLoading) {
             log.info("正在爬取，请不要重复启动！！！！");
             return;
         }
@@ -173,7 +173,7 @@ public class WebDriverPoolChrome {
     }
 
 
-    public Runnable createThread(String item_url, String item_id , Integer retryCount) {
+    public Runnable createThread(String item_url, String item_id, Integer retryCount) {
 
         TItemContent tItemContent = tItemContentService.selectById(item_id);
         if (tItemContent != null) {
@@ -181,10 +181,10 @@ public class WebDriverPoolChrome {
             long nowDate = new Date().getTime();
 
             // 过期时间是60天
-            if (nowDate - beginDate <= (3600*24*60*1000L)) {
+            if (nowDate - beginDate <= (3600 * 24 * 60 * 1000L)) {
                 return null;
             }
-            log.info("过期："+tItemContent.getItemId());
+            log.info("过期：" + tItemContent.getItemId());
         }
 
         Runnable runnable = new Runnable() {
@@ -239,10 +239,9 @@ public class WebDriverPoolChrome {
 //                    String str = webElement.getAttribute("outerHTML");
 
                     // 手机版
-                    new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOfElementLocated(By.className("desc-wrapper")));
+                    new WebDriverWait(driver, 600).until(ExpectedConditions.visibilityOfElementLocated(By.className("desc-wrapper")));
                     WebElement webElement = driver.findElement(By.id("root"));
                     String str = webElement.getAttribute("outerHTML");
-
 
 
                     Html html = new Html(str);
@@ -258,24 +257,33 @@ public class WebDriverPoolChrome {
 
 
                 } catch (Exception e) {
-                    e.printStackTrace();
 
-                    log.error("补捉详细页失败 ，"+ e.getLocalizedMessage());
+                    log.error("补捉详细页失败 ，" + e.getLocalizedMessage());
+                    TItem item = tItemService.selectById(item_id);
+                    log.error(item.getTitle() + " url:" + item_url);
 
                     // 失败，即重试3次
                     Integer rc = retryCount;
-                    if (3 >= rc){
+                    if (3 >= rc) {
                         // 重新重试
                         Runnable thread = createThread(item_url, item_id, rc++);
                         if (thread != null) {
                             TBConf.GetDriverPool().execute(thread);
                         }
+                    }else {
+
+                        //  重试3 次依然失败，插入为空内容
+                        TItemContent tItemContent = new TItemContent();
+                        tItemContent.setItemId(item_id);
+                        tItemContent.setContent("");
+                        tItemContent.setUpdateDate(new Date());
+
+                        tItemContentService.insertOrUpdate(tItemContent);
                     }
 
                 } finally {
                     driver.close();
                     tWebDriver.setFinish(true);
-
 
 
                 }

@@ -40,101 +40,112 @@ import java.util.Map;
 @RequestMapping(value = "/api")
 public class ApiComtroller {
 
-	@Autowired
-	TTbkItemServiceImpl tbkItemService;
-	@Autowired
-	TItemServiceImpl itemService;
-	@Autowired
-	TItemImgServiceImpl itemImgService;
-	@Autowired
-	TShortUrlServiceImpl shortUrlService;
-	@Autowired
-	TItemContentServiceImpl itemContentService;
-	@Autowired
-	PackageCouponData packageCouponData;
-	@Autowired
-	WebDriverPick webDriverPick;
-	@Autowired
-	TaobaoClient client;
+    @Autowired
+    TTbkItemServiceImpl tbkItemService;
+    @Autowired
+    TTopSellServiceImpl topSellService;
+    @Autowired
+    TItemServiceImpl itemService;
+    @Autowired
+    TItemImgServiceImpl itemImgService;
+    @Autowired
+    TShortUrlServiceImpl shortUrlService;
+    @Autowired
+    TItemContentServiceImpl itemContentService;
+    @Autowired
+    PackageCouponData packageCouponData;
+    @Autowired
+    WebDriverPick webDriverPick;
+    @Autowired
+    TaobaoClient client;
 
-	@ResponseBody
-	@RequestMapping(value = "/top")
-	public ResultUtil top(
-			@RequestParam(defaultValue = "1") Integer page,
-			@RequestParam(defaultValue = "50") Integer pageSize,
-			@RequestParam(defaultValue = "0") Integer categoryid
-	){
+    @ResponseBody
+    @RequestMapping(value = "/top")
+    public ResultUtil top(
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "50") Integer pageSize,
+            @RequestParam(defaultValue = "0") Integer categoryid
+    ) {
 
-		ResultUtil resultUtil = itemService.selectNewList(page, pageSize, categoryid);
+        ResultUtil resultUtil = itemService.selectNewList(page, pageSize, categoryid);
 
-		return resultUtil;
-	}
+        return resultUtil;
+    }
 
-	@ResponseBody
-	@RequestMapping(value = "/detail")
-	public ResultUtil detail(@RequestParam String itemid){
+    @ResponseBody
+    @RequestMapping(value = "/detail")
+    public ResultUtil detail(@RequestParam String itemid) {
 
-		Map map = itemService.selectDetail(itemid);
+        Map map = itemService.selectDetail(itemid);
 
-		return new ResultUtil(map);
-	}
+        return new ResultUtil(map);
+    }
 
-	@ResponseBody
-	@RequestMapping(value = "/shorturl")
-	public ResultUtil short_url(@RequestParam String itemid,
-							@RequestParam String url,
-							@RequestParam String text,
-							@RequestParam String logo){
+    @ResponseBody
+    @RequestMapping(value = "/topsell")
+    public ResultUtil topsell() {
 
-		if (url.equals("")){
-			HashMap<Object, Object> map = new HashMap<>();
-			ResultUtil resultUtil = new ResultUtil(map);
-			return  resultUtil;
-		}
-		String tempUrl = url;
-		if (!tempUrl.startsWith("https://")){
-			tempUrl = "https:" + url;
-		}
-		try {
-			tempUrl = URLDecoder.decode(tempUrl, "UTF-8");
-			String shortUrl = shortUrlService.getShortUrl(itemid, tempUrl, text, logo);
+        Wrapper wrapper = new EntityWrapper<>();
+        List topSells = topSellService.selectList(wrapper);
 
-			HashMap<Object, Object> map = new HashMap<>();
-			map.put("shorturl",shortUrl);
-			ResultUtil resultUtil = new ResultUtil(map);
-			return  resultUtil;
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("top", topSells);
+        return new ResultUtil(map);
+    }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return  new ResultUtil(e);
-		}
+    @ResponseBody
+    @RequestMapping(value = "/shorturl")
+    public ResultUtil short_url(@RequestParam String itemid,
+                                @RequestParam String url,
+                                @RequestParam String text,
+                                @RequestParam String logo) {
 
-	}
+        if (url.equals("")) {
+            HashMap<Object, Object> map = new HashMap<>();
+            ResultUtil resultUtil = new ResultUtil(map);
+            return resultUtil;
+        }
+        String tempUrl = url;
+        if (!tempUrl.startsWith("https://")) {
+            tempUrl = "https:" + url;
+        }
+        try {
+            tempUrl = URLDecoder.decode(tempUrl, "UTF-8");
+            String shortUrl = shortUrlService.getShortUrl(itemid, tempUrl, text, logo);
 
-	@ResponseBody
-	@RequestMapping(value = "/oppo")
-	public ResultUtil oppo_url(@RequestParam String num_iid){
+            HashMap<Object, Object> map = new HashMap<>();
+            map.put("shorturl", shortUrl);
+            ResultUtil resultUtil = new ResultUtil(map);
+            return resultUtil;
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultUtil(e);
+        }
 
+    }
 
-		TbkItemRecommendGetRequest req = new TbkItemRecommendGetRequest();
-		req.setFields("num_iid,click_url");
-		req.setNumIid(Long.valueOf(num_iid));
-		req.setCount(20L);
-		req.setPlatform(1L);
-		try {
-			TbkItemRecommendGetResponse rsp = client.execute(req);
-			HashMap<Object, Object> map = new HashMap<>();
-			ResultUtil resultUtil = new ResultUtil(map);
-			return  resultUtil;
-
-		} catch (ApiException e) {
-			e.printStackTrace();
-			return  new ResultUtil(e);
-		}
-	}
+    @ResponseBody
+    @RequestMapping(value = "/oppo")
+    public ResultUtil oppo_url(@RequestParam String num_iid) {
 
 
+        TbkItemRecommendGetRequest req = new TbkItemRecommendGetRequest();
+        req.setFields("num_iid,click_url");
+        req.setNumIid(Long.valueOf(num_iid));
+        req.setCount(20L);
+        req.setPlatform(1L);
+        try {
+            TbkItemRecommendGetResponse rsp = client.execute(req);
+            HashMap<Object, Object> map = new HashMap<>();
+            ResultUtil resultUtil = new ResultUtil(map);
+            return resultUtil;
+
+        } catch (ApiException e) {
+            e.printStackTrace();
+            return new ResultUtil(e);
+        }
+    }
 
 
 }

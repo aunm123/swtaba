@@ -47,6 +47,19 @@ class HomeService extends Service {
 		});
 		return response;
 	}
+
+	async getTopSell() {
+		const { ctx, config, logger } = this;
+		logger.info(`获取top Sell`);
+
+		// 获取搜索结果
+		const response = await ctx.curl(`${config.searchServer}/api/topsell`, {
+			dataType: 'json',
+			method: 'GET',
+			timeout: 30000,
+		});
+		return response;
+	}
 }
 
 module.exports = HomeService;

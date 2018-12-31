@@ -1,0 +1,38 @@
+<% items.forEach(function(item){ %>
+<div class="waterfall-item">
+    <a href="javascript:;" onclick="open_url('/detail?itemid=<%= item.item_id %>')">
+        <div>
+            <img class="img lazy"
+                 data-original="<%= item.pict_url %>"
+                 src="public/image/loading.gif">
+        </div>
+        <div class="info">
+            <h3 class="title"><%= item.title %></h3>
+            <% if(item.item_description) { %>
+            <h3 class="title" style="color: #f47920; border: 1px solid #ff5000;padding: 3px;margin: 7px;">
+                <%=item.item_description %>
+            </h3>
+            <% } else { %>
+            <h3 class="title" style="color: #f47920;padding: 3px;margin: 5px;"></h3>
+            <% } %>
+            <p class="priceInfo" style="padding-bottom: 0;">
+                <span class="yen">¥</span><span class="price"><%= item.zk_final_price %></span>
+                <span class="yen line-through" style="margin-left: 5px;">¥</span><span
+                        class="price line-through extra-price"><%= (parseInt(item.zk_final_price) + parseInt(item.coupon_amount)) %></span>
+            </p>
+            <p class="priceInfo" style="display: flex;align-items: center;">
+                <i class="iconfont icon-wodeyouhuijuan" style="margin-right: 3px;color: #b22c46;"></i>
+                <span style="font-size: 13px;color: #b22c46;"><%=item.coupon_amount%></span>
+            </p>
+
+        </div>
+    </a>
+</div>
+<% }); %>
+<script>
+	$(function () {
+		$('img.lazy').lazyload({
+			container: $("#like-list-con")
+		});
+	})
+</script>

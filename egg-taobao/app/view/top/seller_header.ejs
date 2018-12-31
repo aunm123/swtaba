@@ -1,0 +1,30 @@
+<script src="public/js/iscroll/iscroll.js"></script>
+<div>
+    <img style="width: 100vw" height="150"
+         src="https://gw.alicdn.com/tfs/TB1R.cskfDH8KJjy1XcXXcpdXXa-750-300.jpg_q75.jpg" alt="">
+    <div class="header-nav-con">
+        <div id="cell-iscroll">
+            <div class="header-nav" id="header-nav" style="touch-action: none;">
+                <ul class="header-nav-list">
+
+                    <% topsell.forEach(function (item) {  %>
+                        <li class="header-nav-item">
+                            <span><%=item.cName%></span>
+                        </li>
+                    <% }) %>
+
+                </ul>
+            </div>
+        </div>
+        <button class="filter-icon js-hide js-noBg"></button>
+    </div>
+</div>
+<script>
+	new IScroll('#header-nav', {scrollX: true, scrollY: true, freeScroll: true});
+	$(function () {
+        $('.header-nav-item').click(function (e) {
+	        $('.select').removeClass('select');
+	        $(e.currentTarget).addClass('select');
+        })
+	})
+</script>

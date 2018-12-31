@@ -1,6 +1,6 @@
 package com.tim.service;
 
-import com.tim.entity.TTbkItem;
+import com.tim.entity.TTopSell;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.service.IService;
  * </p>
  *
  * @author tim
- * @since 2018-12-26
+ * @since 2018-12-31
  */
-public interface ITTbkItemService extends IService<TTbkItem> {
+public interface ITTopSellService extends IService<TTopSell> {
 
 }

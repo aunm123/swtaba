@@ -11,10 +11,10 @@ import org.springframework.stereotype.Controller;
  * </p>
  *
  * @author tim
- * @since 2018-12-26
+ * @since 2018-12-31
  */
 @Controller
-@RequestMapping("/t-short-url")
-public class TShortUrlController {
+@RequestMapping("/t-url-cache")
+public class TUrlCacheController {
 
 }

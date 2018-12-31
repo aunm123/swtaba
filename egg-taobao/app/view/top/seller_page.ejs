@@ -1,0 +1,113 @@
+<%- include('../temple/head.ejs'); %>
+<link rel="stylesheet" href="public/js/dropload/dropload.css">
+<link rel="stylesheet" href="public/css/top.css">
+<body>
+<%- include('../iframe_open.ejs'); %>
+
+<script type="text/javascript">
+	window.parent.postMessage("loadfinish", '*');
+</script>
+
+<%- include('seller_header.ejs',{topsell: topsell}) %>
+
+<div id="list">
+
+    <div data-mxview="atb_like">
+        <div class="">
+            <h3 class="atb_like_title">猜你喜欢</h3>
+            <div class="waterfall" id="like-list-con">
+                <div class="waterfall-list">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="public/js/dropload/dropload.min.js?time=20181212"></script>
+<script>
+	$(function () {
+
+		var page = 1;
+		// dropload
+		var dropload = $('body').dropload({
+			scrollArea: window,
+			domUp: {
+				domClass: 'dropload-up',
+				domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+				domUpdate: '<div class="dropload-update">↑释放更新</div>',
+				domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+			},
+			domDown: {
+				domClass: 'dropload-down',
+				domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+				domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+				domNoData: '<div class="dropload-noData">数据已经加载完毕</div>'
+			},
+			loadUpFn: function (me) {
+				page = 1;
+				$.ajax({
+					type: 'POST',
+					url: '/t_page',
+					data: {topid: 0, page: page},
+					dataType: 'html',
+					success: function (data) {
+						model(data, me, "up");
+					},
+					error: function (xhr, type) {
+						// 即使加载出错，也得重置
+						me.lock()
+						me.resetload();
+					}
+				});
+			},
+			loadDownFn: function (me) {
+				$.ajax({
+					type: 'POST',
+					url: '/t_page',
+					data: {topid: 0, page: page},
+					dataType: 'html',
+					success: function (data) {
+						model(data, me, "down");
+					},
+					error: function (xhr, type) {
+						// 即使加载出错，也得重置
+						me.resetload();
+					}
+				});
+			},
+		});
+
+		function model(data, me, m) {
+
+			try {
+				if (page === 1) {
+					$('.waterfall-list').html(data);
+				} else {
+					$('.waterfall-list').append(data);
+				}
+			} catch (e) {
+			}
+
+
+			var total = $('.hasmore').attr("more");
+			var len = $('.waterfall-list .waterfall-item').length;
+
+
+			page++;
+			// 每次数据加载完，必须重置
+			if (len >= total) {
+				me.lock();
+				me.noData();
+			}
+
+			me.resetload();
+		}
+
+
+	});
+</script>
+
+<%- include('../iframe_close.ejs'); %>
+</body>
+<%- include('../temple/foot.ejs'); %>

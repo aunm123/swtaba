@@ -1,6 +1,6 @@
 package com.tim.mapper;
 
-import com.tim.entity.TTbkItem;
+import com.tim.entity.TTopSell;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author tim
- * @since 2018-12-26
+ * @since 2018-12-31
  */
-public interface TTbkItemMapper extends BaseMapper<TTbkItem> {
+public interface TTopSellMapper extends BaseMapper<TTopSell> {
 
 }
