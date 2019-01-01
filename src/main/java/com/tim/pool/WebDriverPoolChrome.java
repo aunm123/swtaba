@@ -266,12 +266,13 @@ public class WebDriverPoolChrome {
                     Integer rc = retryCount;
                     if (3 >= rc) {
                         // 重新重试
-                        Runnable thread = createThread(item_url, item_id, rc++);
+                        rc = rc + 1;
+                        Runnable thread = createThread(item_url, item_id, rc);
                         if (thread != null) {
                             TBConf.GetDriverPool().execute(thread);
                         }
                     }else {
-
+                        System.out.println("重试3次依然失败，插入为空内容");
                         //  重试3 次依然失败，插入为空内容
                         TItemContent tItemContent = new TItemContent();
                         tItemContent.setItemId(item_id);

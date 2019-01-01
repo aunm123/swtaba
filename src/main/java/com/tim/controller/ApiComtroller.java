@@ -16,6 +16,7 @@ import com.tim.config.TBConf;
 import com.tim.entity.*;
 import com.tim.magic.PackageCouponData;
 import com.tim.pool.WebDriverPick;
+import com.tim.service.ITUrlCacheService;
 import com.tim.service.impl.*;
 import com.tim.util.HttpUtil;
 import com.tim.util.JSONUtil;
@@ -59,6 +60,8 @@ public class ApiComtroller {
     WebDriverPick webDriverPick;
     @Autowired
     TaobaoClient client;
+    @Autowired
+    ITUrlCacheService urlCacheService;
 
     @ResponseBody
     @RequestMapping(value = "/top")
@@ -84,7 +87,23 @@ public class ApiComtroller {
             params.put("vekey", TBConf.VEKEY);
             params.put("detail","1");
             params.put("para",itemid);
-            String content = HttpUtil.sendGet("http://api.vephp.com/hcid", params);
+
+            String keyid = HttpUtil.getUrlString("http://api.vephp.com/hcid", params);
+            keyid = JSONUtil.md5(keyid);
+
+            TUrlCache cache = urlCacheService.selectById(keyid);
+            String content = "";
+            if (cache == null) {
+                content = HttpUtil.sendGet("http://api.vephp.com/hcid", params);
+                TUrlCache urlCache = new TUrlCache();
+                urlCache.setContent(content);
+                urlCache.setId(keyid);
+                urlCache.setMaxAge(12);   // 缓存12天
+                urlCacheService.insert(urlCache);
+            }else {
+                content = cache.getContent();
+            }
+
             JSONObject object = JSON.parseObject(content);
             if (!object.containsKey("error")) {
 
@@ -96,6 +115,8 @@ public class ApiComtroller {
             } else {
                 return new ResultUtil(new Exception(object.getString("msg")));
             }
+
+
 
         }
 

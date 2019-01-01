@@ -1,6 +1,6 @@
 package com.tim.service;
 
-import com.tim.entity.TTopSell;
+import com.tim.entity.TUrlCache;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @author tim
  * @since 2019-01-01
  */
-public interface ITTopSellService extends IService<TTopSell> {
+public interface ITUrlCacheService extends IService<TUrlCache> {
 
 }

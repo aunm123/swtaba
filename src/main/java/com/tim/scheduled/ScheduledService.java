@@ -1,12 +1,13 @@
 package com.tim.scheduled;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.tim.config.TBConf;
 import com.tim.entity.TKey;
 import com.tim.entity.TUrlCache;
 import com.tim.magic.PackageCouponData;
 import com.tim.pool.WebDriverPoolChrome;
-import com.tim.service.ITUrlCacheService;
+import com.tim.service.*;
 import com.tim.service.impl.TKeyServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,14 @@ public class ScheduledService {
     private TKeyServiceImpl keyService;
     @Autowired
     private ITUrlCacheService urlCacheService;
+    @Autowired
+    private ITItemService itemService;
+    @Autowired
+    private ITTbkItemService itTbkItemService;
+    @Autowired
+    private ITItemContentService itemContentService;
+    @Autowired
+    private ITItemImgService itemImgService;
 
     /**
      * 定时任务 （定时采集chrome数据）（每小时启动一次）
@@ -46,6 +55,14 @@ public class ScheduledService {
      */
     @Scheduled(cron = "0 0 0 0/1 * *")
     public void keyword_scheduled(){
+
+        // 每天清理所有item数据
+        Wrapper allWrap = new EntityWrapper<>();
+        itemService.delete(allWrap);
+        itTbkItemService.delete(allWrap);
+        itemContentService.delete(allWrap);
+        itemImgService.delete(allWrap);
+
 
         List<TKey> keys = keyService.selectList(new EntityWrapper<>());
         // 每个关键字都查找n页面
@@ -66,8 +83,8 @@ public class ScheduledService {
         for (TUrlCache urlCache : urlCaches){
             Date createDate = urlCache.getCreateDate();
             Long timec = new Date().getTime() - createDate.getTime();
-            if (timec >= (3600 * 24 * 1L)){
-                // 缓存1天
+            if (timec >= (3600 * 24 * urlCache.getMaxAge())){
+                // 大于缓存设置的天数，即删除
                 urlCacheService.deleteById(urlCache.getId());
             }
         }

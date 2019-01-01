@@ -1,8 +1,8 @@
 package com.tim.service.impl;
 
-import com.tim.entity.TTopSell;
-import com.tim.mapper.TTopSellMapper;
-import com.tim.service.ITTopSellService;
+import com.tim.entity.TUrlCache;
+import com.tim.mapper.TUrlCacheMapper;
+import com.tim.service.ITUrlCacheService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2019-01-01
  */
 @Service
-public class TTopSellServiceImpl extends ServiceImpl<TTopSellMapper, TTopSell> implements ITTopSellService {
+public class TUrlCacheServiceImpl extends ServiceImpl<TUrlCacheMapper, TUrlCache> implements ITUrlCacheService {
 
 }

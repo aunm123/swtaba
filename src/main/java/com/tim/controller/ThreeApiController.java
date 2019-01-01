@@ -71,6 +71,7 @@ public class ThreeApiController {
                 TUrlCache urlCache = new TUrlCache();
                 urlCache.setContent(content);
                 urlCache.setId(keyid);
+                urlCache.setMaxAge(3);   // 缓存3天
                 urlCacheService.insert(urlCache);
 
                 return new ResultUtil(JSONUtil.connect(urlCache));
@@ -99,8 +100,9 @@ public class ThreeApiController {
             Wrapper sub_wrapper = new EntityWrapper<>();
             sub_wrapper.eq("parentid",topid);
             TTopSell sell2 = topSellService.selectOne(sub_wrapper);
-            subcate = sell2.getKeyword();
-
+            if (sell2 != null) {
+                subcate = sell2.getKeyword();
+            }
         } else {
             subcate = sell1.getKeyword();
             TTopSell sell2 = topSellService.selectById(sell1.getParentid());

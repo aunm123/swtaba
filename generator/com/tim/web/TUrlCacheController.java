@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
  * @since 2019-01-01
  */
 @Controller
-@RequestMapping("/t-top-sell")
-public class TTopSellController {
+@RequestMapping("/t-url-cache")
+public class TUrlCacheController {
 
 }

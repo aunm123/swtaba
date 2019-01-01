@@ -39,8 +39,8 @@ public class MybatisGenerator {
 //                    "t_tbk_item",
 //					  "t_key",
 //					  "t_short_url",
-					"t_top_sell",
-//					"t_url_cache"
+//					"t_top_sell",
+					"t_url_cache"
 			});
 
 			put("tablePrefix", new String[]{"t_"});
