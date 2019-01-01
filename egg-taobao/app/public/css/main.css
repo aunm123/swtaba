@@ -130,9 +130,6 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.waterfall .waterfall-list .waterfall-item a .info .priceInfo {
-  padding: 0 8px 8px 8px;
-}
 .waterfall .waterfall-list .waterfall-item a .info .priceInfo .yen {
   font-size: 13px;
   color: #ff5000;
@@ -170,5 +167,59 @@
 .waterfall .waterfall-list .waterfall-item:nth-child(2n) {
   padding-left: 3px;
   padding-right: 6px;
+}
+.toolbar {
+  z-index: 99;
+  position: fixed;
+  width: 100vw;
+  background-color: transparent;
+  height: 50px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  top: 0px;
+}
+.nv.toolbar {
+  background-color: #f9f9f9 !important;
+}
+.nv.toolbar .toolbar__btn {
+  color: black!important;
+  background-color: transparent!important;
+}
+.nv.toolbar .toolbar__btn .iconfont {
+  color: black!important;
+}
+.toolbar .toolbar__btn-wrapper {
+  width: 100%;
+  pointer-events: auto;
+}
+.toolbar .toolbar__btn-wrapper .toolbar__btn {
+  color: white;
+  position: relative;
+  float: left;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+  height: 8vw;
+  width: 8vw;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  justify-content: center;
+  text-align: center;
+  -moz-border-radius: 13.33333vw;
+  border-radius: 13.33333vw;
+  -webkit-transition: background 0.3s ease;
+  -moz-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.toolbar .toolbar__btn-wrapper .toolbar__btn .iconfont {
+  color: white;
 }
 /*# sourceMappingURL=main.css.map */

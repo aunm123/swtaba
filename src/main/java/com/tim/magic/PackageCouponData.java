@@ -31,10 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -237,84 +234,14 @@ public class PackageCouponData {
                     continue;
                 }
 
-                TItem item = new TItem();
-                item.setCategory(data.getString("category_id"));
-                item.setItemUrl(data.getString("item_url"));
-
-                item.setNumIid(data.getString("num_iid"));
-                item.setPictUrl(data.getString("pict_url"));
-                item.setProvcity(data.getString("provcity"));
-
-                item.setSellerId(data.getString("seller_id"));
-                item.setTitle(data.getString("title"));
-                item.setShortTitle(data.getString("short_title"));
-                item.setUserType(data.getInteger("user_type"));
-                item.setVolume(data.getString("volume"));
-                item.setItemDescription(data.getString("item_description"));
-                item.setZkFinalPrice((int) (data.getFloatValue("zk_final_price") * 100));
-                item.setWhiteImage(data.getString("white_image"));
-                item.setReservePrice((int) (data.getFloat("reserve_price") * 100));
-
-
-                TTbkItem tbkItem = new TTbkItem();
-                tbkItem.setCommissionRate(data.getInteger("commission_rate"));
-                tbkItem.setCommissionType(data.getString("commission_type"));
-
-                tbkItem.setCouponId(data.getString("coupon_id"));
-                tbkItem.setCouponInfo(data.getString("coupon_info"));
-                tbkItem.setCouponRemainCount(data.getInteger("coupon_remain_count"));
-                tbkItem.setCouponTotalCount(data.getInteger("coupon_total_count"));
-                tbkItem.setCouponClickUrl(data.getString("coupon_share_url"));
-                tbkItem.setCouponEndTime(data.getDate("coupon_end_time"));
-                tbkItem.setCouponStartTime(data.getDate("coupon_start_time"));
-
-                Pattern pattern = Pattern.compile("减(\\d+)元");
-                Matcher matcher = pattern.matcher(tbkItem.getCouponInfo());
-
-                while (matcher.find()) {
-                    tbkItem.setCouponAmount(matcher.group(1));
-                    item.setZkFinalPrice(item.getReservePrice() - Integer.valueOf(tbkItem.getCouponAmount()));
-                }
-
-
-                tbkItem.setIncludeDxjh(data.getString("include_dxjh"));
-                tbkItem.setIncludeMkt(data.getString("include_mkt"));
-
-                tbkItem.setShopTitle(data.getString("shop_title"));
-                tbkItem.setItemId(item.getNumIid());
-                tbkItem.setCategory(data.getString("category_id"));
-
-
-                // 父级 类别
-                TCategory parent_category = new TCategory();
-                parent_category.setId(data.getInteger("level_one_category_id"));
-                parent_category.setCatName(data.getString("level_one_category_name"));
-                categoryService.insertOrUpdate(parent_category);
-
-                // 当前级 类别
-                TCategory category = new TCategory();
-                category.setId(data.getInteger("category_id"));
-                category.setCatName(data.getString("category_name"));
-                category.setParentId(parent_category.getId());
-                categoryService.insertOrUpdate(category);
-
-                // 获得 小图片
-                LinkedList<TItemImg> tItemImgs = gettItemImgs(data, item);
-
-                try {
-                    itemService.saveItem(item, tItemImgs, tbkItem);
-
-                } catch (Exception e) {
-                } finally {
-                    datas.add(JSONUtil.connect(tbkItem, item));
-                }
+                datas.add(saveItemData(data));
 
             }
 
 
             Integer re = ((JSONObject) JSON.parse(rsp.getBody())).getJSONObject("tbk_dg_material_optional_response")
                     .getInteger("total_results");
-            
+
             log.info("关键字 '" + keyword + "' 一共有: " + re + " 条数据" + " page: " + page + " pageSize: " + pageSize);
             return new ResultUtil(datas, re, page);
 
@@ -327,20 +254,115 @@ public class PackageCouponData {
 
     private LinkedList<TItemImg> gettItemImgs(JSONObject data, TItem item) {
         LinkedList<TItemImg> tItemImgs = new LinkedList<>();
-        JSONObject small_images = data.getJSONObject("small_images");
-        if (small_images != null) {
-            JSONArray small_images_array = small_images.getJSONArray("string");
-            for (Object img_url_obj : small_images_array) {
-                String img_url = (String) img_url_obj;
 
-                TItemImg itemImg = new TItemImg();
-                itemImg.setItemId(item.getNumIid());
-                itemImg.setUrl(img_url);
+        JSONArray small_images_array = null;
+        Object images = data.get("small_images");
+        if (images instanceof Collection){
+            small_images_array = (JSONArray) images;
 
-                tItemImgs.add(itemImg);
+        }else {
+            JSONObject small_images = data.getJSONObject("small_images");
+            if (small_images != null) {
+                small_images_array = small_images.getJSONArray("string");
             }
         }
+
+        for (Object img_url_obj : small_images_array) {
+            String img_url = (String) img_url_obj;
+
+            TItemImg itemImg = new TItemImg();
+            itemImg.setItemId(item.getNumIid());
+            itemImg.setUrl(img_url);
+
+            tItemImgs.add(itemImg);
+        }
+
         return tItemImgs;
+    }
+
+    public Object saveItemData(JSONObject data){
+
+        TItem item = new TItem();
+        item.setCategory(data.getString("category_id"));
+        item.setItemUrl(data.getString("item_url"));
+
+        item.setNumIid(data.getString("num_iid"));
+        item.setPictUrl(data.getString("pict_url"));
+        item.setProvcity(data.getString("provcity"));
+
+        item.setSellerId(data.getString("seller_id"));
+        item.setTitle(data.getString("title"));
+        item.setShortTitle(data.getString("short_title"));
+        item.setUserType(data.getInteger("user_type"));
+        item.setVolume(data.getString("volume"));
+        item.setItemDescription(data.getString("item_description"));
+        item.setZkFinalPrice((int) (data.getFloatValue("zk_final_price") * 100));
+        item.setWhiteImage(data.getString("white_image"));
+        item.setReservePrice((int) (data.getFloat("reserve_price") * 100));
+
+
+        TTbkItem tbkItem = new TTbkItem();
+        tbkItem.setCommissionRate( (int) (data.getFloat("commission_rate") * 100));
+        tbkItem.setCommissionType(data.getString("commission_type"));
+
+        tbkItem.setCouponId(data.getString("coupon_id"));
+        tbkItem.setCouponInfo(data.getString("coupon_info"));
+        tbkItem.setCouponRemainCount(data.getInteger("coupon_remain_count"));
+        tbkItem.setCouponTotalCount(data.getInteger("coupon_total_count"));
+
+        tbkItem.setCouponClickUrl(data.getString("coupon_share_url"));
+        if (data.containsKey("coupon_click_url")){
+            tbkItem.setCouponClickUrl(data.getString("coupon_click_url"));
+        }
+
+        tbkItem.setCouponEndTime(data.getDate("coupon_end_time"));
+        tbkItem.setCouponStartTime(data.getDate("coupon_start_time"));
+
+        Pattern pattern = Pattern.compile("减(\\d+)元");
+        Matcher matcher = pattern.matcher(tbkItem.getCouponInfo());
+
+        while (matcher.find()) {
+            tbkItem.setCouponAmount(matcher.group(1));
+            item.setZkFinalPrice(item.getReservePrice() - Integer.valueOf(tbkItem.getCouponAmount()));
+        }
+
+
+        tbkItem.setIncludeDxjh(data.getString("include_dxjh"));
+        tbkItem.setIncludeMkt(data.getString("include_mkt"));
+
+        tbkItem.setShopTitle(data.getString("shop_title"));
+        tbkItem.setItemId(item.getNumIid());
+        tbkItem.setCategory(data.getString("category_id"));
+
+
+        // 父级 类别
+        if (data.containsKey("level_one_category_id")){
+            TCategory parent_category = new TCategory();
+            parent_category.setId(data.getInteger("level_one_category_id"));
+            parent_category.setCatName(data.getString("level_one_category_name"));
+            categoryService.insertOrUpdate(parent_category);
+
+            // 当前级 类别
+            TCategory category = new TCategory();
+            category.setId(data.getInteger("category_id"));
+            category.setCatName(data.getString("category_name"));
+            category.setParentId(parent_category.getId());
+            categoryService.insertOrUpdate(category);
+
+        }
+
+
+        // 获得 小图片
+        LinkedList<TItemImg> tItemImgs = gettItemImgs(data, item);
+
+        try {
+            itemService.saveItem(item, tItemImgs, tbkItem);
+
+        } catch (Exception e) {
+        } finally {
+            return JSONUtil.connect(tbkItem, item);
+        }
+
     }
 
 }

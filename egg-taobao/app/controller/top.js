@@ -3,8 +3,9 @@ const Controller = require('egg').Controller;
 class TopController extends Controller {
 	async index() {
 		const ctx = this.ctx;
+		let {topid} = ctx.query;
 
-		const topSellData = await ctx.service.home.getTopSell();
+		const topSellData = await ctx.service.home.getTopSell({ topid });
 		const {top} = topSellData.data.data;
 
 		await ctx.render('top/seller_page.ejs', { topsell:top });
@@ -19,12 +20,15 @@ class TopController extends Controller {
 		const ctx = this.ctx;
 
 		let { topid, page } = ctx.request.body;
+
+		let catdata = await ctx.service.top.getTopCate({ topid });
+
 		var params = {
-			topcate: "热销",
-			subcate: "运动",
+			topcate: catdata.data.data.topcate,
+			subcate: catdata.data.data.subcate,
 			page,
 			topid
-		}
+		};
 		let topdata = await ctx.service.top.getTopCateData(params);
 		let { data } = JSON.parse(topdata.data.data.content);
 

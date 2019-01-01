@@ -1,6 +1,8 @@
 package com.tim.entity;
 
+import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.tim.common.BaseEntity;
@@ -11,13 +13,14 @@ import com.tim.common.BaseEntity;
  * </p>
  *
  * @author tim
- * @since 2018-12-31
+ * @since 2019-01-01
  */
 @TableName("t_top_sell")
 public class TTopSell extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     private String icon;
@@ -34,6 +37,8 @@ public class TTopSell extends BaseEntity {
     private Integer isdelete;
 
     private String keyword;
+
+    private Integer parentid;
 
     public Integer getId() {
         return id;
@@ -84,6 +89,13 @@ public class TTopSell extends BaseEntity {
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
+    public Integer getParentid() {
+        return parentid;
+    }
+
+    public void setParentid(Integer parentid) {
+        this.parentid = parentid;
+    }
 
     @Override
     public String toString() {
@@ -95,6 +107,7 @@ public class TTopSell extends BaseEntity {
         ", updateDate=" + updateDate +
         ", isdelete=" + isdelete +
         ", keyword=" + keyword +
+        ", parentid=" + parentid +
         "}";
     }
 }

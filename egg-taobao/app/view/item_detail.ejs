@@ -55,7 +55,9 @@
             </div>
             <%- include('temple/detail_short_copy.ejs', {short_url: short_url}); %>
             <div class="title-wrapper"><h2 class="title"><%=title%></h2></div>
-            <div class="delivery-box"><span class="delivery-price">货源地：<%=provcity%></span><span class="month-sold">月销量：<%=volume%></span>
+            <div class="delivery-box">
+                <span class="delivery-price"><% if (provcity) {%> 货源地：<%=provcity%><% } %></span>
+                <span class="month-sold">月销量：<%=volume%></span>
             </div>
         </div>
     </div>

@@ -7,14 +7,14 @@
 <script type="text/javascript">
 	window.parent.postMessage("loadfinish", '*');
 </script>
-<a href="javascript:;" onclick="changeSelect(55)">asdasdasdasd</a>
+
 <%- include('seller_header.ejs',{topsell: topsell}) %>
 
 <div id="list">
 
     <div data-mxview="atb_like">
         <div class="">
-            <h3 class="atb_like_title">猜你喜欢</h3>
+            <h3 class="atb_like_title"></h3>
             <div class="waterfall" id="like-list-con">
                 <div class="waterfall-list">
                 </div>
@@ -30,14 +30,32 @@
 <script>
 	var page = 1;
 	var dropload = null;
-    function changeSelect(topid) {
-	    page = 1;
-	    $('.waterfall-list').html('');
-	    dropload.resetload();
-    }
-    
+	var current_topid = getParam("topid");
+
 	$(function () {
 
+		window.changeSelect = function(topid) {
+			page = 1;
+			current_topid = topid;
+			$('.waterfall-list').html('');
+			dropload.resetload();
+		}
+
+		function loaddata(topid, dropload) {
+			$.ajax({
+				type: 'POST',
+				url: '/t_page',
+				data: {topid: topid, page: page},
+				dataType: 'html',
+				success: function (data) {
+					model(data, dropload, "down");
+				},
+				error: function (xhr, type) {
+					// 即使加载出错，也得重置
+					dropload.resetload();
+				}
+			});
+		}
 
 		// dropload
 		dropload = $('body').dropload({
@@ -55,19 +73,7 @@
 				domNoData: '<div class="dropload-noData">数据已经加载完毕</div>'
 			},
 			loadDownFn: function (me) {
-				$.ajax({
-					type: 'POST',
-					url: '/t_page',
-					data: {topid: 0, page: page},
-					dataType: 'html',
-					success: function (data) {
-						model(data, me, "down");
-					},
-					error: function (xhr, type) {
-						// 即使加载出错，也得重置
-						me.resetload();
-					}
-				});
+				loaddata(current_topid,me);
 			},
 		});
 
@@ -96,8 +102,17 @@
 
 			me.resetload();
 		}
+        
+		$(document).scroll(function() {
+			var scroH = $(document).scrollTop();  //滚动高度
 
+			if(scroH >= 180){  //距离顶部大于可见宽度
+				$('.toolbar').addClass('nv')
+			}else {
+				$('.toolbar').removeClass('nv')
+			}
 
+		});
 	});
 </script>
 

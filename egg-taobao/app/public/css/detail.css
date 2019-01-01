@@ -21,59 +21,6 @@
   z-index: 99;
   color: #616161;
 }
-.app .toolbar {
-  z-index: 99;
-  position: fixed;
-  width: 100vw;
-  background-color: transparent;
-  height: 50px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-}
-.app .nv.toolbar {
-  background-color: #f9f9f9 !important;
-}
-.app .nv.toolbar .toolbar__btn {
-  color: black!important;
-  background-color: transparent!important;
-}
-.app .nv.toolbar .toolbar__btn .iconfont {
-  color: black!important;
-}
-.app .toolbar .toolbar__btn-wrapper {
-  width: 100%;
-  pointer-events: auto;
-}
-.app .toolbar .toolbar__btn-wrapper .toolbar__btn {
-  color: white;
-  position: relative;
-  float: left;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: flex;
-  height: 8vw;
-  width: 8vw;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -moz-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -moz-box-pack: center;
-  justify-content: center;
-  text-align: center;
-  -moz-border-radius: 13.33333vw;
-  border-radius: 13.33333vw;
-  -webkit-transition: background 0.3s ease;
-  -moz-transition: background 0.3s ease;
-  transition: background 0.3s ease;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.app .toolbar .toolbar__btn-wrapper .toolbar__btn .iconfont {
-  color: white;
-}
 .app .delivery-box {
   padding: 0 3.2vw;
   -webkit-box-flex: 1;

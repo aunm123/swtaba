@@ -13,16 +13,16 @@
                 <%=item.item_description %>
             </h3>
             <% } %>
-            <p class="priceInfo" style="padding-bottom: 0;">
-                <span class="yen">¥</span><span class="price"><%= item.zk_final_price %></span>
-                <span class="yen line-through" style="margin-left: 5px;">¥</span><span
-                        class="price line-through extra-price"><%= (parseInt(item.zk_final_price) + parseInt(item.coupon_amount)) %></span>
-            </p>
-            <p class="priceInfo" style="display: flex;align-items: center;">
-                <i class="iconfont icon-wodeyouhuijuan" style="margin-right: 3px;color: #b22c46;"></i>
-                <span style="font-size: 13px;color: #b22c46;"><%=item.coupon_amount%></span>
-            </p>
+            <div class="priceInfo" style="padding-bottom: 8px;">
+                <div class="coupon-icon">
+                    <span class="coupon-icon-left">券</span>
+                    <span class="coupon-icon-right"><%=item.coupon_amount%>元</span>
+                </div>
 
+                <span class="yen">¥</span><span class="price"><%= item.zk_final_price %></span>
+                <span class="yen line-through" style="margin-left: 2px;">¥</span><span
+                        class="price line-through extra-price"><%= (parseInt(item.zk_final_price) + parseInt(item.coupon_amount)) %></span>
+            </div>
         </div>
     </a>
 </div>

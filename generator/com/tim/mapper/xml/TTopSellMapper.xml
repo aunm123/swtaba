@@ -11,6 +11,7 @@
         <result column="update_date" property="updateDate" />
         <result column="isdelete" property="isdelete" />
         <result column="keyword" property="keyword" />
+        <result column="parentid" property="parentid" />
     </resultMap>
 
 </mapper>

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author tim
- * @since 2018-12-31
+ * @since 2019-01-01
  */
 public interface TTopSellMapper extends BaseMapper<TTopSell> {
 

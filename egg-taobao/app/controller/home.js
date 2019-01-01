@@ -12,7 +12,7 @@ class HomeController extends Controller {
 		const listData = await ctx.service.home.getTopData(params);
 		const {currentPage, data, total, done, message} = listData.data;
 
-		const topSellData = await ctx.service.home.getTopSell();
+		const topSellData = await ctx.service.home.getTopSell({topid: "0"});
 		const {top} = topSellData.data.data;
 
 		await ctx.render('index.ejs', {total: total, topsell: top});
@@ -56,6 +56,12 @@ class HomeController extends Controller {
 
 			const short_url_data = await ctx.service.home.getShortUrl(params);
 			listData.data.data["short_url"] = short_url_data.data.data.shorturl;
+			if (!listData.data.data["provcity"]){
+				listData.data.data["provcity"] = "";
+			}
+			if (!listData.data.data["smallimg"]){
+				listData.data.data["smallimg"] = [];
+			}
 
 			await ctx.render('item_detail.ejs', listData.data.data);
 		}

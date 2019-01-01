@@ -100,6 +100,10 @@ public class TItemServiceImpl extends ServiceImpl<TItemMapper, TItem> implements
             wrapper.eq("item_id", itemid);
             TTbkItem tbkItem = tbkItemService.selectOne(wrapper);
 
+            if (tbkItem == null) {
+                return null;
+            }
+
             TItem tItem = this.selectById(tbkItem.getItemId());
 
             List imglist = itemImgService.selectList(wrapper);

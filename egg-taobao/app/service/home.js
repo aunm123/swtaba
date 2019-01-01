@@ -48,13 +48,16 @@ class HomeService extends Service {
 		return response;
 	}
 
-	async getTopSell() {
+	async getTopSell({ topid }) {
 		const { ctx, config, logger } = this;
 		logger.info(`获取top Sell`);
 
 		// 获取搜索结果
 		const response = await ctx.curl(`${config.searchServer}/api/topsell`, {
 			dataType: 'json',
+			data: {
+				parentid: topid
+			},
 			method: 'GET',
 			timeout: 30000,
 		});
