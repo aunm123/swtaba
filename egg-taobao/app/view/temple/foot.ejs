@@ -12,8 +12,10 @@
 	})
 
     function open_taobao(targetClass,s_url) {
-	    var url = "taobao://s.click.taobao.com/6ERCbL32kLy";                   //淘宝
-	    window.location = "taobao:"+s_url;
+	    // var url = "taobao://s.click.taobao.com/6ERCbL32kLy";                   //淘宝
+        var temp = s_url.replace("https:","");
+        temp.repeat("http:","");
+	    window.location = "taobao:"+temp;
 
 
 	    // const cb = new ClipboardJS(targetClass, {
