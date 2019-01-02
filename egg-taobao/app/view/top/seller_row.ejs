@@ -1,6 +1,6 @@
 <% items.forEach(function(item){ %>
 <div class="waterfall-item">
-    <a href="javascript:;" onclick="open_url('/detail?itemid=<%= item.item_id %>')">
+    <a href="javascript:;" onclick="open_url(event,'/detail?itemid=<%= item.item_id %>')">
         <div>
             <img class="img lazy"
                  data-original="<%= item.pict_url %>"
@@ -19,9 +19,11 @@
                     <span class="coupon-icon-right"><%=item.coupon_amount%>元</span>
                 </div>
 
-                <span class="yen">¥</span><span class="price"><%= item.zk_final_price %></span>
-                <span class="yen line-through" style="margin-left: 2px;">¥</span><span
-                        class="price line-through extra-price"><%= (parseInt(item.zk_final_price) + parseInt(item.coupon_amount)) %></span>
+                <div style="padding: 0 8px;">
+                    <span class="yen">¥</span><span class="price"><%=(parseFloat(item.zk_final_price) - parseFloat(item.coupon_amount)).toFixed(2) %></span>
+                    <span class="yen line-through" style="margin-left: 2px;">¥</span><span
+                            class="price line-through extra-price"><%=(parseFloat(item.zk_final_price)).toFixed(2)%></span>
+                </div>
             </div>
         </div>
     </a>

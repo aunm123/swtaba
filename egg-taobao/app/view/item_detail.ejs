@@ -46,10 +46,10 @@
             <div class="prices-wrapper">
                 <div class="prices">
                     <div class="price-title"></div>
-                    <div class="price"><%=((reservePrice)/100.0 - couponAmount).toFixed(2) %></div>
-                    <span class="price-tag text"><%=couponInfo%></span>
+                    <div class="price"><%=((zkFinalPrice)/100.0 - couponAmount).toFixed(2) %></div>
+                    <span class="price-tag text"><%=locals.couponInfo%></span>
                 </div>
-                <div class="extra-price"><p>价格<span class="price-span line-through">￥<%=((reservePrice)/100.0).toFixed(2)%></span></p></div>
+                <div class="extra-price"><p>价格<span class="price-span line-through">￥<%=((zkFinalPrice)/100.0).toFixed(2)%></span></p></div>
                 <div class="price-intl"></div>
                 <div class="price-tip"></div>
             </div>

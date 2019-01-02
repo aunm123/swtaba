@@ -1,6 +1,6 @@
 <script src="public/js/iscroll/iscroll.js"></script>
 <div>
-    <img style="width: 100vw" height="150"
+    <img style="width: 100vw;min-height: 150px" id="headimg"
          src="https://gw.alicdn.com/tfs/TB1R.cskfDH8KJjy1XcXXcpdXXa-750-300.jpg_q75.jpg" alt="">
     <header class="toolbar sticky">
         <div class="toolbar__btn-wrapper clearfix">
@@ -18,7 +18,9 @@
 
                     <% topsell.forEach(function (item,index) {  %>
                         <li class="header-nav-item <%if(index==0){%>select<%}%>" data-model="<%=item.id%>">
-                            <span><%=item.cName%></span>
+                            <a href="javascript:;" onclick="navsekect(this)">
+                                <span><%=item.cName%></span>
+                            </a>
                         </li>
                     <% }) %>
 
@@ -29,14 +31,16 @@
     </div>
 </div>
 <script>
-	new IScroll('#header-nav', {scrollX: true, scrollY: true, freeScroll: true});
-	$(function () {
-        $('.header-nav-item').click(function (e) {
-	        $('.select').removeClass('select');
-	        $(e.currentTarget).addClass('select');
+    $(function () {
+    	var win_width = $(window).width();
+        $('#headimg').css('min-height',win_width/375.0*150.0);
+    })
+	new IScroll('#header-nav', {scrollX: true, scrollY: true, freeScroll: true,click: true });
+	function navsekect(currentTarget) {
+		$('.select').removeClass('select');
+		$(currentTarget).parent().addClass('select');
 
-	        var sele_id = $(e.currentTarget).attr("data-model");
-	        changeSelect(sele_id);
-        })
-	})
+		var sele_id = $(currentTarget).parent().attr("data-model");
+		changeSelect(sele_id);
+	}
 </script>

@@ -15,7 +15,7 @@ class HomeService extends Service {
 				page: page,
 				pageSize: pageSize
 			},
-			timeout: 30000,
+			timeout: 600000,
 		});
 		return response;
 	}
@@ -30,7 +30,7 @@ class HomeService extends Service {
 			data: {
 				itemid: itemid,
 			},
-			timeout: 30000,
+			timeout: 600000,
 		});
 		return response;
 	}
@@ -43,7 +43,7 @@ class HomeService extends Service {
 			dataType: 'json',
 			method: 'GET',
 			data: params,
-			timeout: 30000,
+			timeout: 600000,
 		});
 		return response;
 	}
@@ -59,7 +59,7 @@ class HomeService extends Service {
 				parentid: topid
 			},
 			method: 'GET',
-			timeout: 30000,
+			timeout: 600000,
 		});
 		return response;
 	}

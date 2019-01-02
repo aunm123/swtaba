@@ -318,12 +318,16 @@ public class PackageCouponData {
         tbkItem.setCouponEndTime(data.getDate("coupon_end_time"));
         tbkItem.setCouponStartTime(data.getDate("coupon_start_time"));
 
-        Pattern pattern = Pattern.compile("减(\\d+)元");
-        Matcher matcher = pattern.matcher(tbkItem.getCouponInfo());
-
-        while (matcher.find()) {
-            tbkItem.setCouponAmount(matcher.group(1));
-            item.setZkFinalPrice(item.getReservePrice() - Integer.valueOf(tbkItem.getCouponAmount()));
+        try {
+            Pattern pattern = Pattern.compile("减(\\d+)元");
+            Matcher matcher = pattern.matcher(tbkItem.getCouponInfo());
+            while (matcher.find()) {
+                tbkItem.setCouponAmount(matcher.group(1));
+                item.setZkFinalPrice(item.getZkFinalPrice() - Integer.valueOf(tbkItem.getCouponAmount()));
+            }
+        }catch (Exception e){
+            tbkItem.setCouponAmount("0");
+            item.setZkFinalPrice((int) (data.getFloatValue("zk_final_price") * 100));
         }
 
 

@@ -72,7 +72,7 @@ public class TItemServiceImpl extends ServiceImpl<TItemMapper, TItem> implements
         if (categoryid != 0) {
             wrapper.eq("category", categoryid);
         }
-        wrapper.orderBy(true, "create_date", false);
+        wrapper.orderBy(true, "volume", false);
         Page<TTbkItem> tbkItemPage = new Page<TTbkItem>(page, pageSize);
         Page tbkItems = tbkItemService.selectPage(tbkItemPage, wrapper);
 

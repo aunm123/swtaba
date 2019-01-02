@@ -1,6 +1,6 @@
 <% items.forEach(function(item){ %>
 <div class="search-item">
-	<a href="javascript:;" onclick="open_url('/detail?itemid=<%=item.numIid%>')">
+	<a href="javascript:;" onclick="open_url(event,'/detail?itemid=<%=item.numIid%>')">
         <img class="img lazy"
              data-original="<%=item.pictUrl%>"
              src="public/image/loading.gif">

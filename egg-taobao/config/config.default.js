@@ -39,5 +39,11 @@ module.exports = appInfo => {
 		responseTimeout: 600000,
 	};
 
+	config.httpclient = {
+		httpAgent: {
+			timeout: 63000,
+		},
+	};
+
 	return config;
 };

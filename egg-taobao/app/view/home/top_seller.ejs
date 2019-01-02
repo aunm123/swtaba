@@ -1,7 +1,7 @@
 <div class="category-div">
     <% topsell.forEach(function(item){ %>
     <div>
-        <a class="item" href="javascript:;" onclick="open_url('/top?topid=<%=item.id%>')">
+        <a class="item" href="javascript:;" onclick="open_url(event,'/top?topid=<%=item.id%>')">
             <img src="<%=item.icon%>" alt="">
             <span><%=item.cName%></span>
         </a>

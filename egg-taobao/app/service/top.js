@@ -10,7 +10,7 @@ class TopService extends Service {
 			dataType: 'json',
 			method: 'GET',
 			data: params,
-			timeout: 60000,
+			timeout: 600000,
 		});
 		return response;
 	}
@@ -23,7 +23,7 @@ class TopService extends Service {
 			dataType: 'json',
 			method: 'GET',
 			data: params,
-			timeout: 60000,
+			timeout: 600000,
 		});
 		return response;
 	}

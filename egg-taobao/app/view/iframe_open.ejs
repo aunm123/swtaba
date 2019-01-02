@@ -47,7 +47,10 @@
 		$(".spinner-div").hide();
 	}
 
-	function open_url(url) {
+	function open_url(event,url) {
+		if (!event.isTrusted){
+			return ;
+        }
 		$(".spinner-div").show();
 
 		var target = $('.main-frame');
