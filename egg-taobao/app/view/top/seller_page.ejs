@@ -11,7 +11,6 @@
 <%- include('seller_header.ejs',{topsell: topsell}) %>
 
 <div id="list">
-
     <div data-mxview="atb_like">
         <div class="" style="padding-top: 8px;">
             <div class="waterfall" id="like-list-con">
@@ -37,6 +36,8 @@
 			page = 1;
 			current_topid = topid;
 			$('.waterfall-list').html('');
+			dropload.noData(false);
+			dropload.unlock();
 			dropload.resetload();
 		}
 
@@ -78,6 +79,7 @@
 
 		function model(data, me, m) {
 
+			var oldlen = $('.waterfall-list .waterfall-item').length;
 			try {
 				if (page === 1) {
 					$('.waterfall-list').html(data);
@@ -86,15 +88,14 @@
 				}
 			} catch (e) {
 			}
-
-
-			var total = $('.hasmore').attr("more");
+			$('img.lazy').lazyload({
+				container: $("#like-list-con")
+			});
 			var len = $('.waterfall-list .waterfall-item').length;
-
 
 			page++;
 			// 每次数据加载完，必须重置
-			if (len >= total) {
+			if (len-oldlen < 20) {
 				me.lock();
 				me.noData();
 			}

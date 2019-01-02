@@ -33,6 +33,9 @@ class HomeController extends Controller {
 		};
 		console.log("获取第" + page + "页数据");
 		const listData = await ctx.service.home.getTopData(params);
+		if (!listData.data.data){
+			listData.data.data = [];
+		}
 		const {currentPage, data, total, done, message} = listData.data;
 		await ctx.render('home/home_row.ejs', {items: data});
 

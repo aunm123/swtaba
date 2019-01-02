@@ -30,7 +30,14 @@ class TopController extends Controller {
 			topid
 		};
 		let topdata = await ctx.service.top.getTopCateData(params);
-		let { data } = JSON.parse(topdata.data.data.content);
+		if (!topdata.data.data.content){
+			topdata.data.data.content = "{}";
+		}
+		let tempTopData = JSON.parse(topdata.data.data.content);
+		if (!tempTopData.data){
+			tempTopData.data = [];
+		}
+		let { data } = tempTopData;
 
 		await ctx.render('top/seller_row.ejs', { items: data });
 

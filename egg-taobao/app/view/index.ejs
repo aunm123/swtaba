@@ -140,7 +140,9 @@
 					$('.waterfall-list').append(data);
 				}
 			}catch (e){}
-
+			$('img.lazy').lazyload({
+				container: $("#like-list-con")
+			});
 
 			var total = $('.hasmore').attr("more");
 			var len = $('.waterfall-list .waterfall-item').length;
