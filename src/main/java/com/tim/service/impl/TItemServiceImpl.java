@@ -73,23 +73,25 @@ public class TItemServiceImpl extends ServiceImpl<TItemMapper, TItem> implements
             wrapper.eq("category", categoryid);
         }
         wrapper.orderBy(true, "volume", false);
-        Page<TTbkItem> tbkItemPage = new Page<TTbkItem>(page, pageSize);
-        Page tbkItems = tbkItemService.selectPage(tbkItemPage, wrapper);
+        Page<TItem> itemPage = new Page<>(page,pageSize);
+        Page items = this.selectPage(itemPage, wrapper);
 
         ArrayList<Object> objects = new ArrayList<>();
 
-        for (TTbkItem tbkItem : (List<TTbkItem>) tbkItems.getRecords()) {
+        for (TItem item : (List<TItem>) items.getRecords()) {
 
-            TItem tItem = this.selectById(tbkItem.getItemId());
+            Wrapper selectItemid = new EntityWrapper<>();
+            selectItemid.eq("item_id",item.getNumIid());
+            TTbkItem tbkItem = tbkItemService.selectOne(selectItemid);
 
-            if (tItem != null) {
-                JSONObject jsonObject = JSONUtil.connect(tbkItem, tItem);
+            if (tbkItem != null) {
+                JSONObject jsonObject = JSONUtil.connect(tbkItem, item);
                 objects.add(jsonObject);
             }
 
         }
 
-        return new ResultUtil(objects, tbkItems.getTotal(), page);
+        return new ResultUtil(objects, items.getTotal(), page);
 
     }
 

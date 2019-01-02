@@ -98,8 +98,8 @@ public class ApiComtroller {
                 TUrlCache urlCache = new TUrlCache();
                 urlCache.setContent(content);
                 urlCache.setId(keyid);
-                urlCache.setMaxAge(12);   // 缓存12天
-                urlCacheService.insert(urlCache);
+                urlCache.setMaxAge(30);   // 缓存30天
+                urlCacheService.insertOrUpdate(urlCache);
             }else {
                 content = cache.getContent();
             }

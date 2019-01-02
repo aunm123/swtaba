@@ -72,7 +72,7 @@ public class ThreeApiController {
                 urlCache.setContent(content);
                 urlCache.setId(keyid);
                 urlCache.setMaxAge(3);   // 缓存3天
-                urlCacheService.insert(urlCache);
+                urlCacheService.insertOrUpdate(urlCache);
 
                 return new ResultUtil(JSONUtil.connect(urlCache));
             } else {

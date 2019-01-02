@@ -90,7 +90,7 @@ public class PackageCouponData {
                 item.setSellerId(data.getString("seller_id"));
                 item.setTitle(data.getString("title"));
                 item.setUserType(data.getInteger("user_type"));
-                item.setVolume(data.getString("volume"));
+                item.setVolume(data.getInteger("volume"));
                 item.setItemDescription(data.getString("item_description"));
                 item.setZkFinalPrice((int) (data.getFloatValue("zk_final_price") * 100));
 
@@ -253,30 +253,32 @@ public class PackageCouponData {
     }
 
     private LinkedList<TItemImg> gettItemImgs(JSONObject data, TItem item) {
+
         LinkedList<TItemImg> tItemImgs = new LinkedList<>();
 
-        JSONArray small_images_array = null;
-        Object images = data.get("small_images");
-        if (images instanceof Collection){
-            small_images_array = (JSONArray) images;
+        try {
+            JSONArray small_images_array = null;
+            Object images = data.get("small_images");
+            if (images instanceof Collection){
+                small_images_array = (JSONArray) images;
 
-        }else {
-            JSONObject small_images = data.getJSONObject("small_images");
-            if (small_images != null) {
-                small_images_array = small_images.getJSONArray("string");
+            }else {
+                JSONObject small_images = data.getJSONObject("small_images");
+                if (small_images != null) {
+                    small_images_array = small_images.getJSONArray("string");
+                }
             }
-        }
 
-        for (Object img_url_obj : small_images_array) {
-            String img_url = (String) img_url_obj;
+            for (Object img_url_obj : small_images_array) {
+                String img_url = (String) img_url_obj;
 
-            TItemImg itemImg = new TItemImg();
-            itemImg.setItemId(item.getNumIid());
-            itemImg.setUrl(img_url);
+                TItemImg itemImg = new TItemImg();
+                itemImg.setItemId(item.getNumIid());
+                itemImg.setUrl(img_url);
 
-            tItemImgs.add(itemImg);
-        }
-
+                tItemImgs.add(itemImg);
+            }
+        }catch (Exception e){ }
         return tItemImgs;
     }
 
@@ -294,7 +296,7 @@ public class PackageCouponData {
         item.setTitle(data.getString("title"));
         item.setShortTitle(data.getString("short_title"));
         item.setUserType(data.getInteger("user_type"));
-        item.setVolume(data.getString("volume"));
+        item.setVolume(data.getInteger("volume"));
         item.setItemDescription(data.getString("item_description"));
         item.setZkFinalPrice((int) (data.getFloatValue("zk_final_price") * 100));
         item.setWhiteImage(data.getString("white_image"));

@@ -63,6 +63,7 @@
   width: 4px;
   height: 4px;
   margin: 0 2px;
+  background: #ff0030;
 }
 .main .category-div {
   display: flex;
@@ -75,6 +76,7 @@
 .main .category-div .item {
   display: flex;
   justify-content: center;
+  align-items: center;
   align-content: center;
   flex-direction: column;
   margin-bottom: 5px;
@@ -221,5 +223,16 @@
 }
 .toolbar .toolbar__btn-wrapper .toolbar__btn .iconfont {
   color: white;
+}
+.top-sell .item i {
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f47920;
+  color: white;
+  border-radius: 50%;
 }
 /*# sourceMappingURL=main.css.map */

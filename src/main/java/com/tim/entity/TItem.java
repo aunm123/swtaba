@@ -12,7 +12,7 @@ import com.tim.common.BaseEntity;
  * </p>
  *
  * @author tim
- * @since 2018-12-16
+ * @since 2019-01-02
  */
 @TableName("t_item")
 public class TItem extends BaseEntity {
@@ -48,7 +48,7 @@ public class TItem extends BaseEntity {
     @TableField("user_type")
     private Integer userType;
 
-    private String volume;
+    private Integer volume;
 
     @TableField("zk_final_price")
     private Integer zkFinalPrice;
@@ -147,11 +147,11 @@ public class TItem extends BaseEntity {
     public void setUserType(Integer userType) {
         this.userType = userType;
     }
-    public String getVolume() {
+    public Integer getVolume() {
         return volume;
     }
 
-    public void setVolume(String volume) {
+    public void setVolume(Integer volume) {
         this.volume = volume;
     }
     public Integer getZkFinalPrice() {

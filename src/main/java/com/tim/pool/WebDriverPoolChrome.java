@@ -125,6 +125,7 @@ public class WebDriverPoolChrome {
         TBConf.ChromeLoading = true;
 
         Wrapper wrapper = new EntityWrapper<>();
+        wrapper.orderBy(true, "volume", false); // 按销售量采集， 优先采集销售量高的商品
         Integer count = itemMapper.selectCount(wrapper);
         Integer totalPage = count / 50 + (count % 50 == 0 ? 0 : 1);
 

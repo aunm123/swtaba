@@ -1,6 +1,6 @@
 package com.tim.mapper;
 
-import com.tim.entity.TUrlCache;
+import com.tim.entity.TTopSell;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author tim
- * @since 2019-01-01
+ * @since 2019-01-02
  */
-public interface TUrlCacheMapper extends BaseMapper<TUrlCache> {
+public interface TTopSellMapper extends BaseMapper<TTopSell> {
 
 }
