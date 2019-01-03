@@ -11,17 +11,18 @@
             </div>
         </div>
     </header>
+    <% if (topsell.size > 0) {%>
     <div class="header-nav-con">
         <div id="cell-iscroll">
             <div class="header-nav" id="header-nav" style="touch-action: none;">
                 <ul class="header-nav-list">
 
                     <% topsell.forEach(function (item,index) {  %>
-                        <li class="header-nav-item <%if(index==0){%>select<%}%>" data-model="<%=item.id%>">
-                            <a href="javascript:;" onclick="navsekect(this)">
-                                <span><%=item.cName%></span>
-                            </a>
-                        </li>
+                    <li class="header-nav-item <%if(index==0){%>select<%}%>" data-model="<%=item.id%>">
+                        <a href="javascript:;" onclick="navsekect(this)">
+                            <span><%=item.cName%></span>
+                        </a>
+                    </li>
                     <% }) %>
 
                 </ul>
@@ -29,6 +30,7 @@
         </div>
         <button class="filter-icon js-hide js-noBg"></button>
     </div>
+    <% } %>
 </div>
 <script>
     $(function () {

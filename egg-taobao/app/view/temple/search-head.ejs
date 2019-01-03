@@ -4,18 +4,84 @@
             <i class="iconfont icon-back_light"></i>
         </a>
         <i class="iconfont icon-search search-icon"></i>
-        <input id="search-input" class="search-input" type="text">
+        <input id="search-input" class="search-input" type="text" autocomplete="off">
         <a href="javascript:;" class="btn" onClick="searchAction()">
             搜索
         </a>
+        <div class="clear-btn" onclick="clearBtnPress()">
+            <i class="iconfont icon-clear search-icon" style="float:right"></i>
+        </div>
+    </div>
+    <div class="search-head-list">
+        <ul>
+        </ul>
     </div>
 </header>
 <script>
 	document.getElementById("search-input").value = decodeURI(getParam('q'));
-
-	$('#search-input').on('keypress',function(event){
+	$('#search-input').on('keypress', function (event) {
 		if (event.keyCode == 13) {
 			searchAction()
 		}
 	});
+	$('#search-input').on('focus', function () {
+		keywordChange();
+	});
+	$('#search-input').on('blur', function () {
+		setTimeout(function () {
+			if (!$('#search-input').is(":focus")){
+				$('.search-head-list ul').html('');
+            }
+		},100)
+	});
+	$('#search-input').on('input', function () {
+		keywordChange();
+	});
+
+	function clearBtnPress() {
+		$('#search-input').val('');
+		$('.search-head-list ul').html('');
+		return;
+	}
+
+	function setKeyWord(value) {
+		console.log(value)
+		$('#search-input').val(value);
+		$('#search-input').focus();
+		keywordChange();
+
+	}
+
+	function keywordChange() {
+		var k = $('#search-input').val();
+		if (k.length <= 0) {
+			$('.search-head-list ul').html('');
+			return;
+		}
+		var params = {key: k};
+		$.ajax({
+			type: 'POST',
+			url: "/api/key",
+			data: params,
+			success: function (res) {
+				var newk = $('#search-input').val();
+				if (newk.length <= 0) {
+					$('.search-head-list ul').html('');
+					return;
+				}
+				if (k!=newk){
+					return ;
+                }
+				var result = '';
+				for (var i = 0; i < res.length; i++) {
+					var item = res[i];
+					result += '<li><a onclick="setKeyWord(\'' + item[0] + '\')"><i class="iconfont icon-search search-icon"></i>'
+						+ item[0] + '</a></li>'
+				}
+				$('.search-head-list ul').html(result);
+			},
+			dataType: 'json'
+		});
+	}
+
 </script>

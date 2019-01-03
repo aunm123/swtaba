@@ -2,6 +2,28 @@
   background: #F0F0F0;
   padding: 10px 0;
 }
+.search-head .search-icon {
+  padding: 4px;
+  padding-left: 8px;
+}
+.search-head .clear-btn {
+  position: absolute;
+  top: 0;
+  right: 85px;
+  color: #ababab;
+}
+.search-head .clear-btn:active {
+  color: #6e6e6e;
+}
+.search-head .search-head-list li a {
+  display: block;
+}
+.search-head .search-head-list li a:active {
+  background-color: #F0F0F0;
+}
+.search-head .search-head-list li span {
+  line-height: 30px;
+}
 .search-head .search-content {
   position: relative;
   display: -webkit-box;
@@ -10,8 +32,6 @@
 .search-head .search-content .search-icon {
   position: absolute;
   height: 100%;
-  padding: 4px;
-  padding-left: 8px;
 }
 .search-head .search-content .btn {
   padding: 0 12px;
@@ -19,6 +39,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.search-head .search-content .btn:active {
+  color: #ababab;
 }
 .search-head .search-content .search-input {
   letter-spacing: 0.5px;

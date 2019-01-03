@@ -2,6 +2,35 @@
   background: #F0F0F0;
   padding: 10px 0;
 
+  .search-icon{
+    padding: 4px;
+    padding-left: 8px;
+  }
+
+  .clear-btn{
+    position: absolute;
+    top: 0;
+    right: 85px;
+    color: #ababab;
+  }
+  .clear-btn:active{
+    color: #6e6e6e;
+  }
+
+  .search-head-list{
+    li {
+      a {
+        display: block;
+      }
+      a:active{
+        background-color: #F0F0F0;
+      }
+      span {
+        line-height: 30px;
+      }
+    }
+  }
+
   .search-content{
     position: relative;
     display: -webkit-box;
@@ -10,8 +39,6 @@
     .search-icon{
       position: absolute;
       height: 100%;
-      padding: 4px;
-      padding-left: 8px;
     }
 
     .btn{
@@ -20,6 +47,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    .btn:active{
+      color: #ababab;
     }
 
     .search-input{

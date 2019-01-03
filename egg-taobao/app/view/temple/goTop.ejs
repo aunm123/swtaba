@@ -1,0 +1,22 @@
+<!-- 返回顶部 -->
+<div class="am-gotop" style="display: none;">
+    <a class="fq-top">
+        <i class="iconfont icon-top"></i>
+    </a>
+</div>
+<script>
+    $(function () {
+	    $(window).scroll(function () {
+		    $(window).scroll(function(){
+			    if($(this).scrollTop()>500){//当window的scrolltop距离大于1时，go to top按钮淡出，反之淡入
+				    $(".am-gotop").fadeIn();
+			    } else {
+				    $(".am-gotop").fadeOut();
+			    }
+		    });
+	    });
+	    $('.am-gotop a').click(function(){
+		    $('html,body').animate({scrollTop:0},'slow');
+	    });
+    })
+</script>

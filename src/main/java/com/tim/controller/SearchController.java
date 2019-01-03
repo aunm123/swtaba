@@ -3,6 +3,7 @@ package com.tim.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.tim.entity.TKey;
 import com.tim.magic.PackageCouponData;
+import com.tim.service.ITHotService;
 import com.tim.service.ITItemService;
 import com.tim.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +25,8 @@ public class SearchController {
 
     @Autowired
     private ITItemService itemService;
+    @Autowired
+    private ITHotService hotService;
 
     @Autowired
     PackageCouponData packageCouponData;
@@ -47,6 +51,19 @@ public class SearchController {
 
         ResultUtil resultUtil = itemService.selectKeyWord(page, pageSize, categoryid, v, p, q);
         return  resultUtil;
+
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/hot")
+    public ResultUtil search(HttpServletRequest request){
+
+        List<String> hots = hotService.getHotList();
+
+        Map map = new HashMap();
+        map.put("hot",hots);
+
+        return  new ResultUtil(map);
 
     }
 

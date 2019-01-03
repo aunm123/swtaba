@@ -12,6 +12,7 @@ module.exports = app => {
 
 	router.get('/keyword', controller.search.index);
 	router.get('/search', controller.search.search);
+	router.post('/api/key', controller.search.search_list_api);
 	router.post('/s_page', controller.search.search_page);
 
 	router.get('/top', controller.top.index);

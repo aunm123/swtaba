@@ -56,13 +56,13 @@ public class ScheduledService {
     @Scheduled(cron = "0 0 0 0/1 * *")
     public void keyword_scheduled(){
 
+        log.info("开始清理item数据");
         // 每天清理所有item数据
         Wrapper allWrap = new EntityWrapper<>();
         itemService.delete(allWrap);
         itTbkItemService.delete(allWrap);
         itemContentService.delete(allWrap);
         itemImgService.delete(allWrap);
-
 
         List<TKey> keys = keyService.selectList(new EntityWrapper<>());
         // 每个关键字都查找n页面

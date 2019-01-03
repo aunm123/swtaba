@@ -42,14 +42,16 @@ public class ThreeApiController {
     public ResultUtil top(
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "热销") String topcate,
-            @RequestParam(defaultValue = "运动") String subcate
+            @RequestParam(defaultValue = "") String subcate
     ) {
 
         Map<String, String> params = new HashMap<>();
         params.put("vekey", TBConf.VEKEY);
         try {
             params.put("topcate", URLEncoder.encode(topcate, "UTF-8"));
-            params.put("subcate", URLEncoder.encode(subcate, "UTF-8"));
+            if (subcate.length() > 0){
+                params.put("subcate", URLEncoder.encode(subcate, "UTF-8"));
+            }
             params.put("sort", "total_sales_des");
             params.put("page", page.toString());
             params.put("pagesize", "20");

@@ -235,4 +235,17 @@
   color: white;
   border-radius: 50%;
 }
+.search-head .search-head-list {
+  background: white;
+  margin-top: 10px;
+  text-align: left;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+.search-head .search-head-list li {
+  border-bottom: 1px solid #F0F0F0;
+  padding: 5px 40px;
+}
 /*# sourceMappingURL=main.css.map */
