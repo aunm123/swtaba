@@ -1,5 +1,6 @@
 'use strict';
 const Service = require('egg').Service;
+const Common = require('../util/common');
 
 class HomeService extends Service {
 	async getTopData({categoryid, page, pageSize}) {

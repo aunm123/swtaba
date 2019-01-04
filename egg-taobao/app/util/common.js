@@ -17,5 +17,11 @@ module.exports = {
 				return {data: [], message: 'timeout'};
 			}
 		});
+	},
+	apiChcekStatus(response,ctx){
+		if (response.status >= 200 && response.status < 300) {
+			return response;
+		}
+		ctx.body = {error: "api callback fail！"};
 	}
 };

@@ -1,5 +1,6 @@
 'use strict';
 const Service = require('egg').Service;
+const Common = require('../util/common');
 
 class SearchService extends Service {
 	async getSearchUrl(params) {

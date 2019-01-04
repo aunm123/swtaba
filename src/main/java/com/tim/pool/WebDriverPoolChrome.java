@@ -51,7 +51,7 @@ public class WebDriverPoolChrome {
     //phantomjs路径
     private static final String WIN_JS_BIN = "D:\\chromedriver_win32\\chromedriver.exe";
     private static final String MAC_JS_BIN = "/path/chromedriver";
-    private static final String LINUX_JS_BIN = "";
+    private static final String LINUX_JS_BIN = "/data/app/chromedriver";
 
     /**
      * 生成一个新的PhantomJSDriver
@@ -69,8 +69,8 @@ public class WebDriverPoolChrome {
 //        chromeOptions.addArguments("user-agent=\"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50\"");
 
         //单线程运行
-//        chromeOptions.addArguments("–single-process");
-        chromeOptions.addArguments("–no-sandbox");
+//        chromeOptions.addArguments("–-single-process");
+        chromeOptions.addArguments("--no-sandbox");
 
         // 禁止图片加载
         HashMap<String, Integer> prefs = new HashMap<String, Integer>();

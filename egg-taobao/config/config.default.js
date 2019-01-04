@@ -18,8 +18,8 @@ module.exports = appInfo => {
 
 	config.middleware = [];
 
-	exports.searchServer = 'http://localhost:8087';
-	exports.host = 'http://localhost:8087';
+	exports.searchServer = 'http://212.64.57.254:8080/swtaobao3';
+	exports.host = 'http://212.64.57.254:8080/swtaobao3';
 
 	exports.logger = {
 		level: 'DEBUG',

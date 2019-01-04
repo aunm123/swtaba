@@ -1,5 +1,6 @@
 'use strict';
 const Service = require('egg').Service;
+const Common = require('../util/common');
 
 class TopService extends Service {
 	async getTopCateData(params) {
