@@ -18,6 +18,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,9 @@ public class WebDriverPoolChrome {
     @Autowired
     TItemMapper itemMapper;
 
-    private ArrayList<TWebDriver> webDrivers = new ArrayList<>();
+    public ArrayList<TWebDriver> webDrivers = new ArrayList<TWebDriver>();
+
+    private ArrayList<Runnable> retryRunable = new ArrayList<Runnable>();
 
     //phantomjs路径
     private static final String WIN_JS_BIN = "D:\\chromedriver_win32\\chromedriver.exe";
@@ -71,6 +74,11 @@ public class WebDriverPoolChrome {
         //单线程运行
 //        chromeOptions.addArguments("–-single-process");
         chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.addArguments("--disable-extensions");
+        chromeOptions.addArguments("--window-size=375,2046");
+        chromeOptions.addArguments("--ignore-ssl-errors=true");
+        chromeOptions.addArguments("--ssl-protocol=TLSv1");
 
         // 禁止图片加载
         HashMap<String, Integer> prefs = new HashMap<String, Integer>();
@@ -94,7 +102,7 @@ public class WebDriverPoolChrome {
         tWebDriver.setDriver(driver);
 
         // 设置浏览器大小
-        driver.manage().window().setSize(new Dimension(375, 2046));
+//        driver.manage().window().setSize(new Dimension(375, 2046));
 
         return tWebDriver;
 
@@ -150,20 +158,33 @@ public class WebDriverPoolChrome {
                 }
             }
         }
+
         TBConf.GetDriverPool().shutdown();
 
         while (true) {//等待所有任务都结束了继续执行
             try {
                 if (TBConf.GetDriverPool().isTerminated()) {
-                    for (int i = 0; i < webDrivers.size(); i++) {
-                        TWebDriver tWebDriver = webDrivers.get(i);
-                        tWebDriver.getDriver().quit();
+
+                    if (retryRunable.size() > 0) {
+                        TBConf.CleanPool();
+                        for (Runnable run : retryRunable) {
+                            TBConf.GetDriverPool().execute(run);
+                        }
+                        TBConf.GetDriverPool().shutdown();
+                        retryRunable.clear();
+                    } else {
+
+                        // 关闭webdriver
+                        for (int i = 0; i < webDrivers.size(); i++) {
+                            TWebDriver tWebDriver = webDrivers.get(i);
+                            tWebDriver.getDriver().quit();
+                        }
+                        webDrivers.clear();
+                        log.info("所有的子线程都结束了！");
+                        TBConf.CleanPool();
+                        TBConf.ChromeLoading = false;
+                        break;
                     }
-                    webDrivers.clear();
-                    log.info("所有的子线程都结束了！");
-                    TBConf.CleanPool();
-                    TBConf.ChromeLoading = false;
-                    break;
                 }
                 Thread.sleep(1000);
             } catch (Exception e) {
@@ -218,13 +239,10 @@ public class WebDriverPoolChrome {
 
                     driver.switchTo().window(new_tabs.get(1)); //switches to new tab
 
-                    driver.get(item_url);
-
-                    // 获取 网页的 title
-                    log.info(" Page title is: " + driver.getTitle());
+                    driver.get("https://m.intl.taobao.com/detail/detail.html?id=" + item_id);
 
                     // PC版
-//                    new WebDriverWait(driver, 180).until(input -> {
+//                    new WebDriverWait(driver, 120).until(input -> {
 //                        WebElement webElement = ((WebDriver) input).findElement(By.id("page"));
 //                        WebElement targetElement = webElement.findElement(By.className("ke-post"));
 //                        String innerHTML = targetElement.getAttribute("innerHTML");
@@ -239,29 +257,88 @@ public class WebDriverPoolChrome {
 //                    WebElement webElement = driver.findElement(By.id("page"));
 //                    String str = webElement.getAttribute("outerHTML");
 
-                    // 手机版
-                    new WebDriverWait(driver, 600).until(ExpectedConditions.visibilityOfElementLocated(By.className("desc-wrapper")));
-                    WebElement webElement = driver.findElement(By.id("root"));
+                    // 手机版  ExpectedConditions.visibilityOfElementLocated(By.className("desc-wrapper")
+
+                    new WebDriverWait(driver, 120).until(input -> {
+                        WebElement webElement = ((WebDriver) input).findElement(By.tagName("body"));
+
+                        WebElement wrapperElement = null;
+                        WebElement contentElement = null;
+
+                        try {
+                            wrapperElement = webElement.findElement(By.className("desc-wrapper"));
+                        } catch (NoSuchElementException e) { };
+
+                        try {
+                            contentElement = webElement.findElement(By.className("detail-content"));
+                        } catch (NoSuchElementException e) { };
+
+                        if (wrapperElement != null) {
+                            if (wrapperElement.getRect().height > 3) {
+                                return true;
+                            }
+                        }
+                        if (contentElement != null) {
+                            if (contentElement.getRect().height > 3) {
+                                return true;
+                            }
+                        }
+                        return false;
+
+//                        ExpectedCondition<WebElement> targetEx = ExpectedConditions.visibilityOf(targetElement);
+//                        ExpectedCondition<WebElement> target2Ex = ExpectedConditions.visibilityOf(target2Element);
+//                        return ExpectedConditions.visibilityOfAllElements(targetElement,target2Element);
+                    });
+                    WebElement webElement = driver.findElement(By.tagName("body"));
                     String str = webElement.getAttribute("outerHTML");
+
+                    // 获取 网页的 title
+                    log.info(" Page title is: " + driver.getTitle());
 
 
                     Html html = new Html(str);
 
-                    Selectable content = html.$(".desc-wrapper");
+                    Selectable content = null;
+
+                    WebElement wrapperElement = null;
+                    WebElement contentElement = null;
+
+                    try {
+                        wrapperElement = webElement.findElement(By.className("desc-wrapper"));
+                    } catch (NoSuchElementException e) { };
+
+                    try {
+                        contentElement = webElement.findElement(By.className("detail-content"));
+                    } catch (NoSuchElementException e) { };
+
+                    if (wrapperElement != null) {
+                        if (wrapperElement.getRect().height > 3) {
+                            content = html.$(".desc-wrapper");
+                        }
+                    }
+                    if (contentElement != null) {
+                        if (contentElement.getRect().height > 3) {
+                            content = html.$(".detail-content");
+                        }
+                    }
+
+                    if (content == null) {
+                        throw new Exception("空数据异常!!!!");
+                    }
 
                     TItemContent tItemContent = new TItemContent();
                     tItemContent.setItemId(item_id);
                     tItemContent.setContent(content.toString());
                     tItemContent.setUpdateDate(new Date());
 
-                    tItemContentService.insertOrUpdate(tItemContent);
+                    tItemContentService.insert(tItemContent);
 
 
                 } catch (Exception e) {
 
-                    log.error("补捉详细页失败 ，" + e.getLocalizedMessage());
+                    log.error("补捉详细页失败 ，" + e.toString());
                     TItem item = tItemService.selectById(item_id);
-                    log.error(item.getTitle() + " url:" + item_url);
+                    log.error(item.getTitle() + " url:" + "https://m.intl.taobao.com/detail/detail.html?id=" + item_id);
 
                     // 失败，即重试3次
                     Integer rc = retryCount;
@@ -270,9 +347,9 @@ public class WebDriverPoolChrome {
                         rc = rc + 1;
                         Runnable thread = createThread(item_url, item_id, rc);
                         if (thread != null) {
-                            TBConf.GetDriverPool().execute(thread);
+                            retryRunable.add(thread);
                         }
-                    }else {
+                    } else {
                         System.out.println("重试3次依然失败，插入为空内容");
                         //  重试3 次依然失败，插入为空内容
                         TItemContent tItemContent = new TItemContent();
@@ -280,7 +357,7 @@ public class WebDriverPoolChrome {
                         tItemContent.setContent("");
                         tItemContent.setUpdateDate(new Date());
 
-                        tItemContentService.insertOrUpdate(tItemContent);
+                        tItemContentService.insert(tItemContent);
                     }
 
                 } finally {

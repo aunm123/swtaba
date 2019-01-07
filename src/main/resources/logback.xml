@@ -3,7 +3,7 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%d{YY-MM-DD HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</pattern>
             <!--<charset>UTF-8</charset>-->
         </encoder>
     </appender>
@@ -19,16 +19,17 @@
             <maxFileSize>10MB</maxFileSize>
         </triggeringPolicy>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%d{YY-MM-DD HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</pattern>
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->
         </encoder>
     </appender>
 
     <!--myibatis log configure-->
-    <logger name="com.apache.ibatis" level="INFO"/>
-    <logger name="java.sql.Connection" level="INFO"/>
+    <logger name="org.openqa.selenium" level="INFO" />
+    <logger name="com.apache.ibatis" level="INFO" />
+    <logger name="java.sql.Connection" level="INFO" />
     <logger name="java.sql.Statement" level="INFO"/>
-    <logger name="java.sql.PreparedStatement" level="INFO"/>
+    <logger name="java.sql.PreparedStatement" level="INFO" />
 
 
     <logger name="com.tim" level="INFO" />

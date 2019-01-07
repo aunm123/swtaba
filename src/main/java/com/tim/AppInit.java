@@ -2,6 +2,7 @@ package com.tim;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.tim.config.TBConf;
 import com.tim.entity.TItem;
 import com.tim.entity.TKey;
 import com.tim.entity.TTbkItem;
@@ -55,6 +56,19 @@ public class AppInit implements CommandLineRunner {
 	@Override
 	public void run(String... strings) {
 
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			@Override
+			public void run() {
+				log.info("关闭 webDrivers ");
+				// 关闭webdriver
+				for (int i = 0; i < webDriverPoolChrome.webDrivers.size(); i++) {
+					TWebDriver tWebDriver = webDriverPoolChrome.webDrivers.get(i);
+					tWebDriver.getDriver().quit();
+				}
+				webDriverPoolChrome.webDrivers.clear();
+			}
+		}));
+
 
 		try {
 //			List<TKey> keys = keyService.selectList(new EntityWrapper<>());
@@ -67,7 +81,7 @@ public class AppInit implements CommandLineRunner {
 //		packageCouponData.packWithWord2("裙子",3, 50);
 //		webDriverPool2.start();
 //		webDriverPick.pickingUpItemWithid("583342670048");
-//			webDriverPoolChrome.start();
+			webDriverPoolChrome.start();
 
 
 //			Wrapper allWrap = new EntityWrapper<>();

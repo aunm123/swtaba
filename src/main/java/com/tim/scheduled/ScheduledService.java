@@ -43,18 +43,17 @@ public class ScheduledService {
      * 定时任务 （定时采集chrome数据）（每小时启动一次）
      */
     @Scheduled(cron = "0 0 0/1 * * *")
-    public void scheduled(){
+    public void scheduled() {
         log.info("定时器判断启动");
         webDriverPoolChrome.start();
     }
-
 
 
     /**
      * 定时任务 （定时关键字数据）（每天启动一次）
      */
     @Scheduled(cron = "0 0 0 0/1 * *")
-    public void keyword_scheduled(){
+    public void keyword_scheduled() {
 
         log.info("开始清理item数据");
         // 每天清理所有item数据
@@ -66,7 +65,7 @@ public class ScheduledService {
 
         List<TKey> keys = keyService.selectList(new EntityWrapper<>());
         // 每个关键字都查找n页面
-        for(TKey key : keys){
+        for (TKey key : keys) {
             for (int i = 1; i <= 2; i++) {
                 packageCouponData.packWithWord2(key.getKey(), i, 200);
             }
@@ -77,13 +76,17 @@ public class ScheduledService {
      * 定时任务 （定时清理cache）（每小时启动一次）
      */
     @Scheduled(cron = "0 0 0/1 * * *")
-    public void urlCache_scheduled(){
+    public void urlCache_scheduled() {
 
         List<TUrlCache> urlCaches = urlCacheService.selectList(new EntityWrapper<>());
-        for (TUrlCache urlCache : urlCaches){
+        for (TUrlCache urlCache : urlCaches) {
             Date createDate = urlCache.getCreateDate();
             Long timec = new Date().getTime() - createDate.getTime();
-            if (timec >= (3600 * 24 * urlCache.getMaxAge())){
+            Integer maxage = urlCache.getMaxAge();
+            if (maxage == null) {
+                maxage = 3;
+            }
+            if (timec >= (3600 * 24 * maxage)) {
                 // 大于缓存设置的天数，即删除
                 urlCacheService.deleteById(urlCache.getId());
             }
