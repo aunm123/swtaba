@@ -4,7 +4,7 @@
 <script src="public/js/clipboard/clipboard.min.js"></script>
 
 
-<body>
+<body style="width: 100vw;height: 100vh;">
 
 <script type="text/javascript">
 	window.parent.postMessage("loadfinish",'*');
@@ -91,6 +91,7 @@
 			el: '.dots',
 			type: 'fraction',
 		},
+		direction : 'horizontal',
 	})
 	$(function () {
 		var viewW = $(window).width();

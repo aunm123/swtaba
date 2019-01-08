@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "aitaotao",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -28,12 +28,10 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-example",
+    "start": "EGG_SERVER_ENV=prod egg-scripts start --daemon --title=aitaotao",
     "stop": "egg-scripts stop --title=egg-server-example",
-    "dev": "egg-bin dev",
-    "debug": "egg-bin debug",
-    "test": "npm run lint -- --fix && npm run test-local",
-    "test-local": "egg-bin test",
+    "dev": "EGG_SERVER_ENV=prod egg-bin dev",
+    "local": "EGG_SERVER_ENV=local  egg-bin dev",
     "cov": "egg-bin cov",
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",

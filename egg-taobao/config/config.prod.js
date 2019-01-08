@@ -1,5 +1,8 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
+
 module.exports = appInfo => {
 	const config = exports = {};
 
@@ -18,11 +21,12 @@ module.exports = appInfo => {
 
 	config.middleware = [];
 
+	config.siteFile = {
+		'/favicon.ico': fs.readFileSync(path.join(__dirname, 'favicon.ico')),
+	};
+
 	exports.searchServer = 'http://212.64.57.254:8080/swtaobao3';
 	exports.host = 'http://212.64.57.254:8080/swtaobao3';
-
-	// exports.searchServer = 'http://127.0.0.1:8080';
-	// exports.host = 'http://127.0.0.1:8080';
 
 	exports.logger = {
 		level: 'DEBUG',
@@ -31,10 +35,7 @@ module.exports = appInfo => {
 
 	exports.security = { // ajax 禁用csrf
 		// domainWhiteList: [ 'http://192.168.111.27:7001' ], // 允许ajax跨域访问白名单
-		csrf: {
-			enable: false,
-			ignoreJSON: true, // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
-		},
+		csrf: false
 	};
 
 	config.clusterClient = {
@@ -48,5 +49,21 @@ module.exports = appInfo => {
 		},
 	};
 
+	config.onerror = {
+		all(err, ctx) {
+			// ctx.status = 500;
+			// ctx.body = 'error !!!!';
+			ctx.redirect('/500')
+		},
+	};
+	config.notfound = {
+		pageUrl: '/public/error/404.html',
+	};
+	config.cluster = {
+		listen: {
+			port: 3001,
+			hostname: '0.0.0.0',
+		}
+	};
 	return config;
 };

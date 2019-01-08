@@ -1,50 +1,80 @@
 <script type="text/javascript">
-	window.postMessage("loadfinish",'*');
+	window.postMessage("loadfinish", '*');
 </script>
 <script>
 	$(function () {
+
+		$("img").each(function (index,item) {
+			var data_src = $(item).attr('data-src');
+			var src = $(item).attr('src');
+			if (data_src){
+				data_src = data_src.replace('_.webp', "");
+				$(item).attr('data-src', data_src);
+            }
+            if (src){
+	            src = src.replace('_.webp', "");
+	            $(item).attr('src', src);
+            }
+		});
+		$("img").each(function (index,item) {
+			var data_src = $(item).attr('data-ks-lazyload');
+			var src = $(item).attr('src');
+			if (data_src){
+				data_src = data_src.replace('_.webp', "");
+				$(item).attr('data-ks-lazyload', data_src);
+			}
+			if (src){
+				src = src.replace('_.webp', "");
+				$(item).attr('src', src);
+			}
+		});
+
 		$('img').lazyload({
-			'data_attribute': 'ks-lazyload'
+			data_attribute: 'ks-lazyload',
+			effect: 'fadeIn',
+			threshold: 180
 		});
 		$('img').lazyload({
-			'data_attribute': 'src'
+			data_attribute: 'src',
+			effect: 'fadeIn',
+			threshold: 180
 		});
 	})
 
-    function open_taobao(targetClass,s_url) {
-	    // var url = "taobao://s.click.taobao.com/6ERCbL32kLy";                   //淘宝
-        var temp = s_url.replace("https:","");
-        temp.repeat("http:","");
-	    window.location = "taobao:"+temp;
+	function open_taobao(targetClass, s_url) {
+		// var url = "taobao://s.click.taobao.com/6ERCbL32kLy";                   //淘宝
+		var temp = s_url.replace("https:", "");
+		temp.repeat("http:", "");
+		window.location = "taobao:" + temp;
 
 
-	    // const cb = new ClipboardJS(targetClass, {
-		 //    text: () => s_url
-	    // })
-	    // cb.on('success', e => {
-		 //    window.location = url;
-	    // })
-	    // cb.on('error', function(e) {
-		 //    alert('复制失败,请手动复制');
-	    // });
-    }
+		// const cb = new ClipboardJS(targetClass, {
+		//    text: () => s_url
+		// })
+		// cb.on('success', e => {
+		//    window.location = url;
+		// })
+		// cb.on('error', function(e) {
+		//    alert('复制失败,请手动复制');
+		// });
+	}
 
 	function searchAction() {
 		var key = $('#search-input').val();
-		if (key.length<=0){
-			return ;
-        }
-		key = key?key:""
-		window.location.href="/search?q="+key;
+		if (key.length <= 0) {
+			return;
+		}
+		key = key ? key : ""
+		window.location.href = "/search?q=" + key;
 
-		var arrayList= JSON.parse(localStorage.getItem("aitt_history"))||[]
+		var arrayList = JSON.parse(localStorage.getItem("aitt_history")) || []
 		if (arrayList.length > 9) {
 			arrayList.pop();
 			arrayList.unshift(key);
 		} else {
 			arrayList.unshift(key);
 		}
-		localStorage.setItem("aitt_history",JSON.stringify(arrayList))
+		localStorage.setItem("aitt_history", JSON.stringify(arrayList))
 	}
 
 </script>
