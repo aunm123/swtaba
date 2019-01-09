@@ -3,11 +3,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 200;
     -webkit-overflow-scrolling:touch;
-    overflow-y: scroll;
+    overflow:auto!important;
     background-color: white;">
 
     <iframe style="width: 100vw;height: 100vh;">
@@ -32,9 +32,8 @@
 		if (data.action == 'closeframe') {
 			var self_item = window.document.getElementsByClassName('main-frame');
 			$(self_item).fadeOut(100);
-
-			$(".main").show();
 			document.scrollingElement.scrollTop = window.scrollTop;
+			$(".main").show();
 			return;
 		}
 	}, false);
@@ -50,9 +49,7 @@
 	}
 
 	function open_url(event,url) {
-		if (!event.isTrusted){
-			return ;
-        }
+
 		$(".spinner-div").show();
 
 		var target = $('.main-frame iframe');

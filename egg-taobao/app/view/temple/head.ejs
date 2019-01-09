@@ -7,9 +7,13 @@
     <link href="public/css/style.css" rel="stylesheet" type="text/css">
     <link href="public/css/main.css" rel="stylesheet" type="text/css">
     <link href="public/font/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="public/js/common/common.css" rel="stylesheet" type="text/css">
 
     <script src="public/js/jquery/jquery.js"></script>
     <script src="public/js/jquery.lazyload.min.js"></script>
+    <script src="public/js/common/common.js"></script>
+
+    <script type="text/javascript" src="public/js/iscroll/iscroll.js"></script>
 
     <!-- 声明文档使用的字符编码 -->
     <meta charset='utf-8'>
@@ -24,7 +28,7 @@
     <!-- 搜索引擎抓取 -->
     <meta name="robots" content="index,follow"/>
     <!-- 为移动设备添加 viewport -->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz -->
 
     <!-- iOS 设备 begin -->
@@ -141,6 +145,17 @@
 			reg = null;
 			r = null;
 			return context == null || context == "" || context == "undefined" ? "" : context;
+		}
+		function isPassive() {
+			var supportsPassiveOption = false;
+			try {
+				addEventListener("test", null, Object.defineProperty({}, 'passive', {
+					get: function () {
+						supportsPassiveOption = true;
+					}
+				}));
+			} catch(e) {}
+			return supportsPassiveOption;
 		}
     </script>
 </head>

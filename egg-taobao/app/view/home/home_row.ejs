@@ -1,6 +1,6 @@
 <% items.forEach(function(item){ %>
 <div class="waterfall-item">
-	<a href="javascript:;" onclick="open_url(event,'/detail?itemid=<%=item.numIid%>')">
+	<a href="javascript:;" data-id="<%=item.numIid%>">
 		<div>
 			<img class="img lazy"
                  data-original="<%=item.pictUrl%>"

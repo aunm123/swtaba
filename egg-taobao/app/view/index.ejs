@@ -1,165 +1,203 @@
 <%- include('temple/head.ejs'); %>
 <body>
-
 <link rel="stylesheet" href="public/js/swiper/css/swiper.min.css">
 <link rel="stylesheet" href="public/js/dropload/dropload.css">
 
 <%- include('iframe_open.ejs'); %>
 
-<div class="main">
+<div class="mainbody">
+    <div class="main scroll">
 
-	<div class="page-header">
-		<div class="logo-div">
-			<div style="display: none" class="logo"></div>
-		</div>
-		<div class="search-input">
-			<span class="search_icon"></span>
-			<span class="input_value">中长款风衣 女</span>
-		</div>
-	</div>
+        <div class="page-header">
+            <div class="logo-div">
+                <div style="display: none" class="logo"></div>
+            </div>
+            <div class="search-input">
+                <span class="search_icon"></span>
+                <span class="input_value">中长款风衣 女</span>
+            </div>
+        </div>
 
-	<div class="swiper-container" id="swiper-container">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<a href="javascript:;">
-					<img src="public/image/banner/1.jpg">
-				</a>
-			</div>
-			<div class="swiper-slide">
-				<a href="javascript:;">
-					<img src="public/image/banner/2.jpg">
-				</a>
-			</div>
-			<div class="swiper-slide">
-				<a href="javascript:;">
-					<img src="public/image/banner/3.jpg">
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="swiper-pagination"></div>
-	<script src="public/js/swiper/js/swiper.js"></script>
-	<script>
-		var bef = (document.body.clientWidth * 2.5) / 100.0;
-		var swiper = new Swiper('#swiper-container', {
-			slidesPerView: 1,
-			spaceBetween: bef * 2,
-			slidesOffsetBefore: bef,
-			loop: true,
-			pagination: {
-				el: '.swiper-pagination',
-			},
-		})
-        $(function () {
-	        $('.search-input').click(function(){
-		        open_url(event,'/keyword');
-	        })
-        })
-	</script>
+        <div class="swiper-container" id="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="javascript:;">
+                        <img src="public/image/banner/1.jpg">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="javascript:;">
+                        <img src="public/image/banner/2.jpg">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="javascript:;">
+                        <img src="public/image/banner/3.jpg">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <script src="public/js/swiper/js/swiper.js"></script>
+        <script>
+			var bef = (document.body.clientWidth * 2.5) / 100.0;
+			var swiper = new Swiper('#swiper-container', {
+				slidesPerView: 1,
+				spaceBetween: bef * 2,
+				slidesOffsetBefore: bef,
+				loop: true,
+				pagination: {
+					el: '.swiper-pagination',
+				},
+			})
+			$(function () {
+				$('.search-input').click(function () {
+					open_url(event, '/keyword');
+				})
+			})
+        </script>
 
-    <%- include('home/top_seller.ejs', {topsell: topsell}); %>
+        <%- include('home/top_seller.ejs', {topsell: topsell}); %>
 
-    <script type="text/javascript">
-		window.postMessage("loadfinish",'*');
-    </script>
+        <script type="text/javascript">
+			window.postMessage("loadfinish", '*');
+        </script>
 
-	<div class="hasmore" style="display: none" more="<%=total%>"></div>
-	<div data-mxview="atb_like">
-		<div class="">
-			<h3 class="atb_like_title">销量最高</h3>
-			<div class="waterfall" id="like-list-con">
-				<div class="waterfall-list">
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="hasmore" style="display: none" more="<%= total %>"></div>
+        <div data-mxview="atb_like">
+            <div class="">
+                <h3 class="atb_like_title">销量最高</h3>
+                <div class="waterfall" id="like-list-con">
+                    <div class="waterfall-list"></div>
+                    <div class="dropload-refresh pullUp">正在加载...</div>
+                </div>
+            </div>
+        </div>
 
 
+    </div>
 </div>
-<%- include('temple/goTop.ejs')%>
-<script src="public/js/dropload/dropload.min.js?time=20181212"></script>
-<script>
-	$(function () {
+
+<script type="text/javascript">
+	$(document).ready(function () {
 
 		var page = 1;
-		// dropload
-		var dropload = $('body').dropload({
-			scrollArea: window,
-			domUp: {
-				domClass: 'dropload-up',
-				domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
-				domUpdate: '<div class="dropload-update">↑释放更新</div>',
-				domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
-			},
-			domDown: {
-				domClass: 'dropload-down',
-				domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
-				domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
-				domNoData: '<div class="dropload-noData">数据已经加载完毕</div>'
-			},
-			loadUpFn : function(me){
-				page = 1;
-				$.ajax({
-					type: 'POST',
-					url: '/i_page',
-					data: {categoryid: 0, page: page},
-					dataType: 'html',
-					success: function (data) {
-						model(data,me,"up");
-					},
-					error: function (xhr, type) {
-						// 即使加载出错，也得重置
-						me.lock()
-						me.resetload();
-					}
-				});
-			},
-			loadDownFn: function (me) {
-				$.ajax({
-					type: 'POST',
-					url: '/i_page',
-					data: {categoryid: 0, page: page},
-					dataType: 'html',
-					success: function (data) {
-						model(data,me,"down");
-					},
-					error: function (xhr, type) {
-						// 即使加载出错，也得重置
-						me.resetload();
-					}
-				});
-			},
+		var iScroll = new IScroll('.mainbody', {
+			keyBindings: true,
+			click: true,
+			fadeScrollbars: false,
+			tap: true,
+			scrollY: true,
 		});
 
-		function model(data,me,m) {
+		var loading = false;
+		var pullDown = 1;     // 下拉刷新避免多次执行
+		var pullUp = 1;       // 上拉加载避免多次执行
+		var downHeight = $(".pullDown").height();
+		var upHeight = $(".pullUp").height();
 
+		iScroll.on('scroll', function () {
+			var y = iScroll.y;
+
+			// 下拉加载
+			if (y >= downHeight && pullDown) {
+				$(".pullDown").addClass("refresh").html("松开刷新...");
+				iScroll.minScrollY = downHeight;
+				pullDown = 0;
+			}
+			if (y <= downHeight && y >= 0 && !pullDown) {
+				$(".pullDown").removeClass("refresh").html("↓下拉刷新");
+				pullDown = 1;
+				iScroll.minScrollY = 0;
+			}
+
+			// 上拉刷新
+			var maxHeight = iScroll.maxScrollY;
+			if (y < maxHeight + 500 && !loading) {
+				$(".pullUp").text("正在加载...");
+				console.log("触发加载");
+				add();
+			}
+		});
+
+		iScroll.on('scrollEnd', function () {
+			var y = iScroll.y;
+			var maxHeight = iScroll.maxScrollY;
+			if (y < maxHeight + 200 && !loading) {
+				$(".pullUp").text("正在加载...");
+				console.log("触发加载");
+				add();
+			}
+		});
+
+		iScroll.on('refresh', function () {
+			$(".pullUp").removeClass("loading").html("↑上拉加载更多");
+			pullUp = 1;
+		});
+
+		// 向列表添加数据
+		function add() {
+			if (loading) return;
+			loading = true;
+			$.ajax({
+				type: 'POST',
+				url: '/i_page',
+				data: {categoryid: 0, page: page},
+				dataType: 'html',
+				success: function (data) {
+					loading = false;
+					model(data, iScroll, "down");
+				},
+				error: function (xhr, type) {
+					loading = false;
+				}
+			});
+		}
+
+		function model(data, me, m) {
 			try {
-				if (page === 1){
+				if (page === 1) {
 					$('.waterfall-list').html(data);
-				}else {
+				} else {
 					$('.waterfall-list').append(data);
 				}
-			}catch (e){}
+			} catch (e) {
+			}
 			$('img.lazy').lazyload({
 				container: $("#like-list-con")
 			});
 
 			var total = $('.hasmore').attr("more");
 			var len = $('.waterfall-list .waterfall-item').length;
-
-
 			page++;
 			// 每次数据加载完，必须重置
-			if (len >= total){
-				me.lock();
-				me.noData();
+			if (len >= total) {
+				// me.lock();
+				// me.noData();
 			}
+			me.refresh();
 
-			me.resetload();
+			$('.waterfall-item a').each(function (index,item) {
+				$(item).bind('click', function (event) {
+					var itemid = $(item).attr('data-id');
+					open_url(event,'/detail?itemid='+itemid);
+				})
+			})
 		}
 
+		document.addEventListener('touchmove', function (e) {
+			e.preventDefault();
+		}, isPassive() ? {
+			capture: false,
+			passive: false
+		} : false);
 
+		// 加载第一页
+		add();
 	});
+
+
 </script>
+<%- include('temple/goTop.ejs') %>
 </body>
 <%- include('temple/foot.ejs'); %>

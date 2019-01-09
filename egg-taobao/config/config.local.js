@@ -25,8 +25,11 @@ module.exports = appInfo => {
 		'/favicon.ico': fs.readFileSync(path.join(__dirname, 'favicon.ico')),
 	};
 
-	exports.searchServer = 'http://127.0.0.1:8080';
-	exports.host = 'http://127.0.0.1:8080';
+	// exports.searchServer = 'http://127.0.0.1:8080';
+	// exports.host = 'http://127.0.0.1:8080';
+
+	exports.searchServer = 'http://212.64.57.254:8080/swtaobao3';
+	exports.host = 'http://212.64.57.254:8080/swtaobao3';
 
 	exports.logger = {
 		level: 'DEBUG',

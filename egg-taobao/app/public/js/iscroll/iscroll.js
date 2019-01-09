@@ -41,7 +41,7 @@ var utils = (function () {
 
 	me.addEvent = function (el, type, fn, capture) {
 		el.addEventListener(type, fn, !!capture);
-	};
+	};``
 
 	me.removeEvent = function (el, type, fn, capture) {
 		el.removeEventListener(type, fn, !!capture);
