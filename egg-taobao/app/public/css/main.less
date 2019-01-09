@@ -85,8 +85,12 @@
   }
 
   .category-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    -ms-flex-pack: distribute;
     justify-content: space-around;
 
     div {
@@ -94,10 +98,20 @@
     }
 
     .item {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
       justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
       align-items: center;
+      -ms-flex-line-pack: center;
       align-content: center;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
       flex-direction: column;
       margin-bottom: 5px;
 
@@ -131,11 +145,15 @@
 
 
   .waterfall-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 
     .waterfall-item {
       width: 50%;
+      -webkit-box-sizing: border-box;
       box-sizing: border-box;
       padding-bottom: 6px;
 
@@ -223,7 +241,11 @@
   background-color: transparent;
   height: 50px;
   padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   top: 0px;
 }
@@ -250,24 +272,20 @@
     position: relative;
     float: left;
     display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
     height: 8vw;
     width: 8vw;
     -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -moz-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     text-align: center;
-    -moz-border-radius: 13.33333vw;
     border-radius: 13.33333vw;
     -webkit-transition: background .3s ease;
-    -moz-transition: background .3s ease;
+    -o-transition: background .3s ease;
     transition: background .3s ease;
     background-color: rgba(0, 0, 0, .4);
 
@@ -283,8 +301,14 @@
       width: 40px;
       height: 40px;
       font-size: 24px;
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
       justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
       align-items: center;
       background-color: #f47920;
       color: white;
@@ -309,6 +333,5 @@
     padding: 5px 40px;
   }
 }
-
 
 
