@@ -25,6 +25,10 @@ class HomeController extends Controller {
 	async index_page() {
 		const ctx = this.ctx;
 
+		//设置允许跨域的域名，*代表允许任意域名跨域
+		ctx.set('Access-Control-Allow-Origin', '*');
+		ctx.set('Cache-Control', 'no-cache');
+
 		let {categoryid, page} = ctx.request.body;
 		const params = {
 			categoryid,

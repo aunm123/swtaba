@@ -115,19 +115,24 @@
 				});
 			},
 			loadDownFn: function (me) {
-				$.ajax({
-					type: 'POST',
-					url: '/i_page',
-					data: {categoryid: 0, page: page},
-					dataType: 'html',
-					success: function (data) {
-						model(data,me,"down");
-					},
-					error: function (xhr, type) {
-						// 即使加载出错，也得重置
-						me.resetload();
-					}
-				});
+				var display =$('.main').css('display');
+				if(display == 'none'){
+					return;
+				}else {
+					$.ajax({
+						type: 'POST',
+						url: '/i_page',
+						data: {categoryid: 0, page: page},
+						dataType: 'html',
+						success: function (data) {
+							model(data,me,"down");
+						},
+						error: function (xhr, type) {
+							// 即使加载出错，也得重置
+							me.resetload();
+						}
+					});
+                }
 			},
 		});
 

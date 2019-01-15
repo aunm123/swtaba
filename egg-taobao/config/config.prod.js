@@ -33,7 +33,7 @@ module.exports = appInfo => {
 		consoleLevel: 'DEBUG',
 	};
 
-	exports.security = { // ajax 禁用csrf
+	config.security = { // ajax 禁用csrf
 		// domainWhiteList: [ 'http://192.168.111.27:7001' ], // 允许ajax跨域访问白名单
 		csrf: false
 	};
@@ -51,9 +51,12 @@ module.exports = appInfo => {
 
 	config.onerror = {
 		all(err, ctx) {
-			// ctx.status = 500;
-			// ctx.body = 'error !!!!';
-			ctx.redirect('/500')
+			let orgin = ctx.request.origin;
+			if (orgin.indexOf("http://localhost") === 0|| orgin.indexOf("http://127.0.0.1") === 0){
+				ctx.end();
+			}else {
+				ctx.redirect('/500');
+			}
 		},
 	};
 	config.notfound = {

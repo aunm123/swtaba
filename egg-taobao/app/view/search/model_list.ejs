@@ -7,33 +7,33 @@
 
 			var page = 1;
 			var pageSize = 20;
-            function loadDownFn(me) {
-	            let params = {
-		            categoryid: 0,
-		            page: page,
-		            q: getParam("q"),
-		            v: getParam("v"),
-		            p: getParam("p"),
-		            m: getParam("m"),
-	            }
-	            $.ajax({
-		            type: 'POST',
-		            url: '/s_page',
-		            data: params,
-		            dataType: 'html',
-		            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-		            success: function (data) {
-			            model(data,me,"down");
-		            },
-		            error: function (xhr, type) {
-			            // 即使加载出错，也得重置
-			            console.log(xhr)
-			            me.lock();
-			            me.resetload();
-			            loadDownFn(me);
-		            }
-	            });
-            }
+			function loadDownFn(me) {
+				var params = {
+					categoryid: 0,
+					page: page,
+					q: getParam("q"),
+					v: getParam("v"),
+					p: getParam("p"),
+					m: getParam("m"),
+				}
+				$.ajax({
+					type: 'POST',
+					url: '/s_page',
+					data: params,
+					dataType: 'html',
+					contentType: "application/x-www-form-urlencoded; charset=utf-8",
+					success: function (data) {
+						model(data,me,"down");
+					},
+					error: function (xhr, type) {
+						// 即使加载出错，也得重置
+						console.log(xhr)
+						me.lock();
+						me.resetload();
+						loadDownFn(me);
+					}
+				});
+			}
 			// dropload
 			var dropload = $('.list-content').dropload({
 				domDown: {
@@ -55,7 +55,7 @@
 						$('.search-list').append(data);
 					}
 				}catch (e){}
-                try {total}catch (e){total = 20}
+				try {total}catch (e){total = 20}
 				var len = $('.search-list .search-item').length;
 
 

@@ -28,6 +28,8 @@ class TopService extends Service {
 		});
 		return response;
 	}
+
+
 }
 
 module.exports = TopService;

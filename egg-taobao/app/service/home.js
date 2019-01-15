@@ -64,6 +64,8 @@ class HomeService extends Service {
 		});
 		return response;
 	}
+
+
 }
 
 module.exports = HomeService;

@@ -4,7 +4,7 @@
 <script src="public/js/clipboard/clipboard.min.js"></script>
 
 
-<body style="width: 100vw;height: 100vh;">
+<body style="width: 100vw;height: 100vh; position: relative;">
 
 <script type="text/javascript">
 	window.parent.postMessage("loadfinish",'*');
@@ -72,10 +72,12 @@
     </div>
     <% }%>
 
-    <div class="bar" style="box-shadow: 0px 1px 10px #dadada;">
-        <div class="bar-btn-wrapper">
-            <a id="totb" class="bar-btn bar-buynow" href="javascript:;" onclick="open_taobao('#totb','<%=couponClickUrl%>')">淘宝领劵</a>
-        </div>
+
+</div>
+
+<div class="bar" style="box-shadow: 0px 1px 10px #dadada;">
+    <div class="bar-btn-wrapper">
+        <a id="totb" class="bar-btn bar-buynow" href="javascript:;" onclick="open_taobao('#totb','<%=couponClickUrl%>')">淘宝领劵</a>
     </div>
 </div>
 
@@ -86,14 +88,16 @@
 </style>
 <script src="public/js/swiper/js/swiper.js"></script>
 <script>
-	var swiper = new Swiper('#carousel', {
-		pagination: {
-			el: '.dots',
-			type: 'fraction',
-		},
-		direction : 'horizontal',
-	})
+
 	$(function () {
+		var swiper = new Swiper('#carousel', {
+			pagination: {
+				el: '.dots',
+				type: 'fraction',
+			},
+			direction : 'horizontal',
+		})
+
 		var viewW = $(window).width();
 		$(document).scroll(function() {
 			var scroH = $(document).scrollTop();  //滚动高度

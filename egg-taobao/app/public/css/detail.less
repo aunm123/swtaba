@@ -185,127 +185,6 @@
     }
   }
 
-  .bar-btn-wrapper .bar-btn, .bar-item {
-    height: 9.6vw;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 1 0%;
-    -moz-box-flex: 1;
-    flex: 1 1 0%;
-  }
-
-  .bar {
-    width: 100%;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    padding: 1.86667vw 0;
-    background-color: #fff;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-    -moz-box-orient: horizontal;
-    -moz-box-direction: normal;
-    flex-direction: row;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -moz-box-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    align-items: center;
-    z-index: 1;
-    padding-bottom: calc(env(safe-area-inset-bottom) + 1.86667vw);
-
-    .icon-select, .bar .iconfont {
-      color: #ff5000;
-    }
-
-    .bar-item {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -moz-box;
-      display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-      -webkit-flex-direction: column;
-      -moz-box-orient: vertical;
-      -moz-box-direction: normal;
-      flex-direction: column;
-      -webkit-justify-content: space-around;
-      justify-content: space-around;
-      -webkit-box-align: center;
-      -webkit-align-items: center;
-      -moz-box-align: center;
-      align-items: center;
-
-      .icon {
-        width: 5.33333vw;
-        height: 5.33333vw;
-        font-size: 5.33333vw;
-        line-height: 5.33333vw;
-        color: #999;
-      }
-
-      span {
-        font-size: 3.2vw;
-        color: #999;
-        white-space: nowrap;
-      }
-    }
-
-    .bar-btn-wrapper {
-      width: 80vw;
-      height: 9.6vw;
-      margin: auto;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -moz-box;
-      display: flex;
-      -webkit-align-self: center;
-      align-self: center;
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
-      -moz-box-pack: center;
-      justify-content: center;
-      font-weight: 500;
-      -moz-border-radius: 133.33333vw;
-      border-radius: 133.33333vw;
-      overflow: hidden;
-
-      .bar-btn {
-        width: 29.33333vw;
-        line-height: 9.6vw;
-        font-size: 3.73333vw;
-        color: #fff;
-        text-align: center;
-      }
-      .bar-btn, .bar-item {
-        height: 9.6vw;
-        -webkit-box-flex: 1;
-        -webkit-flex: 1 1 0%;
-        -moz-box-flex: 1;
-        flex: 1 1 0%;
-      }
-    }
-  }
-
-  .bar-addcart {
-    background-image: -webkit-linear-gradient(left, #ffc500, #ff9402);
-    background-image: -moz-linear-gradient(left, #ffc500, #ff9402);
-    background-image: linear-gradient(90deg, #ffc500, #ff9402);
-  }
-
-  .bar-buynow {
-    background-image: -webkit-linear-gradient(left, #ff7a00, #fe560a);
-    background-image: -moz-linear-gradient(left, #ff7a00, #fe560a);
-    background-image: linear-gradient(90deg, #ff7a00, #fe560a);
-  }
-
   .tshop-psm {
     margin-bottom: 60px;
 
@@ -356,4 +235,125 @@
     }
 
   }
+}
+
+.bar-btn-wrapper .bar-btn, .bar-item {
+  height: 9.6vw;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 0%;
+  -moz-box-flex: 1;
+  flex: 1 1 0%;
+}
+
+.bar {
+  width: 100%;
+  position: fixed!important;
+  left: 0;
+  bottom: 0;
+  padding: 1.86667vw 0;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+  z-index: 1;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 1.86667vw);
+
+  .icon-select, .bar .iconfont {
+    color: #ff5000;
+  }
+
+  .bar-item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    flex-direction: column;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    align-items: center;
+
+    .icon {
+      width: 5.33333vw;
+      height: 5.33333vw;
+      font-size: 5.33333vw;
+      line-height: 5.33333vw;
+      color: #999;
+    }
+
+    span {
+      font-size: 3.2vw;
+      color: #999;
+      white-space: nowrap;
+    }
+  }
+
+  .bar-btn-wrapper {
+    width: 80vw;
+    height: 9.6vw;
+    margin: auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -webkit-align-self: center;
+    align-self: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    justify-content: center;
+    font-weight: 500;
+    -moz-border-radius: 133.33333vw;
+    border-radius: 133.33333vw;
+    overflow: hidden;
+
+    .bar-btn {
+      width: 29.33333vw;
+      line-height: 9.6vw;
+      font-size: 3.73333vw;
+      color: #fff;
+      text-align: center;
+    }
+    .bar-btn, .bar-item {
+      height: 9.6vw;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 0%;
+      -moz-box-flex: 1;
+      flex: 1 1 0%;
+    }
+  }
+}
+
+.bar-addcart {
+  background-image: -webkit-linear-gradient(left, #ffc500, #ff9402);
+  background-image: -moz-linear-gradient(left, #ffc500, #ff9402);
+  background-image: linear-gradient(90deg, #ffc500, #ff9402);
+}
+
+.bar-buynow {
+  background-image: -webkit-linear-gradient(left, #ff7a00, #fe560a);
+  background-image: -moz-linear-gradient(left, #ff7a00, #fe560a);
+  background-image: linear-gradient(90deg, #ff7a00, #fe560a);
 }

@@ -74,7 +74,7 @@
 			    return '<%=short_url%>';
 		    }
 	    })
-	    clipboard.on('success', e => {
+	    clipboard.on('success', function(e) {
             $('.code').addClass('select');
 		    $('.keycopy')[0].innerText = "已复制"
 	    })

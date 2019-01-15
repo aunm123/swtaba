@@ -29,16 +29,20 @@
 			}
 		});
 
-		$('img').lazyload({
-			data_attribute: 'ks-lazyload',
-			effect: 'fadeIn',
-			threshold: 180
-		});
-		$('img').lazyload({
-			data_attribute: 'src',
-			effect: 'fadeIn',
-			threshold: 180
-		});
+		setTimeout(function () {
+			$('img').lazyload({
+				data_attribute: 'ks-lazyload',
+				effect: 'fadeIn',
+				threshold: 180 ,
+				container: $("body"),
+			});
+			$('img').lazyload({
+				data_attribute: 'src',
+				effect: 'fadeIn',
+				threshold: 180,
+				container: $("body"),
+			});
+		},100)
 	})
 
 	function open_taobao(targetClass, s_url) {
