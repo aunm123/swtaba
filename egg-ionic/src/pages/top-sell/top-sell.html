@@ -1,0 +1,74 @@
+<header class="toolbar sticky header">
+  <div class="toolbar__btn-wrapper clearfix">
+    <div class="toolbar__btn toolbar__back">
+      <a href="javascript:;" (click)="back()">
+        <i class="iconfont icon-back_light"></i>
+      </a>
+    </div>
+  </div>
+</header>
+
+
+<ion-content id="topsell" style="background-color: #f8f8f8" (ionScroll)="ionScroll()">
+
+  <div>
+    <img style="width: 100vw;min-height: 150px" id="headimg"
+         src="https://gw.alicdn.com/tfs/TB1R.cskfDH8KJjy1XcXXcpdXXa-750-300.jpg_q75.jpg" alt="">
+    <div class="header-nav-con" *ngIf="topsellCat && topsellCat.length > 0">
+      <div class="header-nav" id="header-nav" style="touch-action: none;">
+        <ul class="header-nav-list">
+
+          <li class="header-nav-item " [ngClass]="topid==item.id?'select':''" *ngFor="let item of topsellCat">
+            <a href="javascript:;" (tap)="selectCate(item.id)">
+              <span>{{item.cName}}</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div data-mxview="atb_like">
+    <div class="" style="padding-top: 8px;">
+
+      <list #list [startPage]="0">
+        <ng-template let-listData="listData">
+
+          <div class="waterfall-item" *ngFor="let item of listData">
+            <a href="javascript:;" (tap)="selectItem(item.item_id)">
+              <div>
+                <img class="img lazy"
+                     [attr.data-original]="item.pict_url"
+                     src="assets/imgs/loading.gif">
+              </div>
+              <div class="info">
+                <h3 class="title">{{item.title}}</h3>
+                <h3 class="title" style="color: #f47920; border: 1px solid #ff5000;padding: 3px;margin: 7px;" *ngIf="item.item_description">
+                  {{item.item_description}}
+                </h3>
+                <div class="priceInfo" style="padding-bottom: 8px;">
+                  <div class="coupon-icon">
+                    <span class="coupon-icon-left">券</span>
+                    <span class="coupon-icon-right">{{item.coupon_amount}}元</span>
+                  </div>
+
+                  <div style="padding: 0 8px;">
+                    <span class="yen">¥</span><span class="price">{{item.final_price}}</span>
+                    <span class="yen line-through" style="margin-left: 2px;">¥</span><span
+                    class="price line-through extra-price">{{item.zk_final_price}}</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </ng-template>
+      </list>
+
+    </div>
+  </div>
+
+</ion-content>
+
+<go-top></go-top>

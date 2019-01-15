@@ -1,0 +1,68 @@
+<header class="toolbar sticky header">
+  <div class="toolbar__btn-wrapper clearfix">
+    <div class="toolbar__btn toolbar__back">
+      <a href="javascript:;" (click)="back()">
+        <i class="iconfont icon-back_light"></i>
+      </a>
+    </div>
+  </div>
+</header>
+
+<ion-content (ionScroll)="ionScroll()">
+
+  <div class="app">
+
+    <div class="carousel" id="carousel">
+      <div class="swiper-wrapper" style="min-width: 100vw;min-height: 100vw;">
+
+        <div data-index="0" *ngIf="data.pictUrl" class="swiper-slide">
+          <img-lazy-load class="mui-lazy slick-image lazy" [src]="data.pictUrl"></img-lazy-load>
+        </div>
+
+        <div [attr.data-index]="i+1" class="swiper-slide" *ngFor="let itemimg of data.smallimg; let i = index">
+          <img-lazy-load class="mui-lazy slick-image lazy" [src]="itemimg.url"></img-lazy-load>
+        </div>
+      </div>
+      <div class="dots"></div>
+    </div>
+
+    <div class="info">
+      <div class="base">
+        <div class="prices-wrapper">
+          <div class="prices">
+            <div class="price-title"></div>
+            <div class="price">{{ ((data.zkFinalPrice)/100.0 - data.couponAmount).toFixed(2) }}</div>
+            <span class="price-tag text" *ngIf="data.couponInfo">{{data.couponInfo}}</span>
+          </div>
+          <div class="extra-price"><p>价格<span class="price-span line-through">￥{{((data.zkFinalPrice)/100.0).toFixed(2)}}</span></p></div>
+          <div class="price-intl"></div>
+          <div class="price-tip"></div>
+        </div>
+        <short-url [itemDetail]="data"></short-url>
+        <div class="title-wrapper"><h2 class="title">{{data.title}}</h2></div>
+        <div class="delivery-box">
+          <span class="delivery-price" *ngIf="data.provcity">货源地：{{ data.provcity }}</span>
+          <span class="month-sold">月销量：{{data.volume}}</span>
+        </div>
+      </div>
+    </div>
+
+    <detail-content [content]="contentHtml"></detail-content>
+
+  </div>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar style="height: 50px;box-shadow: 0px 1px 10px #dadada;">
+    <div class="bar">
+      <div class="bar-btn-wrapper">
+        <a id="totb" class="bar-btn bar-buynow" href="javascript:;">淘宝领劵</a>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+
+<go-top></go-top>

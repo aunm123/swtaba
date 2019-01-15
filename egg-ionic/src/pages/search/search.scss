@@ -1,0 +1,70 @@
+page-search {
+  .list-content{
+    z-index: 99;
+    overflow-y: scroll;
+    flex: 1;
+
+    .search-list{
+      .search-item{
+        width: 100vw;
+        background-color: white;
+        border-bottom: 1px solid #F0F0F0;
+        padding: 7px;
+
+        .info .pbottom{
+          height: 20px;
+          margin-top: 3px;
+          font-size: 11px;
+
+          .left{
+            float: left;
+          }
+          .right{
+            float: right;
+          }
+        }
+
+        .img.lazy{
+          width: 120px;
+          min-width: 120px;
+          height: 120px;
+          min-height: 120px;
+          object-fit: cover;
+          margin-right: 7px;
+        }
+
+        a {
+          display: flex;
+
+          .title{
+            font-size: 14px;
+            height: 44px;
+            overflow: hidden;
+            line-height: 1.5;
+            text-overflow: -o-ellipsis-lastline;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+
+          }
+        }
+      }
+    }
+  }
+  .scroll-content{
+    background-color: #f8f8f8;
+    margin-top: 55px!important;
+  }
+  .scroll-content::before{
+    bottom: 0!important;
+  }
+  .fixed-content{
+    background-color: #f8f8f8;
+  }
+
+  .sortHeight{
+    margin-top: 94px!important;
+  }
+
+}

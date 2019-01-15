@@ -1,0 +1,31 @@
+search-plan {
+  #hot{
+    padding: 0 12px;
+    z-index: 200;
+
+    .search-title{
+      font-size: 16px;
+      line-height: 3;
+      text-indent: 12px;
+      color: #999;
+
+      .clear-cache{
+        margin-right: 10px;
+        float: right;
+        font-size: 13px;
+        line-height: 18px;
+        text-indent: 0;
+        margin-top: 15px;
+      }
+    }
+
+    .item{
+      display: inline-block;
+      background-color: #fff;
+      padding: 6px 8px;
+      margin: 0 4px 16px;
+      border: 1px solid #e6e6e6;
+      border-radius: 5px;
+    }
+  }
+}

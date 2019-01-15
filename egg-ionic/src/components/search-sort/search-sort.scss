@@ -1,0 +1,30 @@
+search-sort {
+  .category{
+
+    .category-wrap{
+      display: flex;
+      border-bottom: 1px solid #F0F0F0;
+
+      li {
+        flex: 1;
+        a {
+          width: 100%;
+          height: 38px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        a:active{
+          background-color: #f6f6f6;
+        }
+      }
+
+      li.select{
+        a {
+          color: #f58220;
+        }
+      }
+    }
+  }
+}

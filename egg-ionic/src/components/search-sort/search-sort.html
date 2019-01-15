@@ -1,0 +1,29 @@
+<div class="module list-sort" data-module="category" data-mode="category-mode10">
+  <div class="category clear"
+       style="background-color: rgb(255, 255, 255); position: relative; top: 0px;">
+    <ul class="category-wrap clear">
+      <li class="select" id="normal">
+        <a href="javascript:void(0)" data-tab="综合排序" (click)="normalsort()">
+          默认排序
+        </a>
+      </li>
+      <li id="sell">
+        <a href="javascript:void(0)" data-tab="销量" (click)="sellsort()">
+          月销量
+        </a>
+      </li>
+      <li id="price1">
+        <a href="javascript:void(0)" data-tab="价格从低到高" (click)="pricesort('a')">
+          价格 <i class="iconfont icon-up" style="margin-left: 5px;font-size: 10px;"></i>
+        </a>
+      </li>
+      <li id="price2">
+        <a href="javascript:void(0)" data-tab="价格从高到低" (click)="pricesort('d')">
+          价格 <i class="iconfont icon-down" style="margin-left: 5px;font-size: 10px;"></i>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<!--style="position: fixed;left: 0;right: 0;"-->

@@ -1,0 +1,18 @@
+<header class="search-head">
+  <div class="search-content">
+    <a href="javascript:;" class="btn" (click)="doblack()">
+      <i class="iconfont icon-back_light"></i>
+    </a>
+    <i class="iconfont icon-search search-icon"></i>
+    <input id="search-input" class="search-input" type="text" autocomplete="off" [(ngModel)]="searchkeyWord">
+    <a href="javascript:;" class="btn" (click)="doSearchAction()" >
+      搜索
+    </a>
+    <div class="clear-btn" (click)="clearBtnPress()">
+      <i class="iconfont icon-clear search-icon" style="float:right"></i>
+    </div>
+  </div>
+  <div class="search-head-list">
+    <ul></ul>
+  </div>
+</header>

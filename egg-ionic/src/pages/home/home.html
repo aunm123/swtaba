@@ -1,0 +1,87 @@
+<ion-content id="home" style="background-color: #f8f8f8">
+
+  <div class="main " id="homepage">
+
+    <div class="page-header">
+      <div class="logo-div">
+        <div style="display: none" class="logo"></div>
+      </div>
+      <div class="search-input" (click)="gotoSearch()">
+        <span class="search_icon"></span>
+        <span class="input_value">中长款风衣 女</span>
+      </div>
+    </div>
+
+    <div class="swiper-container" id="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <a href="javascript:;">
+            <img src="assets/imgs/banner/1.jpg">
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="javascript:;">
+            <img src="assets/imgs/banner/2.jpg">
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="javascript:;">
+            <img src="assets/imgs/banner/3.jpg">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+
+    <!--热销分类 -->
+    <div class="category-div">
+      <div class="top-sell" *ngFor="let item of topsell">
+        <a class="item" href="javascript:;" (click)="gotoCategory(item.id)">
+          <i class="iconfont {{ item.icon }}" [ngStyle]="{ 'background-color' : item.color}"></i>
+          <span>{{ item.cName }}</span>
+        </a>
+      </div>
+    </div>
+
+    <!--销量最高-->
+    <div data-mxview="atb_like">
+      <div class="">
+        <h3 class="atb_like_title">销量最高</h3>
+
+        <list #list [startPage]="1">
+          <ng-template let-listData="listData">
+
+            <div class="waterfall-item" *ngFor="let item of listData">
+              <a href="javascript:;" (click)="gotoDetailPage(item.numIid)">
+                <div>
+                  <img class="img lazy"
+                       [attr.data-original]="item.pictUrl"
+                       src="assets/imgs/loading.gif">
+                </div>
+                <div class="info">
+                  <h3 class="title">{{item.title}}</h3>
+                  <p class="priceInfo" style="padding-bottom: 0;padding: 0 8px;">
+                    <span class="yen">¥</span>
+                    <span class="price">{{ ((item.zkFinalPrice)/100.0 - item.couponAmount).toFixed(2) }}</span>
+                    <span class="yen line-through" style="margin-left: 5px;">¥</span>
+                    <span class="price line-through extra-price">{{ ((item.zkFinalPrice)/100.0).toFixed(2) }}</span>
+                  </p>
+                  <p class="priceInfo"
+                     style="display: flex;align-items: center;padding: 0 8px;padding-bottom: 8px;">
+                    <span style="font-size: 13px;padding: 0 5px;border: 1px solid #ff5000;color: #ff5000;">{{ item.couponInfo }}</span>
+                  </p>
+                </div>
+              </a>
+            </div>
+
+          </ng-template>
+        </list>
+
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<go-top></go-top>

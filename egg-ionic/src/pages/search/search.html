@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar style="padding: 0;background-color: #F0F0F0;">
+    <search-bar (searchAction)="searchAction($event)" (showPlan)="showPlan()" (black)="black()"></search-bar>
+    <search-sort *ngIf="showList" [m]="mSort" [v]="volumnSort" [p]="priceSort" (reProps)="reProps($event)">
+    </search-sort>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <search-plan *ngIf="!showList"></search-plan>
+  <div *ngIf="showList" style="padding-top: 38px;">
+    <div class="module list-content">
+      <div class="search-list" style="overflow: hidden">
+        <div class="search-item" *ngFor="let item of searchitems">
+          <a href="javascript:;" (click)="gotoDetailPage(item.numIid)">
+            <img class="img lazy"
+                 [attr.data-original]="item.pictUrl"
+                 src="assets/imgs/loading.gif">
+            <div class="info" style="flex: 1;">
+              <h3 class="title">{{item.title}}</h3>
+              <p class="priceInfo" style="padding-bottom: 0;">
+                <span class="yen" style="color: red;">¥</span>
+                <span class="price" style="color: red;font-weight: 700;font-size: 20px;margin-left: -2px;">
+                        {{ ((item.reservePrice)/100.0 - item.couponAmount).toFixed(2) }}
+                    </span>
+                <span class="yen line-through" style="margin-left: 5px;">¥</span>
+                <span class="price line-through extra-price">{{ ((item.reservePrice)/100.0).toFixed(2) }}</span>
+              </p>
+              <p class="priceInfo" style="display: flex;align-items: center;">
+                <!--<i class="iconfont icon-wodeyouhuijuan" style="margin-right: 7px"></i>-->
+                <span style="    font-size: 13px;padding: 0 5px;border: 1px solid #ff5000;color: #ff5000;">{{ item.couponInfo }}</span>
+              </p>
+
+              <p class="pbottom">
+                <span class="left">{{item.provcity}}</span>
+                <span class="right">月销量：{{item.volume}}</span>
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="getSearchProduct($event)">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="加载中..." position="bottom" >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+
+</ion-content>
+
+<go-top></go-top>
