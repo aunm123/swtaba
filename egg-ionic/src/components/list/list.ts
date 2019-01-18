@@ -16,6 +16,8 @@ export class ListComponent {
 
   @Input() startPage : number = 0;
   @ContentChild(TemplateRef) wlist: TemplateRef<any>;
+
+
   listArray = { listData: [] };
 
   constructor() {

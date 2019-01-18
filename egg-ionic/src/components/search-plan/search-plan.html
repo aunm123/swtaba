@@ -11,9 +11,7 @@
     <h1 class="search-title">热门搜索</h1>
     <section data-spm="8002" class="search-list-keys">
 
-      <!--<% hotkeywords.forEach(function(item){ %>-->
-      <!--<a href="/search?q=<%= item %>" class="item"><%= item %></a>-->
-      <!--<% }); %>-->
+      <a (click)="hotKeyBtnPress(x)" *ngFor="let x of hotkeys" class="item">{{x}}</a>
 
     </section>
   </div>

@@ -119,7 +119,7 @@ export class TopSellPage {
     setTimeout(function () {
       self.currentPage = 1;
       self.dropload.resetload();
-    })
+    });
   }
 
   selectItem(itemid){

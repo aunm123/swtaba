@@ -46,11 +46,16 @@ export class SearchBarComponent {
       self.keywordChange();
     });
     window["setKeyWord"] = function (value) {
-      console.log(value);
       $('#search-input').val(value);
       $('#search-input').focus();
       self.keywordChange();
-    }
+    };
+
+      window["doKeyWordAction"] = function (value) {
+          $('#search-input').val(value);
+          self.searchAction.emit(value);
+      }
+
 
   }
 

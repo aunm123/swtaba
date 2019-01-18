@@ -1,8 +1,10 @@
-import { Component, SimpleChanges, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, SimpleChanges, NgZone, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {AppGlobal, AppService} from "../../app/app.service";
 import {DetailPage} from "../detail/detail";
+
 declare let $: any;
+
 /**
  * Generated class for the SearchPage page.
  *
@@ -12,101 +14,111 @@ declare let $: any;
 
 @IonicPage()
 @Component({
-  selector: 'page-search',
-  templateUrl: 'search.html',
+    selector: 'page-search',
+    templateUrl: 'search.html',
 })
 export class SearchPage {
 
-  searchitems: Array<any> = [];
-  currentPage: number = 0;
-  searchkey: string = "";
-  volumnSort: string = "";
-  priceSort: string = "";
-  mSort: string = "";
-  showList: boolean = false;
+    searchitems: Array<any> = [];
+    currentPage: number = 1;
+    searchkey: string = "";
+    volumnSort: string = "";
+    priceSort: string = "";
+    mSort: string = "";
+    showList: boolean = false;
+    dropload: any;
+    @ViewChild("list") list;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public appService: AppService,private zone: NgZone) {}
+    constructor(public navCtrl: NavController, public navParams: NavParams, public appService: AppService, private zone: NgZone) {
+    }
 
-  ionViewDidLoad() {}
+    ionViewDidLoad() {}
 
-  /**
-   * 获取搜索商品
-   */
-  getSearchProduct(infiniteScroll) {
+    /**
+     * 获取搜索商品
+     */
+    getSearchProduct() {
 
-    let page = this.currentPage + 1;
-    let showLoading = false;
-    if (infiniteScroll == null) {
-      page = 1;
-      showLoading = true;
-    };
-    let params = {
-      categoryid: 0,
-      page: page, // 当前页
-      pageSize: 20, // 每页显示个数
-      q: decodeURI(this.searchkey),
-      v: this.volumnSort, p: this.priceSort, m: this.mSort
-    };
-    this.appService.httpGet(AppGlobal.API.getSearchUrl, params, res => {
+        let self = this;
+        this.dropload = $('#search .scroll-content').dropload({
+            scrollArea: $('#search .scroll-content'),
+            domDown: {
+                domClass: 'dropload-down',
+                domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+                domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                domNoData: '<div class="dropload-noData">数据已经加载完毕</div>'
+            },
+            loadDownFn: function (me) {
+                self.loadData(self.currentPage, me);
+            },
+        });
+    }
 
-      this.currentPage = page;
+    loadData(page, dropload){
 
-      if (page == 1) {
-        this.searchitems = res.data;
-      } else {
-        this.searchitems = this.searchitems.concat(res.data);
-      }
-      if (infiniteScroll) {
-        infiniteScroll.complete();
-      }
-      if (this.searchitems.length >= res.total){
-        if (infiniteScroll) {
-          infiniteScroll.enable(false);
-          this.appService.toast("数据加载结束");
-          return
+        let params = {
+            categoryid: 0,
+            page: this.currentPage, // 当前页
+            pageSize: 20, // 每页显示个数
+            q: this.appService.encodeSearchKey(this.searchkey),
+            v: this.volumnSort, p: this.priceSort, m: this.mSort
+        };
+        this.appService.httpGet(AppGlobal.API.getSearchUrl, params, res => {
+            this.currentPage = page+1;
+
+            this.list.success(res.data, page);
+            if (res.data >= res.total) {
+                dropload.lock();
+                dropload.noData();
+            }
+            setTimeout(function () {
+                dropload.resetload();
+                $('#search img.lazy').lazyload({
+                    container: $("#search .search-list")
+                });
+            }, 500)
+
+        })
+    }
+
+
+    gotoDetailPage(itemid) {
+        this.navCtrl.push(DetailPage, {
+            itemid: itemid
+        })
+    }
+
+    searchAction(keyword) {
+        this.showList = true;
+        if (!this.dropload){
+            this.getSearchProduct();
         }
-      }
-
-      this.zone.run(() => {
+        this.searchkey = keyword;
+        this.searchitems = [];
+        let self = this;
         setTimeout(function () {
-          $('img.lazy').lazyload({
-            container: $(".search-list")
-          });
-        }, 1000)
-      })
+            self.currentPage = 1;
+            self.dropload.resetload();
+        });
+    }
 
+    showPlan() {
+        this.showList = false;
+    }
 
-    },showLoading)
-  }
+    black() {
+        this.navCtrl.pop();
+    }
 
-
-  gotoDetailPage(itemid){
-    this.navCtrl.push(DetailPage, {
-      itemid: itemid
-    })
-  }
-
-  searchAction(keyword) {
-    console.log(keyword);
-    this.showList = true;
-    this.searchkey = keyword;
-    this.searchitems = [];
-    this.getSearchProduct(null);
-  }
-
-  showPlan(){
-    this.showList = false;
-  }
-
-  black(){
-    this.navCtrl.pop();
-  }
-
-  reProps({v,p,m}){
-    this.volumnSort = v;
-    this.priceSort = p;
-    this.mSort = m;
-    this.getSearchProduct(null);
-  }
+    reProps({v, p, m}) {
+        this.volumnSort = v;
+        this.priceSort = p;
+        this.mSort = m;
+        let self = this;
+        setTimeout(function () {
+            self.currentPage = 1;
+            self.dropload.resetload();
+        });
+    }
 
 }
