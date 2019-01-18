@@ -59,7 +59,7 @@ export class SearchPage {
         let params = {
             categoryid: 0,
             page: this.currentPage, // 当前页
-            pageSize: 20, // 每页显示个数
+            pageSize: 1, // 每页显示个数
             q: this.appService.encodeSearchKey(this.searchkey),
             v: this.volumnSort, p: this.priceSort, m: this.mSort
         };
